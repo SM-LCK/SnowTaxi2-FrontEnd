@@ -16,15 +16,21 @@ code {
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 50%;
-  /* max-width: 500px; */
-  padding: 0 20px;
+  width: 100%;
+  max-width: 600px;
+  padding: 0 50px;
   left: 50%;
   transform: translate(-50%, 0);
   background-color: #f7f7f7;
   overflow: hidden;
+}
+
+.container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* align-content: center; */
 }
 
 .titleWrap {
@@ -38,6 +44,7 @@ code {
   margin-top: 26px;
   flex: 1;
 }
+
 .inputTitle {
   font-size: 18px;
   font-weight: 600;
@@ -48,13 +55,12 @@ code {
   display: flex;
   border-radius: 20px;
   padding: 16px;
-  margin-top: 8px;
   background-color: #ffffff;
   border: 1px solid #e2e0e0;
 }
 
 .inputWrap:focus-within {
-  border: 3px solid #03a9f4;
+  border: 3px solid #2196f3;
 }
 
 .input {

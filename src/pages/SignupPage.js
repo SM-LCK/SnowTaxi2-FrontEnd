@@ -1,39 +1,93 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import noonsong from "../assets/noonsong.png";
+import { validPassword } from "../components/RegEx";
+import profile1 from "../assets/profile1.png";
+import profile2 from "../assets/profile2.png";
+import profile3 from "../assets/profile3.png";
+import profile4 from "../assets/profile4.png";
+import ReactRoundedImage from "react-rounded-image";
+import axios from "axios";
+
 const SignupPage = () => {
   const navigate = useNavigate();
+  const [avatar, setAvatar] = useState("");
   const [nickname, setNickname] = useState("");
   const [password, setPassword] = useState("");
+  const [checkPassword, setCheckPassword] = useState("");
+  const [isPasswordValid, setIsPasswordValid] = useState(true);
+  const [isPasswordMatch, setIsPasswordMatch] = useState(true);
+  const images = [profile1, profile2, profile3, profile4];
 
-  const randomImage = "../assets/noonsong.png";
+  useEffect(() => {
+    const randomIndex = Math.floor(Math.random() * images.length);
+    const selectedImage = images[randomIndex];
+    setAvatar(selectedImage);
+  }, []);
 
-  const handleLogin = () => {
-    // 여기에서 로그인 로직을 구현하면 됩니다.
-    // 예를 들어, 서버로 요청을 보내고 인증을 확인하거나
-    // 로컬 스토리지 등을 사용하여 인증을 처리할 수 있습니다.
-
-    // 임시로 성공 메시지 출력 후 홈 페이지로 이동하는 예제
-    alert(`Signup 성공! ${nickname}`);
-    navigate("/");
-    // history.push("/home");
+  const handlePasswordChange = (e) => {
+    const inputPassword = e.target.value;
+    setPassword(inputPassword);
+    setIsPasswordValid(validPassword.test(inputPassword));
   };
+
+  const handleCheckPasswordChange = (e) => {
+    const inputCheckPassword = e.target.value;
+    setCheckPassword(inputCheckPassword);
+  };
+
+  useEffect(() => {
+    setIsPasswordMatch(password === checkPassword);
+  }, [password, checkPassword]);
+
+  const handleSignup = () => {
+    alert(`Signup 성공! ${nickname}`);
+    navigate("/Home/TaxiRouteList");
+  };
+
+  const axioshandleSignup = async () => {
+    const data = {
+      nickname: nickname,
+      password: password,
+      avatar: avatar,
+    };
+    try {
+      const response = await axios.post("http://localhost:9090/signup/", data);
+      console.log("signup: ", response.data);
+      if (response.status == 200) {
+        alert(`Signup 성공!`);
+        navigate("/TaxiRouteList");
+      } else {
+        alert(`Signup 실패`);
+      }
+    } catch (error) {
+      console.log("fail", error);
+    }
+  };
+
   return (
     <div className="page">
       <div
         style={{
           display: "flex",
           justifyContent: "center",
-          marginTop: "50px",
+          marginTop: "60px",
         }}
       >
-        <img src={noonsong} alt="랜덤 이미지" width={150} height={180} />
+        <ReactRoundedImage
+          image={avatar}
+          roundedColor="#2196F3"
+          imageWidth="180"
+          imageHeight="180"
+          roundedSize="10"
+          borderRadius="100"
+        />
+
+        {/*<img src={profileImg} alt="랜덤 이미지" width={180} height={180} />*/}
       </div>
       <div className="contentWrap">
-        {/* <label htmlFor="email">이메일</label> */}
         <div className="inputTitle"> 닉네임 </div>
-        <div className="inputWrap">
+        <div className="inputWrap" style={{ marginTop: "10px" }}>
           <input
             className="input"
             // type="text"
@@ -43,20 +97,47 @@ const SignupPage = () => {
           />
         </div>
 
-        {/* <label htmlFor="password">비밀번호</label> */}
-        <div style={{ marginTop: "30px" }} className="inputTitle">
+        <div style={{ marginTop: "50px" }} className="inputTitle">
           비밀번호
         </div>
-        <div className="inputWrap">
+        <div className="inputWrap" style={{ marginTop: "10px" }}>
           <input
             className="input"
             type="password"
             id="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={handlePasswordChange}
           />
         </div>
+        {!isPasswordValid && (
+          <p className="text-body-secondary" style={{ marginTop: "10px" }}>
+            유효한 비밀번호를 입력하세요.
+          </p>
+        )}
 
+        <div style={{ marginTop: "10px" }} className="inputTitle">
+          비밀번호 확인
+        </div>
+        <div className="inputWrap" style={{ marginTop: "10px" }}>
+          <input
+            className="input"
+            type="password"
+            id="checkPassword"
+            value={checkPassword}
+            onChange={handleCheckPasswordChange}
+          />
+        </div>
+        {!isPasswordMatch && (
+          <p className="text-body-secondary" style={{ marginTop: "10px" }}>
+            다시 확인해주세요.
+          </p>
+        )}
+
+        <div className="d-grid gap-2" style={{ marginTop: "163px" }}>
+          <Button variant="dark" size="lg" onClick={handleSignup}>
+            회원가입
+          </Button>
+        </div>
         <div
           style={{
             display: "flex",
@@ -64,20 +145,10 @@ const SignupPage = () => {
             marginTop: "20px",
           }}
         >
-          <p className="text-body-secondary" style={{}}>
-            이미 회원이신가요?
-          </p>
+          <p style={{}}>이미 회원이신가요?</p>
           <Link to="/Login">
-            <p className="text-body-secondary" style={{ marginLeft: "10px" }}>
-              로그인
-            </p>
+            <p style={{ marginLeft: "10px" }}>로그인</p>
           </Link>
-        </div>
-
-        <div className="d-grid gap-2">
-          <Button variant="dark" size="lg" onClick={handleLogin}>
-            회원가입
-          </Button>
         </div>
       </div>
     </div>

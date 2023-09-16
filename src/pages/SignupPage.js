@@ -8,8 +8,13 @@ import profile3 from "../assets/profile3.png";
 import profile4 from "../assets/profile4.png";
 import ReactRoundedImage from "react-rounded-image";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 const SignupPage = () => {
+  const { state } = useLocation();
+  console.log(state);
+  const email = state.email;
+
   const navigate = useNavigate();
   const [avatar, setAvatar] = useState("");
   const [nickname, setNickname] = useState("");
@@ -17,6 +22,7 @@ const SignupPage = () => {
   const [checkPassword, setCheckPassword] = useState("");
   const [isPasswordValid, setIsPasswordValid] = useState(true);
   const [isPasswordMatch, setIsPasswordMatch] = useState(true);
+  const [isNicknameCheck, setIsNicknameCheck] = useState(false);
   const images = [profile1, profile2, profile3, profile4];
 
   useEffect(() => {
@@ -40,30 +46,59 @@ const SignupPage = () => {
     setIsPasswordMatch(password === checkPassword);
   }, [password, checkPassword]);
 
-  const handleSignup = () => {
-    alert(`Signup 성공! ${nickname}`);
-    navigate("/Home/TaxiRouteList");
+  const handleNicknameCheck = (e) => {
+    setIsNicknameCheck(true);
   };
 
   const axioshandleSignup = async () => {
-    const data = {
-      nickname: nickname,
-      password: password,
-      avatar: avatar,
-    };
+    // const data = {
+    //   email: email,
+    //   password: password,
+    // };
+
     try {
-      const response = await axios.post("http://localhost:9090/signup/", data);
-      console.log("signup: ", response.data);
-      if (response.status == 200) {
-        alert(`Signup 성공!`);
-        navigate("/TaxiRouteList");
-      } else {
-        alert(`Signup 실패`);
-      }
+      console.log(email);
+      console.log(password);
+      axios({
+        method: "post",
+        url: `${process.env.REACT_APP_API_URL}/auth/signUp`,
+        data: {
+          email: email,
+          password: password,
+        },
+      })
+        .then(function (response) {
+          console.log(response);
+          console.log("signup: ", response.data);
+          if (response.status == 200) {
+            alert(`회원가입 성공!`);
+            navigate("/Home/TaxiRouteList");
+          } else {
+            alert(`회원가입 실패`);
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     } catch (error) {
-      console.log("fail", error);
+      console.log("signup err", error);
     }
   };
+
+  //   const response = await axios.post(
+  //     `${process.env.REACT_APP_API_URL}/auth/signUp`,
+  //     data
+  //   );
+  //   console.log("signup: ", response.data);
+  //   if (response.status == 200) {
+  //     alert(`회원가입 성공!`);
+  //     navigate("/Home/TaxiRouteList");
+  //   } else {
+  //     alert(`회원가입 실패`);
+  //   }
+  // } catch (error) {
+  //   console.log("fail signup", error);
+  // }
 
   return (
     <div className="page">
@@ -82,19 +117,44 @@ const SignupPage = () => {
           roundedSize="10"
           borderRadius="100"
         />
-
-        {/*<img src={profileImg} alt="랜덤 이미지" width={180} height={180} />*/}
       </div>
-      <div className="contentWrap">
-        <div className="inputTitle"> 닉네임 </div>
-        <div className="inputWrap" style={{ marginTop: "10px" }}>
-          <input
-            className="input"
-            // type="text"
-            id="nickname"
-            value={nickname}
-            onChange={(e) => setNickname(e.target.value)}
-          />
+
+      <div className="contentWrap" style={{ marginTop: "50px" }}>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <div className="inputTitle"> 닉네임 </div>
+          <div
+            style={{
+              display: "flex",
+              marginTop: "10px",
+              borderRadius: "20px",
+              padding: "16px",
+              border: "1px solid #e2e0e0",
+              backgroundColor: "#ffffff",
+              width: "100%",
+            }}
+          >
+            <input
+              className="input"
+              // type="text"
+              id="nickname"
+              value={nickname}
+              onChange={(e) => setNickname(e.target.value)}
+            />
+          </div>
+        </div>
+
+        <div
+          style={{
+            marginTop: "15px",
+            alignItems: "center",
+          }}
+        >
+          <Button variant="secondary" size="md" onClick={handleNicknameCheck}>
+            중복체크
+          </Button>
+          {isNicknameCheck && (
+            <p className="text-body-secondary">사용가능한 닉네임입니다.</p>
+          )}
         </div>
 
         <div style={{ marginTop: "50px" }} className="inputTitle">
@@ -115,7 +175,10 @@ const SignupPage = () => {
           </p>
         )}
 
-        <div style={{ marginTop: "10px" }} className="inputTitle">
+        <div
+          style={{ marginTop: "20px", marginBottom: "10px" }}
+          className="inputTitle"
+        >
           비밀번호 확인
         </div>
         <div className="inputWrap" style={{ marginTop: "10px" }}>
@@ -133,8 +196,8 @@ const SignupPage = () => {
           </p>
         )}
 
-        <div className="d-grid gap-2" style={{ marginTop: "163px" }}>
-          <Button variant="dark" size="lg" onClick={handleSignup}>
+        <div className="d-grid gap-2" style={{ marginTop: "150px" }}>
+          <Button variant="dark" size="lg" onClick={axioshandleSignup}>
             회원가입
           </Button>
         </div>
@@ -146,7 +209,7 @@ const SignupPage = () => {
           }}
         >
           <p style={{}}>이미 회원이신가요?</p>
-          <Link to="/Login">
+          <Link to="/">
             <p style={{ marginLeft: "10px" }}>로그인</p>
           </Link>
         </div>

@@ -25,8 +25,18 @@ const TaxiRouteListPage = () => {
         >
           출발지
         </div>
-        <div style={{ fontSize: "18px", marginTop: "30px" }}>
-          도착지는 숙대입구 후문입니다. <br /> 출발지를 선택해주세요.
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            fontSize: "20px",
+            marginTop: "30px",
+            justifyContent: "center",
+          }}
+        >
+          <div>도착지는 숙대입구 후문입니다.</div>
+          <div>출발지를 선택해주세요.</div>
         </div>
       </div>
 

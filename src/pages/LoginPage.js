@@ -26,43 +26,49 @@ const LoginPage = () => {
   const handleLogin = async () => {
     // 임시로 성공 메시지 출력 후 홈 페이지로 이동하는 예제
     // alert(`Login 성공! 이메일: ${email}`);
-    // navigate("/Home/TaxiRouteList");
-    // const { data } = await axios.get("/api/test");
-    // console.log(data);
+    navigate("/Home/TaxiRouteList");
   };
 
   const axioshandleLogin = async () => {
-    // axios
-    //   .get("/test", { withCredentials: true })
-    //   .then(function (response) {
-    //     console.log(response.data);
-    //   })
-    //   .catch(function (error) {
-    //     console.log("실패");
-    //   });
-
-    // const data = {
-    //   email: email,
-    //   password: password,
-    // };
+    const fullEmail = email + "@sookmyung.ac.kr";
+    const data = {
+      email: email,
+      password: password,
+    };
 
     try {
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/test`);
-      // const response = await axios.post("/api/test", data);
-      console.log("login: ", response.data);
-      // const accessToken = response.data.token;
-      // localStorage.setItem("@accessToken", accessToken);
+      axios({
+        method: "post",
+        url: `${process.env.REACT_APP_API_URL}/auth/login`,
+        data: {
+          email: fullEmail,
+          password: password,
+        },
+      }).then((response) => {
+        console.log("res: ", response.data);
 
-      if (response.status == 200) {
-        alert(`로그인 성공`);
-        navigate("/Home/TaxiRouteList");
-      } else {
-        alert(`Login 실패`);
-      }
+        if (response.status == 200) {
+          alert(`로그인 성공!`);
+          navigate("/Home/TaxiRouteList");
+        } else {
+          alert(`로그인 실패`);
+        }
+      });
     } catch (error) {
-      console.log("fail", error);
-      alert(`로그인 실패`);
+      console.log("test err", error);
     }
+    //const response = await axios.get(`${process.env.REACT_APP_API_URL}/test`);
+    // const response = await axios.post(
+    //   `${process.env.REACT_APP_API_URL}/test`,
+    //   data
+    // );
+    // console.log("login: ", response.data);
+    // const accessToken = response.data.token;
+    // localStorage.setItem("@accessToken", accessToken);
+
+    // } catch (error) {
+    //   console.log("fail login", error);
+    // }
 
     // axios({
     //   method: "post",
@@ -90,9 +96,9 @@ const LoginPage = () => {
           fontWeight: "700",
         }}
       >
-        ❄️ 숙명 이메일과 <br /> 설정한 비밀번호를 입력하세요 ❄️
+        ❄️ 숙명 이메일 로그인 ❄️
       </div>
-      <div className="contentWrap">
+      <div className="contentWrap" style={{ marginTop: "50px" }}>
         <div className="inputTitle"> 이메일 </div>
         <div className="inputWrap" style={{ marginTop: "10px" }}>
           <input
@@ -100,9 +106,9 @@ const LoginPage = () => {
             type="email"
             id="email"
             value={email}
-            //onchange는 input의 입력이 끝났을 때 발생
             onChange={handleEmailChange}
           />
+          <div style={{ fontSize: "18px" }}>@sookmyung.ac.kr</div>
         </div>
         {!isEmailValid && (
           <p className="text-body-secondary" style={{ marginTop: "10px" }}>
@@ -122,11 +128,6 @@ const LoginPage = () => {
             onChange={handlePasswordChange}
           />
         </div>
-        {!isPasswordValid && (
-          <p className="text-body-secondary" style={{ marginTop: "10px" }}>
-            유효한 비밀번호를 입력하세요.
-          </p>
-        )}
 
         <div
           style={{
@@ -141,7 +142,7 @@ const LoginPage = () => {
           </Link>
         </div>
 
-        <div className="d-grid gap-2" style={{ marginTop: "290px" }}>
+        <div className="d-grid gap-2" style={{ marginTop: "340px" }}>
           <Button variant="primary" size="lg" onClick={axioshandleLogin}>
             로그인
           </Button>

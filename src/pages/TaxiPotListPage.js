@@ -9,6 +9,7 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
+import MakepotModal from "../components/MakepotModal";
 
 const TaxiPotListPage = () => {
   const { state } = useLocation();
@@ -35,14 +36,16 @@ const TaxiPotListPage = () => {
   }
   const today = `${year}.${month}.${date} ${day}`;
 
-  const [timeValue, setTimeValue] = useState("");
+  const [modalShow, setModalShow] = useState(false);
 
-  const handleTimeChange = (newTimeValue) => {
-    setTimeValue(newTimeValue);
-    console.log(timeValue);
-  };
+  // const [timeValue, setTimeValue] = useState("");
 
-  useEffect(() => {}, [timeValue]);
+  // const handleTimeChange = (newTimeValue) => {
+  //   setTimeValue(newTimeValue);
+  //   console.log(timeValue);
+  // };
+
+  // useEffect(() => {}, [timeValue]);
 
   return (
     <div
@@ -55,7 +58,9 @@ const TaxiPotListPage = () => {
       //   left: "50%",
       //   transform: "translate(-50%,0)",
       //   backgroundColor: "#f7f7f7",
-      //   overflow: "hidden",
+      //   overflow: "scroll",
+      //   bottom: "100vh",
+      //   marginBottom: "100",
       // }}
     >
       <div
@@ -68,7 +73,7 @@ const TaxiPotListPage = () => {
           style={{
             marginTop: "25px",
             marginBottom: "25px",
-            fontSize: "25px",
+            fontSize: "28px",
             fontWeight: "700",
             justifyContent: "center",
             alignItems: "center",
@@ -104,10 +109,11 @@ const TaxiPotListPage = () => {
               alignItems: "center",
             }}
           >
-            <Button variant="dark" size="md">
+            <Button variant="dark" size="md" onClick={() => setModalShow(true)}>
               + 팟 생성하기
             </Button>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <MakepotModal show={modalShow} onHide={() => setModalShow(false)} />
+            {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DemoContainer components={["TimePicker"]}>
                 <TimePicker
                   //label="Controlled picker"
@@ -115,7 +121,7 @@ const TaxiPotListPage = () => {
                   onChange={handleTimeChange}
                 />
               </DemoContainer>
-            </LocalizationProvider>
+            </LocalizationProvider> */}
           </div>
         </div>
         {/* <div
@@ -130,6 +136,8 @@ const TaxiPotListPage = () => {
           <br />
           팟을 만들어보세요!
         </div> */}
+        <PotItemButton />
+        <PotItemButton />
         <PotItemButton />
         <PotItemButton />
         <PotItemButton />

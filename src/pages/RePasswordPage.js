@@ -52,9 +52,8 @@ const RePasswordPage = () => {
           type="email"
           id="email"
           value={email}
-          //onchange는 input의 입력이 끝났을 때 발생
           onChange={handleEmailChange}
-          placeholder="Email"
+          placeholder="@sookmyung.ac.kr"
         />
       </div>
       {!isEmailValid && (
@@ -67,7 +66,7 @@ const RePasswordPage = () => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          marginTop: "30px",
+          marginTop: "50px",
         }}
       >
         <div className="d-grid gap-2" style={{ marginRight: "20px" }}>

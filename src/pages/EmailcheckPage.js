@@ -2,27 +2,63 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { validEmail } from "../components/RegEx";
+import axios from "axios";
 
 const EmailcheckPage = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
-  const [isEmailValid, setIsEmailValid] = useState(true);
+  const [inputNumber, setInputNumber] = useState("");
+  const [certificateNumber, setCertificateNumber] = useState("");
   const [isNextBtn, setIsNextBtn] = useState(false);
 
   const handleEmailChange = (e) => {
     const inputEmail = e.target.value;
     setEmail(inputEmail);
-    setIsEmailValid(validEmail.test(inputEmail));
+    // setIsEmailValid(validEmail.test(inputEmail));
   };
 
   const handleToNext = () => {
+    const fullEmail = email + "@sookmyung.ac.kr";
     // 임시로 성공 메시지 출력 후 Signup으로 이동
-    navigate("/Signup");
+    navigate("/Signup", { state: { email: fullEmail } });
   };
 
-  const handleCertification = () => {
-    alert(`인증번호 확인`);
-    setIsNextBtn(true);
+  const axiosCertificateEmail = async () => {
+    const fullEmail = email + "@sookmyung.ac.kr";
+    console.log(fullEmail);
+    // const data = { mail: fullEmail };
+    try {
+      axios({
+        method: "get",
+        url: `${process.env.REACT_APP_API_URL}/email/auth`,
+        params: { mail: fullEmail },
+      }).then((response) => {
+        // const response = await axios.post(
+        //   `${process.env.REACT_APP_API_URL}/email/auth`,
+        //   { params: { mail: fullEmail } }
+        // );
+        console.log("email: ", response.data);
+        setCertificateNumber(response.data);
+
+        if (response.status == 200) {
+          console.log("메일 보내기 성공");
+        } else {
+          console.log("메일 보내기 실패");
+        }
+      });
+    } catch (error) {
+      console.log("fail get", error);
+    }
+  };
+
+  const handleCertificateNumber = () => {
+    if (certificateNumber == inputNumber) {
+      setIsNextBtn(true);
+      alert(`인증 성공`);
+    } else {
+      setIsNextBtn(false);
+      alert(`인증 실패`);
+    }
   };
 
   return (
@@ -39,56 +75,92 @@ const EmailcheckPage = () => {
       <p style={{ marginTop: "10px" }}>
         숙명여대 학생들만 이용 가능한 서비스입니다.
       </p>
-      <div className="contentWrap">
-        {/* <label htmlFor="email">이메일</label> */}
+      <div className="contentWrap" style={{ marginTop: "50px" }}>
         <div className="inputTitle"> 이메일 </div>
-        <div className="inputWrap" style={{ marginTop: "10px" }}>
-          <input
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          {/* <div style={{ display: "flex", flexDirection: "column" }}>
+            <div className="inputTitle"> 이메일 </div> */}
+          <div
             style={{
-              width: "100%",
-              outline: "none",
-              border: "none",
-              height: "25px",
-              fontSize: "18px",
-              fontWeight: "400",
+              display: "flex",
+              marginTop: "10px",
+              borderRadius: "20px",
+              padding: "16px",
+              border: "1px solid #e2e0e0",
+              backgroundColor: "#ffffff",
+              width: "70%",
             }}
-            type="email"
-            id="email"
-            value={email}
-            onChange={handleEmailChange}
-            placeholder="@sookmyung.ac.kr"
-          />
-        </div>
-        {!isEmailValid && (
-          <p className="text-body-secondary" style={{ marginTop: "10px" }}>
-            유효한 학교 이메일 주소를 입력하세요.
-          </p>
-        )}
+          >
+            <input
+              style={{
+                width: "100%",
+                outline: "none",
+                border: "none",
+                height: "25px",
+                fontSize: "18px",
+                fontWeight: "400",
+              }}
+              type="email"
+              id="email"
+              value={email}
+              onChange={handleEmailChange}
+              //placeholder="@sookmyung.ac.kr"
+            />
+            <div style={{ fontSize: "18px" }}>@sookmyung.ac.kr</div>
+          </div>
+          {/* </div> */}
 
-        <div className="inputWrap" style={{ marginTop: "30px" }}>
-          <input
-            style={{
-              width: "100%",
-              outline: "none",
-              border: "none",
-              height: "25px",
-              fontSize: "18px",
-              fontWeight: "400",
-            }}
-            //type="number"
-            //id="password"
-            //value={password}
-            // onChange={(e) => setPassword(e.target.value)}
-            placeholder="인증번호를 입력하세요"
-          />
+          <Button variant="dark" onClick={axiosCertificateEmail}>
+            보내기
+          </Button>
         </div>
-        <div style={{ marginTop: "20px" }}>
-          <Button variant="dark" onClick={handleCertification}>
+
+        <div
+          style={{
+            marginTop: "30px",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              borderRadius: "20px",
+              padding: "16px",
+              border: "1px solid #e2e0e0",
+              backgroundColor: "#ffffff",
+              width: "70%",
+            }}
+          >
+            <input
+              style={{
+                width: "100%",
+                outline: "none",
+                border: "none",
+                height: "25px",
+                fontSize: "18px",
+                fontWeight: "400",
+              }}
+              //type="number"
+              id="inputNumber"
+              value={inputNumber}
+              onChange={(e) => setInputNumber(e.target.value)}
+              placeholder="인증번호를 입력하세요"
+            />
+          </div>
+          <Button variant="success" size="md" onClick={handleCertificateNumber}>
             인증하기
           </Button>
         </div>
 
-        <div className="d-grid gap-2" style={{ marginTop: "335px" }}>
+        <div className="d-grid gap-2" style={{ marginTop: "400px" }}>
           {!isNextBtn ? (
             <Button
               variant="secondary"

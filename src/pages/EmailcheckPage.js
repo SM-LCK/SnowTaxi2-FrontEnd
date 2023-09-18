@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { validEmail } from "../components/RegEx";
 import axios from "axios";
+import { AlternateEmail } from "@mui/icons-material";
 
 const EmailcheckPage = () => {
   const navigate = useNavigate();
@@ -37,13 +38,12 @@ const EmailcheckPage = () => {
         //   `${process.env.REACT_APP_API_URL}/email/auth`,
         //   { params: { mail: fullEmail } }
         // );
-        console.log("email: ", response.data);
         setCertificateNumber(response.data);
 
         if (response.status == 200) {
-          console.log("메일 보내기 성공");
+          alert(`인증메일 전송 성공`);
         } else {
-          console.log("메일 보내기 실패");
+          alert(`인증메일 전송 실패`);
         }
       });
     } catch (error) {

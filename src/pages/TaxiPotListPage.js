@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import image from "../assets/taxipotlist.png";
 import PotItemButton from "../components/PotItemButton";
 import { Button } from "react-bootstrap";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import MakepotModal from "../components/MakepotModal";
+import sookmyung from "../assets/map_sookmyung.jpeg";
+import hyochang from "../assets/map_hyochang.jpeg";
+import seoul from "../assets/map_seoul.jpeg";
+import namyoung from "../assets/map_namyoung.jpeg";
 
 const TaxiPotListPage = () => {
   const { state } = useLocation();
@@ -49,19 +48,16 @@ const TaxiPotListPage = () => {
 
   return (
     <div
-      className="page"
-      // style={{
-      //   postion: "absolute",
-      //   width: "100%",
-      //   maxWidth: "600px",
-      //   padding: "0 50px",
-      //   left: "50%",
-      //   transform: "translate(-50%,0)",
-      //   backgroundColor: "#f7f7f7",
-      //   overflow: "scroll",
-      //   bottom: "100vh",
-      //   marginBottom: "100",
-      // }}
+      //className="page"
+      style={{
+        postion: "absolute",
+        width: "100%",
+        height: "100%",
+        // maxWidth: "600px",
+        padding: "0 500px",
+        backgroundColor: "#f7f7f7",
+        paddingBottom: "70px",
+      }}
     >
       <div
         style={{
@@ -82,7 +78,15 @@ const TaxiPotListPage = () => {
         >
           {id} 🔜 후문
         </div>
-        <img src={image} alt="지도" />
+        {id == "숙대입구역" ? (
+          <img src={sookmyung} alt="지도" />
+        ) : id == "효창공원앞역" ? (
+          <img src={hyochang} alt="지도" />
+        ) : id == "서울역" ? (
+          <img src={seoul} alt="지도" />
+        ) : (
+          <img src={namyoung} alt="지도" />
+        )}
         <div style={{ fontSize: "23px", fontWeight: "700", marginTop: "20px" }}>
           {today}
         </div>
@@ -113,15 +117,6 @@ const TaxiPotListPage = () => {
               + 팟 생성하기
             </Button>
             <MakepotModal show={modalShow} onHide={() => setModalShow(false)} />
-            {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DemoContainer components={["TimePicker"]}>
-                <TimePicker
-                  //label="Controlled picker"
-                  value={timeValue}
-                  onChange={handleTimeChange}
-                />
-              </DemoContainer>
-            </LocalizationProvider> */}
           </div>
         </div>
         {/* <div

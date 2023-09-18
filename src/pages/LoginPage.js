@@ -47,7 +47,7 @@ const LoginPage = () => {
       }).then((response) => {
         console.log("res: ", response.data);
 
-        if (response.status == 200) {
+        if (response.data == "home") {
           alert(`로그인 성공!`);
           navigate("/Home/TaxiRouteList");
         } else {

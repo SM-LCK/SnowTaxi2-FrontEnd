@@ -21,10 +21,10 @@ function BottomNav() {
         style={{
           position: "fixed",
           zIndex: "1",
-          width: "100%",
-          maxWidth: "600px",
+          width: "70%",
           bottom: 0,
           backgroundColor: "#f7f7f7",
+          height: "70px",
         }}
       >
         <Nav.Item onClick={() => setTabActive("tab1")}>

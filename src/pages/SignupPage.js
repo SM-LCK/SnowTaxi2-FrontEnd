@@ -47,6 +47,7 @@ const SignupPage = () => {
   }, [password, checkPassword]);
 
   const handleNicknameCheck = (e) => {
+    //중복체크 메서드
     setIsNicknameCheck(true);
   };
 
@@ -57,8 +58,6 @@ const SignupPage = () => {
     // };
 
     try {
-      console.log(email);
-      console.log(password);
       axios({
         method: "post",
         url: `${process.env.REACT_APP_API_URL}/auth/signUp`,
@@ -74,6 +73,7 @@ const SignupPage = () => {
             alert(`회원가입 성공!`);
             navigate("/Home/TaxiRouteList");
           } else {
+            //'해당 이메일의 유저가 존재합니다.'
             alert(`회원가입 실패`);
           }
         })

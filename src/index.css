@@ -17,10 +17,11 @@ code {
   top: 0;
   bottom: 0;
   width: 100%;
-  max-width: 600px;
-  padding: 0 50px;
+  height: 100%;
+  /* max-width: 600px; */
+  padding: 0 500px; /*
   left: 50%;
-  transform: translate(-50%, 0);
+  transform: translate(-50%, 0); */
   background-color: #f7f7f7;
   overflow: hidden;
 }

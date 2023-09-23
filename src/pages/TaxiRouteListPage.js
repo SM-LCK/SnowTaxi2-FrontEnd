@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import sookmyung from "../assets/sookmyung.png";
 import hyochang from "../assets/hyochang.png";
@@ -6,6 +6,27 @@ import seoul from "../assets/seoul.png";
 import namyoung from "../assets/namyoung.png";
 
 const TaxiRouteListPage = () => {
+  const [windowDimensions, setWindowDimensions] = useState({
+    height: window.innerHeight,
+    width: window.innerWidth,
+  });
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowDimensions({
+        height: window.innerHeight,
+        width: window.innerWidth,
+      });
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // 컴포넌트가 언마운트될 때 이벤트 리스너를 제거
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const navigate = useNavigate();
 
   const handleRouteClick = (e, message) => {
@@ -13,14 +34,36 @@ const TaxiRouteListPage = () => {
   };
 
   return (
-    <div className="page">
-      <div className="container">
+    <div
+      className="page"
+      // style={{
+      //   //  height: windowDimensions.height,
+      //   height: "100%",
+      //   width: "100%",
+      // }}
+      style={{
+        postion: "absolute",
+        width: "100%",
+        height: "100%",
+        padding: "0 500px",
+        backgroundColor: "#f7f7f7",
+        paddingBottom: "100px",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <div
           style={{
-            marginTop: "50px",
+            display: "flex",
+            marginTop: "40px",
             fontSize: "30px",
-            fontWeight: "700",
-            marginBottom: "40px",
+            fontWeight: "600",
           }}
         >
           출발지
@@ -30,7 +73,6 @@ const TaxiRouteListPage = () => {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            fontSize: "20px",
             marginTop: "30px",
             justifyContent: "center",
           }}
@@ -40,7 +82,10 @@ const TaxiRouteListPage = () => {
         </div>
       </div>
 
-      <div className="container" style={{ marginTop: "100px" }}>
+      <div
+        className="container"
+        style={{ marginTop: "20px", marginBottom: "100px" }}
+      >
         <div style={{ marginTop: "40px" }}>
           <img
             src={sookmyung}
@@ -52,7 +97,7 @@ const TaxiRouteListPage = () => {
           <img
             src={hyochang}
             alt="효창"
-            onClick={(e) => handleRouteClick(e, "효창공원앞역")}
+            onClick={(e) => handleRouteClick(e, "효창공원역")}
           />
         </div>
         <div style={{ marginTop: "40px" }}>

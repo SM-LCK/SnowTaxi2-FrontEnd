@@ -5,6 +5,27 @@ import { validEmail, validPassword } from "../components/RegEx";
 import axios from "axios";
 
 const LoginPage = () => {
+  const [windowDimensions, setWindowDimensions] = useState({
+    height: window.innerHeight,
+    width: window.innerWidth,
+  });
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowDimensions({
+        height: window.innerHeight,
+        width: window.innerWidth,
+      });
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // 컴포넌트가 언마운트될 때 이벤트 리스너를 제거
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -45,9 +66,14 @@ const LoginPage = () => {
           password: password,
         },
       }).then((response) => {
-        console.log("res: ", response.data);
+        console.log("res: ", response);
 
         if (response.data == "home") {
+          /*
+          const accessToken = response.data.token;
+          console.log(response.data.token);
+          localStorage.setItem("@accessToken", accessToken);
+        */
           alert(`로그인 성공!`);
           navigate("/Home/TaxiRouteList");
         } else {
@@ -57,43 +83,18 @@ const LoginPage = () => {
     } catch (error) {
       console.log("test err", error);
     }
-    //const response = await axios.get(`${process.env.REACT_APP_API_URL}/test`);
-    // const response = await axios.post(
-    //   `${process.env.REACT_APP_API_URL}/test`,
-    //   data
-    // );
-    // console.log("login: ", response.data);
-    // const accessToken = response.data.token;
-    // localStorage.setItem("@accessToken", accessToken);
-
-    // } catch (error) {
-    //   console.log("fail login", error);
-    // }
-
-    // axios({
-    //   method: "post",
-    //   url: "http://localhost:9090/login/",
-    //   data: {
-    //     email: email,
-    //     password: password,
-    //   },
-    //   headers: {'Content-type': 'application/json'}
-    // })
-    //   .then(function (response) {
-    //     console.log(response);
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
   };
 
   return (
-    <div className="page">
+    <div
+      className="page"
+      style={{ height: windowDimensions.height, width: "100%" }}
+    >
       <div
         style={{
           marginTop: "100px",
           fontSize: "30px",
-          fontWeight: "700",
+          fontWeight: "600",
         }}
       >
         ❄️ 숙명 이메일 로그인 ❄️
@@ -108,7 +109,7 @@ const LoginPage = () => {
             value={email}
             onChange={handleEmailChange}
           />
-          <div style={{ fontSize: "18px" }}>@sookmyung.ac.kr</div>
+          <div style={{ fontSize: "15px" }}>@sookmyung.ac.kr</div>
         </div>
         {!isEmailValid && (
           <p className="text-body-secondary" style={{ marginTop: "10px" }}>
@@ -136,13 +137,13 @@ const LoginPage = () => {
             marginTop: "20px",
           }}
         >
-          <p style={{}}>비밀번호를 잊어버리셨나요?</p>
+          <p> 비밀번호를 잊어버리셨나요?</p>
           <Link to="/RePassword">
             <p style={{ marginLeft: "10px" }}>비밀번호 재설정</p>
           </Link>
         </div>
 
-        <div className="d-grid gap-2" style={{ marginTop: "340px" }}>
+        <div className="d-grid gap-2" style={{ marginTop: "300px" }}>
           <Button variant="primary" size="lg" onClick={axioshandleLogin}>
             로그인
           </Button>
@@ -152,9 +153,10 @@ const LoginPage = () => {
             display: "flex",
             flexDirection: "row",
             marginTop: "20px",
+            marginBottom: "100px",
           }}
         >
-          <p style={{}}>아직 회원이 아니신가요?</p>
+          <p>아직 회원이 아니신가요?</p>
           <Link to="/Emailcheck">
             <p style={{ marginLeft: "10px" }}>회원가입</p>
           </Link>

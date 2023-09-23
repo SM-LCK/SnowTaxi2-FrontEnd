@@ -3,7 +3,6 @@ import { useNavigate, Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { validEmail } from "../components/RegEx";
 import axios from "axios";
-import { AlternateEmail } from "@mui/icons-material";
 
 const EmailcheckPage = () => {
   const navigate = useNavigate();
@@ -34,10 +33,6 @@ const EmailcheckPage = () => {
         url: `${process.env.REACT_APP_API_URL}/email/auth`,
         params: { mail: fullEmail },
       }).then((response) => {
-        // const response = await axios.post(
-        //   `${process.env.REACT_APP_API_URL}/email/auth`,
-        //   { params: { mail: fullEmail } }
-        // );
         setCertificateNumber(response.data);
 
         if (response.status == 200) {
@@ -67,7 +62,7 @@ const EmailcheckPage = () => {
         style={{
           marginTop: "100px",
           fontSize: "30px",
-          fontWeight: "700",
+          fontWeight: "600",
         }}
       >
         ❄️ 숙명 이메일 인증 ❄️
@@ -75,7 +70,7 @@ const EmailcheckPage = () => {
       <p style={{ marginTop: "10px" }}>
         숙명여대 학생들만 이용 가능한 서비스입니다.
       </p>
-      <div className="contentWrap" style={{ marginTop: "50px" }}>
+      <div className="contentWrap" style={{ marginTop: "80px" }}>
         <div className="inputTitle"> 이메일 </div>
         <div
           style={{
@@ -98,21 +93,13 @@ const EmailcheckPage = () => {
             }}
           >
             <input
-              style={{
-                width: "100%",
-                outline: "none",
-                border: "none",
-                height: "25px",
-                fontSize: "18px",
-                fontWeight: "400",
-              }}
+              className="input"
               type="email"
               id="email"
               value={email}
               onChange={handleEmailChange}
-              //placeholder="@sookmyung.ac.kr"
             />
-            <div style={{ fontSize: "18px" }}>@sookmyung.ac.kr</div>
+            <div style={{ fontSize: "15px" }}>@sookmyung.ac.kr</div>
           </div>
           {/* </div> */}
 
@@ -145,7 +132,7 @@ const EmailcheckPage = () => {
                 outline: "none",
                 border: "none",
                 height: "25px",
-                fontSize: "18px",
+                fontSize: "15px",
                 fontWeight: "400",
               }}
               //type="number"
@@ -160,7 +147,10 @@ const EmailcheckPage = () => {
           </Button>
         </div>
 
-        <div className="d-grid gap-2" style={{ marginTop: "400px" }}>
+        <div
+          className="d-grid gap-2"
+          style={{ marginTop: "300px", marginBottom: "100px" }}
+        >
           {!isNextBtn ? (
             <Button
               variant="secondary"

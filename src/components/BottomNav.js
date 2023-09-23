@@ -6,13 +6,13 @@ import {
   BsListStars,
 } from "react-icons/bs";
 import React, { useState } from "react";
-import { Navbar } from "react-bootstrap";
 
 function BottomNav() {
   const [tabActive, setTabActive] = useState("tab1");
   console.log(tabActive);
   return (
-    <div style={{ display: "flex", justifyContent: "center" }}>
+    // <div class="w-100">
+    <div class="vw-100" style={{ display: "flex", justifyContent: "center" }}>
       {/* <Navbar bg="light" sticky="bottom"> */}
       <Nav
         justify
@@ -21,8 +21,9 @@ function BottomNav() {
         style={{
           position: "fixed",
           zIndex: "1",
-          width: "70%",
+          width: "50%",
           bottom: 0,
+          //#f7f7f7
           backgroundColor: "#f7f7f7",
           height: "70px",
         }}
@@ -46,7 +47,6 @@ function BottomNav() {
           </Nav.Link>
         </Nav.Item>
       </Nav>
-      {/* </Navbar> */}
     </div>
   );
 }

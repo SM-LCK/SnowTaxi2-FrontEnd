@@ -9,6 +9,27 @@ import profile4 from "../assets/profile4.png";
 import ReactRoundedImage from "react-rounded-image";
 
 const MyPage = () => {
+  const [windowDimensions, setWindowDimensions] = useState({
+    height: window.innerHeight,
+    width: window.innerWidth,
+  });
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowDimensions({
+        height: window.innerHeight,
+        width: window.innerWidth,
+      });
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // 컴포넌트가 언마운트될 때 이벤트 리스너를 제거
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const [avatar, setAvatar] = useState("");
   const [nickname, setNickname] = useState("");
   const [modalShow, setModalShow] = useState(false);
@@ -51,7 +72,10 @@ const MyPage = () => {
   // }, []);
 
   return (
-    <div className="page">
+    <div
+      className="page"
+      style={{ height: windowDimensions.height, width: "100%" }}
+    >
       <div
         style={{
           display: "flex",
@@ -62,7 +86,7 @@ const MyPage = () => {
           style={{
             marginTop: "40px",
             fontSize: "30px",
-            fontWeight: "700",
+            fontWeight: "600",
             marginBottom: "40px",
             justifyContent: "center",
             alignItems: "center",
@@ -71,11 +95,11 @@ const MyPage = () => {
         >
           마이페이지
         </div>
-        <div style={{ fontSize: "23px", fontWeight: "700" }}>나의정보</div>
+        <div style={{ fontSize: "23px", fontWeight: "600" }}>나의정보</div>
         <div
           style={{
-            marginTop: "10px",
-            marginBottom: "10px",
+            marginTop: "5px",
+            marginBottom: "5px",
             display: "flex",
             alignItems: "center",
           }}
@@ -89,7 +113,7 @@ const MyPage = () => {
             roundedSize="10"
             borderRadius="100"
           />
-          <div style={{ fontSize: "20px", marginLeft: "20px" }}>
+          <div style={{ fontSize: "18px", marginLeft: "20px" }}>
             송이님, 안녕하세요!
           </div>
         </div>
@@ -100,11 +124,11 @@ const MyPage = () => {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            marginTop: "10px",
-            marginBottom: "10px",
+            marginTop: "5px",
+            marginBottom: "5px",
           }}
         >
-          <div style={{ fontSize: "23px", fontWeight: "700" }}>참여내역</div>
+          <div style={{ fontSize: "20px", fontWeight: "600" }}>참여내역</div>
           <FiChevronRight size="25" color="black" />
         </div>
         <hr height="30px" />
@@ -113,11 +137,11 @@ const MyPage = () => {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            marginTop: "10px",
-            marginBottom: "10px",
+            marginTop: "5px",
+            marginBottom: "5px",
           }}
         >
-          <div style={{ fontSize: "23px", fontWeight: "700" }}>로그아웃</div>
+          <div style={{ fontSize: "20px", fontWeight: "600" }}>로그아웃</div>
           <FiChevronRight
             size="25"
             color="black"
@@ -131,11 +155,11 @@ const MyPage = () => {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            marginTop: "10px",
-            marginBottom: "10px",
+            marginTop: "5px",
+            marginBottom: "5px",
           }}
         >
-          <div style={{ fontSize: "23px", fontWeight: "700" }}>회원탈퇴</div>
+          <div style={{ fontSize: "20px", fontWeight: "600" }}>회원탈퇴</div>
           <FiChevronRight size="25" color="black" />
         </div>
       </div>

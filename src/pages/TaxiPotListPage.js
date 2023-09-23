@@ -9,10 +9,32 @@ import sookmyung from "../assets/map_sookmyung.jpeg";
 import hyochang from "../assets/map_hyochang.jpeg";
 import seoul from "../assets/map_seoul.jpeg";
 import namyoung from "../assets/map_namyoung.jpeg";
+import axios from "axios";
 
 const TaxiPotListPage = () => {
   const { state } = useLocation();
   const id = state.id;
+  console.log(id);
+
+  const axiosDeparture = async () => {
+    try {
+      axios({
+        method: "get",
+        url: `${process.env.REACT_APP_API_URL}/pot`,
+        params: { departure: id },
+      }).then((response) => {
+        console.log(response);
+      });
+    } catch (error) {
+      console.log("fail get", error);
+    }
+  };
+
+  // useEffect(() => {
+  //   axiosDeparture();
+  // }, []);
+
+  const [modalShow, setModalShow] = useState(false);
 
   const currentdate = new Date();
   const year = currentdate.getFullYear();
@@ -35,28 +57,16 @@ const TaxiPotListPage = () => {
   }
   const today = `${year}.${month}.${date} ${day}`;
 
-  const [modalShow, setModalShow] = useState(false);
-
-  // const [timeValue, setTimeValue] = useState("");
-
-  // const handleTimeChange = (newTimeValue) => {
-  //   setTimeValue(newTimeValue);
-  //   console.log(timeValue);
-  // };
-
-  // useEffect(() => {}, [timeValue]);
-
   return (
     <div
-      //className="page"
+      className="page"
       style={{
         postion: "absolute",
         width: "100%",
         height: "100%",
-        // maxWidth: "600px",
-        padding: "0 500px",
+        padding: "0 450px",
         backgroundColor: "#f7f7f7",
-        paddingBottom: "70px",
+        paddingBottom: "100px",
       }}
     >
       <div
@@ -70,7 +80,7 @@ const TaxiPotListPage = () => {
             marginTop: "25px",
             marginBottom: "25px",
             fontSize: "28px",
-            fontWeight: "700",
+            fontWeight: "600",
             justifyContent: "center",
             alignItems: "center",
             display: "flex",
@@ -78,6 +88,7 @@ const TaxiPotListPage = () => {
         >
           {id} 🔜 후문
         </div>
+
         {id == "숙대입구역" ? (
           <img src={sookmyung} alt="지도" />
         ) : id == "효창공원앞역" ? (
@@ -87,16 +98,17 @@ const TaxiPotListPage = () => {
         ) : (
           <img src={namyoung} alt="지도" />
         )}
-        <div style={{ fontSize: "23px", fontWeight: "700", marginTop: "20px" }}>
+
+        <div style={{ fontSize: "23px", fontWeight: "600", marginTop: "15px" }}>
           {today}
         </div>
         <div style={{ marginTop: "5px", marginBottom: "15px" }}>
-          오늘 탈 택시 팟에만 참여할 수 있어요. 🚖
+          오늘 탈 택시 팟에만 참여할 수 있어요.
           <br />
           모든 정산 금액은 기본 요금인 4800원입니다.
         </div>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <div style={{ marginBottom: "15px" }}>
+          <div style={{ marginBottom: "20px" }}>
             <DropdownButton
               variant="secondary"
               id="dropdown-basic-button"
@@ -116,6 +128,7 @@ const TaxiPotListPage = () => {
             <Button variant="dark" size="md" onClick={() => setModalShow(true)}>
               + 팟 생성하기
             </Button>
+
             <MakepotModal show={modalShow} onHide={() => setModalShow(false)} />
           </div>
         </div>

@@ -31,7 +31,7 @@ const PotItemButton = () => {
           }}
         >
           <div
-            style={{ marginBottom: "5px", fontSize: "20px", fontWeight: "700" }}
+            style={{ marginBottom: "5px", fontSize: "20px", fontWeight: "600" }}
           >
             오전 10:40
           </div>

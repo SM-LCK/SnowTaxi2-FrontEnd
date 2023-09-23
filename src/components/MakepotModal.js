@@ -22,6 +22,15 @@ const MakepotModal = (props) => {
   };
 
   useEffect(() => {}, [timeValue]);
+  const time = timeValue.$d; // 데이터에서 시간 정보를 가져옵니다
+
+  const hours = time.getHours(); // 시간을 얻어옵니다
+  const minutes = time.getMinutes(); // 분을 얻어옵니다
+
+  const formattedTime = `${hours.toString().padStart(2, "0")}:${minutes
+    .toString()
+    .padStart(2, "0")}`;
+  console.log("Formatted time:", formattedTime);
 
   return (
     <Modal

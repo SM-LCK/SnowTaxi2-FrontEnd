@@ -11,6 +11,27 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 
 const SignupPage = () => {
+  const [windowDimensions, setWindowDimensions] = useState({
+    height: window.innerHeight,
+    width: window.innerWidth,
+  });
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowDimensions({
+        height: window.innerHeight,
+        width: window.innerWidth,
+      });
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // 컴포넌트가 언마운트될 때 이벤트 리스너를 제거
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const { state } = useLocation();
   console.log(state);
   const email = state.email;
@@ -101,7 +122,10 @@ const SignupPage = () => {
   // }
 
   return (
-    <div className="page">
+    <div
+      className="page"
+      style={{ height: windowDimensions.height, width: "100%" }}
+    >
       <div
         style={{
           display: "flex",
@@ -119,7 +143,7 @@ const SignupPage = () => {
         />
       </div>
 
-      <div className="contentWrap" style={{ marginTop: "50px" }}>
+      <div className="contentWrap" style={{ marginTop: "30px" }}>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div className="inputTitle"> 닉네임 </div>
           <div
@@ -206,6 +230,7 @@ const SignupPage = () => {
             display: "flex",
             flexDirection: "row",
             marginTop: "20px",
+            marginBottom: "100px",
           }}
         >
           <p style={{}}>이미 회원이신가요?</p>

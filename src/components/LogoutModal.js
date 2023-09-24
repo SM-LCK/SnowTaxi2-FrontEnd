@@ -1,10 +1,29 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import React from "react";
+import axios from "axios";
+import { useNavigate, Link } from "react-router-dom";
 
 const LogoutModal = (props) => {
+  const navigate = useNavigate();
+
   const handleLogout = () => {
-    localStorage.removeItem("@accessToken");
+    try {
+      axios({
+        method: "get",
+        url: `${process.env.REACT_APP_API_URL}/auth/logout`,
+      }).then((response) => {
+        console.log(response.data.data);
+        console.log(response.data.code);
+        alert(response.data.message);
+        if (response.data.code == 200) {
+          localStorage.removeItem("@token");
+          navigate("/");
+        }
+      });
+    } catch (error) {
+      console.log("fail get", error);
+    }
   };
   return (
     <Modal
@@ -15,11 +34,11 @@ const LogoutModal = (props) => {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          <h4>로그아웃 하시겠습니까?</h4>
+          <h4>로그아웃 하기</h4>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>ㄱㄱ</p>
+        <h5>취소하려면 Close 버튼을 눌러주세요.</h5>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="dark" onClick={handleLogout}>

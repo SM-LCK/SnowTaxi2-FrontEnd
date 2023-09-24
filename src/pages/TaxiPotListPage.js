@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import PotItemButton from "../components/PotItemButton";
 import { Button } from "react-bootstrap";
 import Dropdown from "react-bootstrap/Dropdown";
@@ -12,29 +12,79 @@ import namyoung from "../assets/map_namyoung.jpeg";
 import axios from "axios";
 
 const TaxiPotListPage = () => {
+  const navigate = useNavigate();
+  const [modalShow, setModalShow] = useState(false);
+  const [length, setLength] = useState(0);
   const { state } = useLocation();
   const id = state.id;
-  console.log(id);
 
-  const axiosDeparture = async () => {
-    try {
-      axios({
-        method: "get",
-        url: `${process.env.REACT_APP_API_URL}/pot`,
-        params: { departure: id },
-      }).then((response) => {
-        console.log(response);
-      });
-    } catch (error) {
-      console.log("fail get", error);
+  useEffect(() => {
+    if (localStorage.getItem("@token") == undefined) {
+      console.log("nomember", localStorage.getItem("@token"));
+      noMemberAxios();
+    } else {
+      console.log("member", localStorage.getItem("@token"));
+      memberAxios();
+    }
+  }, []);
+
+  //생성하기,참여하기 버튼은 로그인됐을때만 가능
+  const handleCreatePot = () => {
+    if (localStorage.getItem("@token") == undefined) {
+      alert(`로그인이 필요한 기능입니다!`);
+      navigate("/Login");
+    } else {
+      setModalShow(true);
     }
   };
 
-  // useEffect(() => {
-  //   axiosDeparture();
-  // }, []);
+  const noMemberAxios = async () => {
+    try {
+      axios({
+        method: "get",
+        url: `${process.env.REACT_APP_API_URL}/pot/default`,
+        params: { departure: id },
+      })
+        .then((response) => {
+          console.log("response.data.data:", response.data.data);
+          setDataArray(response.data.data);
+          setLength(response.data.data.length);
+          console.log("length:", response.data.data.length);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  const [modalShow, setModalShow] = useState(false);
+  const memberAxios = async () => {
+    try {
+      console.log("token", localStorage.getItem("@token"));
+      axios({
+        method: "get",
+        url: `${process.env.REACT_APP_API_URL}/pot/valid`,
+        params: { departure: id },
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("@token")}`,
+        },
+      })
+        .then((response) => {
+          console.log("response.data.data:", response.data.data);
+          setDataArray(response.data.data);
+          setLength(response.data.data.length);
+          console.log("length:", response.data.data.length);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const [dataArray, setDataArray] = useState([]);
 
   const currentdate = new Date();
   const year = currentdate.getFullYear();
@@ -91,7 +141,7 @@ const TaxiPotListPage = () => {
 
         {id == "숙대입구역" ? (
           <img src={sookmyung} alt="지도" />
-        ) : id == "효창공원앞역" ? (
+        ) : id == "효창공원역" ? (
           <img src={hyochang} alt="지도" />
         ) : id == "서울역" ? (
           <img src={seoul} alt="지도" />
@@ -125,32 +175,36 @@ const TaxiPotListPage = () => {
               alignItems: "center",
             }}
           >
-            <Button variant="dark" size="md" onClick={() => setModalShow(true)}>
+            <Button variant="dark" size="md" onClick={handleCreatePot}>
               + 팟 생성하기
             </Button>
 
-            <MakepotModal show={modalShow} onHide={() => setModalShow(false)} />
+            <MakepotModal
+              show={modalShow}
+              onHide={() => setModalShow(false)}
+              id={id}
+            />
           </div>
         </div>
-        {/* <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            marginTop: "100px",
-          }}
-        >
-          아직 모집 중인 팟이 없습니다.
-          <br />
-          팟을 만들어보세요!
-        </div> */}
-        <PotItemButton />
-        <PotItemButton />
-        <PotItemButton />
-        <PotItemButton />
-        <PotItemButton />
-        <PotItemButton />
-        <PotItemButton />
+        {length == 0 ? (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: "100px",
+            }}
+          >
+            아직 모집 중인 팟이 없습니다.
+            <br />
+            팟을 만들어보세요!
+          </div>
+        ) : (
+          dataArray.map((data) => {
+            console.log("data.participating", data.participating);
+            <PotItemButton data={data} />;
+          })
+        )}
       </div>
     </div>
   );

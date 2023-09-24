@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import { validEmail } from "../components/RegEx";
 import axios from "axios";
 
 const EmailcheckPage = () => {
@@ -14,31 +13,26 @@ const EmailcheckPage = () => {
   const handleEmailChange = (e) => {
     const inputEmail = e.target.value;
     setEmail(inputEmail);
-    // setIsEmailValid(validEmail.test(inputEmail));
   };
 
   const handleToNext = () => {
     const fullEmail = email + "@sookmyung.ac.kr";
-    // 임시로 성공 메시지 출력 후 Signup으로 이동
     navigate("/Signup", { state: { email: fullEmail } });
   };
 
   const axiosCertificateEmail = async () => {
     const fullEmail = email + "@sookmyung.ac.kr";
-    console.log(fullEmail);
-    // const data = { mail: fullEmail };
     try {
       axios({
         method: "get",
         url: `${process.env.REACT_APP_API_URL}/email/auth`,
         params: { mail: fullEmail },
       }).then((response) => {
-        setCertificateNumber(response.data);
-
-        if (response.status == 200) {
-          alert(`인증메일 전송 성공`);
-        } else {
-          alert(`인증메일 전송 실패`);
+        console.log(response.data.data);
+        console.log(response.data.code);
+        alert(response.data.message);
+        if (response.data.code == 200) {
+          setCertificateNumber(response.data.data);
         }
       });
     } catch (error) {
@@ -62,7 +56,7 @@ const EmailcheckPage = () => {
         style={{
           marginTop: "100px",
           fontSize: "30px",
-          fontWeight: "600",
+          fontWeight: "700",
         }}
       >
         ❄️ 숙명 이메일 인증 ❄️

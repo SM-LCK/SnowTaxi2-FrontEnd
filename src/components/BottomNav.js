@@ -9,10 +9,8 @@ import React, { useState } from "react";
 
 function BottomNav() {
   const [tabActive, setTabActive] = useState("tab1");
-  console.log(tabActive);
   return (
-    // <div class="w-100">
-    <div class="vw-100" style={{ display: "flex", justifyContent: "center" }}>
+    <div style={{ display: "flex", justifyContent: "center" }}>
       {/* <Navbar bg="light" sticky="bottom"> */}
       <Nav
         justify
@@ -29,7 +27,7 @@ function BottomNav() {
         }}
       >
         <Nav.Item onClick={() => setTabActive("tab1")}>
-          <Nav.Link href="/Home/TaxiRouteList">
+          <Nav.Link href="/">
             <BsHouse size="30" color="black" />
             <div style={{ color: "black" }}>홈</div>
           </Nav.Link>

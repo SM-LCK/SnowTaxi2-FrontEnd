@@ -39,22 +39,22 @@ const MyPage = () => {
     const randomIndex = Math.floor(Math.random() * images.length);
     const selectedImage = images[randomIndex];
     setAvatar(selectedImage);
-    getToken();
+    // getToken();
   }, []);
 
   const getToken = async () => {
     try {
-      const accessToken = await localStorage.getItem("@accessToken");
+      const accessToken = await localStorage.getItem("@token");
       if (accessToken != null) {
         try {
           axios({
             method: "get",
             url: `${process.env.REACT_APP_API_URL}/test`,
             headers: {
-              Authorization: `Bearer ${accessToken}`,
+              Authorization: `Bearer ${localStorage.getItem("@token")}`,
             },
           }).then((response) => {
-            console.log("res: ", response.data);
+            console.log(response.data);
 
             //setNickname(response.data.data.id);
           });

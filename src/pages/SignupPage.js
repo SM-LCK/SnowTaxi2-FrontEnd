@@ -33,7 +33,6 @@ const SignupPage = () => {
   }, []);
 
   const { state } = useLocation();
-  console.log(state);
   const email = state.email;
 
   const navigate = useNavigate();
@@ -69,33 +68,45 @@ const SignupPage = () => {
 
   const handleNicknameCheck = (e) => {
     //중복체크 메서드
-    setIsNicknameCheck(true);
+    try {
+      axios({
+        method: "post",
+        url: `${process.env.REACT_APP_API_URL}/auth/nicknameCheck`,
+        params: { nickname: nickname },
+      })
+        .then((response) => {
+          console.log(response.data.data);
+          console.log(response.data.code);
+          alert(response.data.message);
+          if (response.data.code == 200) {
+            setIsNicknameCheck(true);
+          }
+        })
+        .catch(function (error) {
+          if (error.response) {
+            alert("dd");
+          }
+        });
+    } catch (error) {
+      console.log("fail get", error);
+    }
   };
 
   const axioshandleSignup = async () => {
-    // const data = {
-    //   email: email,
-    //   password: password,
-    // };
-
     try {
       axios({
         method: "post",
         url: `${process.env.REACT_APP_API_URL}/auth/signUp`,
         data: {
+          nickname: nickname,
           email: email,
           password: password,
         },
       })
         .then(function (response) {
-          console.log(response);
-          console.log("signup: ", response.data);
-          if (response.status == 200) {
-            alert(`회원가입 성공!`);
-            navigate("/Home/TaxiRouteList");
-          } else {
-            //'해당 이메일의 유저가 존재합니다.'
-            alert(`회원가입 실패`);
+          alert(response.data.message);
+          if (response.data.code == 200) {
+            navigate("/Login");
           }
         })
         .catch(function (error) {
@@ -105,21 +116,6 @@ const SignupPage = () => {
       console.log("signup err", error);
     }
   };
-
-  //   const response = await axios.post(
-  //     `${process.env.REACT_APP_API_URL}/auth/signUp`,
-  //     data
-  //   );
-  //   console.log("signup: ", response.data);
-  //   if (response.status == 200) {
-  //     alert(`회원가입 성공!`);
-  //     navigate("/Home/TaxiRouteList");
-  //   } else {
-  //     alert(`회원가입 실패`);
-  //   }
-  // } catch (error) {
-  //   console.log("fail signup", error);
-  // }
 
   return (
     <div
@@ -190,6 +186,7 @@ const SignupPage = () => {
             type="password"
             id="password"
             value={password}
+            placeholder="알파벳과 숫자를 포함한 8글자 이상"
             onChange={handlePasswordChange}
           />
         </div>
@@ -233,7 +230,7 @@ const SignupPage = () => {
             marginBottom: "100px",
           }}
         >
-          <p style={{}}>이미 회원이신가요?</p>
+          <p>이미 회원이신가요?</p>
           <Link to="/">
             <p style={{ marginLeft: "10px" }}>로그인</p>
           </Link>

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import { validEmail, validPassword } from "../components/RegEx";
 import axios from "axios";
 
 const LoginPage = () => {
@@ -29,33 +28,25 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isEmailValid, setIsEmailValid] = useState(true);
-  const [isPasswordValid, setIsPasswordValid] = useState(true);
 
   const handleEmailChange = (e) => {
     const inputEmail = e.target.value;
     setEmail(inputEmail);
-    setIsEmailValid(validEmail.test(inputEmail));
   };
 
   const handlePasswordChange = (e) => {
     const inputPassword = e.target.value;
     setPassword(inputPassword);
-    setIsPasswordValid(validPassword.test(inputPassword));
   };
 
   const handleLogin = async () => {
     // 임시로 성공 메시지 출력 후 홈 페이지로 이동하는 예제
     // alert(`Login 성공! 이메일: ${email}`);
-    navigate("/Home/TaxiRouteList");
+    navigate("/");
   };
 
   const axioshandleLogin = async () => {
     const fullEmail = email + "@sookmyung.ac.kr";
-    const data = {
-      email: email,
-      password: password,
-    };
 
     try {
       axios({
@@ -65,21 +56,22 @@ const LoginPage = () => {
           email: fullEmail,
           password: password,
         },
-      }).then((response) => {
-        console.log("res: ", response);
+      })
+        .then((response) => {
+          console.log(response.headers.get("Authorization"));
+          alert(response.data.message);
 
-        if (response.data == "home") {
-          /*
-          const accessToken = response.data.token;
-          console.log(response.data.token);
-          localStorage.setItem("@accessToken", accessToken);
-        */
-          alert(`로그인 성공!`);
-          navigate("/Home/TaxiRouteList");
-        } else {
-          alert(`로그인 실패`);
-        }
-      });
+          if (response.data.code == 200) {
+            const accessToken = response.headers.get("Authorization");
+            localStorage.setItem("@token", accessToken);
+            navigate("/");
+          }
+        })
+        .catch(function (error) {
+          if (error.response) {
+            alert("회원이 아닙니다.");
+          }
+        });
     } catch (error) {
       console.log("test err", error);
     }
@@ -94,7 +86,7 @@ const LoginPage = () => {
         style={{
           marginTop: "100px",
           fontSize: "30px",
-          fontWeight: "600",
+          fontWeight: "700",
         }}
       >
         ❄️ 숙명 이메일 로그인 ❄️
@@ -111,11 +103,6 @@ const LoginPage = () => {
           />
           <div style={{ fontSize: "15px" }}>@sookmyung.ac.kr</div>
         </div>
-        {!isEmailValid && (
-          <p className="text-body-secondary" style={{ marginTop: "10px" }}>
-            유효한 학교 이메일 주소를 입력하세요.
-          </p>
-        )}
 
         <div className="inputTitle" style={{ marginTop: "30px" }}>
           비밀번호

@@ -1,29 +1,66 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { validEmail } from "../components/RegEx";
 import { Button } from "react-bootstrap";
+import axios from "axios";
 
 const RePasswordPage = () => {
+  const [windowDimensions, setWindowDimensions] = useState({
+    height: window.innerHeight,
+    width: window.innerWidth,
+  });
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowDimensions({
+        height: window.innerHeight,
+        width: window.innerWidth,
+      });
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // 컴포넌트가 언마운트될 때 이벤트 리스너를 제거
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
-  const [isEmailValid, setIsEmailValid] = useState(true);
 
   const handleEmailChange = (e) => {
     const inputEmail = e.target.value;
     setEmail(inputEmail);
-    setIsEmailValid(validEmail.test(inputEmail));
   };
 
   const handleToLogin = () => {
-    navigate("/");
+    navigate("/Login");
   };
 
-  const handleSendEmail = () => {
-    alert(`이메일 전송`);
+  const axiosSendEmail = async () => {
+    const fullEmail = email + "@sookmyung.ac.kr";
+    try {
+      axios({
+        method: "get",
+        url: `${process.env.REACT_APP_API_URL}/email/password`,
+        params: { mail: fullEmail },
+      }).then((response) => {
+        console.log(response.data.code);
+        alert(response.data.message);
+        // if (response.data.code == 200) {
+        // } else {
+        // }
+      });
+    } catch (error) {
+      console.log("fail get", error);
+    }
   };
 
   return (
-    <div className="page">
+    <div
+      className="page"
+      style={{ height: windowDimensions.height, width: "100%" }}
+    >
       <div
         style={{
           display: "flex",
@@ -53,14 +90,10 @@ const RePasswordPage = () => {
           id="email"
           value={email}
           onChange={handleEmailChange}
-          placeholder="@sookmyung.ac.kr"
         />
+        <div style={{ fontSize: "15px" }}>@sookmyung.ac.kr</div>
       </div>
-      {!isEmailValid && (
-        <p className="text-body-secondary" style={{ marginTop: "10px" }}>
-          유효한 학교 이메일 주소를 입력하세요.
-        </p>
-      )}
+
       <div
         style={{
           display: "flex",
@@ -70,7 +103,7 @@ const RePasswordPage = () => {
         }}
       >
         <div className="d-grid gap-2" style={{ marginRight: "20px" }}>
-          <Button variant="dark" size="lg" onClick={handleSendEmail}>
+          <Button variant="dark" size="lg" onClick={axiosSendEmail}>
             이메일 전송
           </Button>
         </div>

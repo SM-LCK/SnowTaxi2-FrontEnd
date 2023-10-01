@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ChattingComponent from "../components/ChattingComponent";
 
 const ChattingPage = () => {
   const [windowDimensions, setWindowDimensions] = useState({

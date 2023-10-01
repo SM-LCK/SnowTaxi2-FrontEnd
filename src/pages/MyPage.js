@@ -7,8 +7,10 @@ import profile2 from "../assets/profile2.png";
 import profile3 from "../assets/profile3.png";
 import profile4 from "../assets/profile4.png";
 import ReactRoundedImage from "react-rounded-image";
+import { useNavigate } from "react-router-dom";
 
 const MyPage = () => {
+  const navigate = useNavigate();
   const [windowDimensions, setWindowDimensions] = useState({
     height: window.innerHeight,
     width: window.innerWidth,
@@ -36,40 +38,21 @@ const MyPage = () => {
   const images = [profile1, profile2, profile3, profile4];
 
   useEffect(() => {
-    const randomIndex = Math.floor(Math.random() * images.length);
-    const selectedImage = images[randomIndex];
-    setAvatar(selectedImage);
-    // getToken();
+    if (localStorage.getItem("@token") == undefined) {
+      alert(`로그인이 필요한 기능입니다!`);
+      navigate("/Login");
+    } else {
+      setNickname(localStorage.getItem("@userNickname"));
+      console.log("nickname", nickname);
+      const randomIndex = Math.floor(Math.random() * images.length);
+      const selectedImage = images[randomIndex];
+      setAvatar(selectedImage);
+    }
   }, []);
 
-  const getToken = async () => {
-    try {
-      const accessToken = await localStorage.getItem("@token");
-      if (accessToken != null) {
-        try {
-          axios({
-            method: "get",
-            url: `${process.env.REACT_APP_API_URL}/test`,
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("@token")}`,
-            },
-          }).then((response) => {
-            console.log(response.data);
-
-            //setNickname(response.data.data.id);
-          });
-        } catch (error) {
-          console.log("test err", error);
-        }
-      }
-    } catch (e) {
-      console.log("getData", e);
-    }
+  const gotoChatting = () => {
+    navigate("/Home/MyChatting");
   };
-
-  // useEffect(() => {
-  //   getToken();
-  // }, []);
 
   return (
     <div
@@ -114,7 +97,7 @@ const MyPage = () => {
             borderRadius="100"
           />
           <div style={{ fontSize: "18px", marginLeft: "20px" }}>
-            송이님, 안녕하세요!
+            {nickname}님, 안녕하세요!
           </div>
         </div>
 
@@ -129,7 +112,7 @@ const MyPage = () => {
           }}
         >
           <div style={{ fontSize: "20px", fontWeight: "600" }}>참여내역</div>
-          <FiChevronRight size="25" color="black" />
+          <FiChevronRight size="25" color="black" onClick={gotoChatting} />
         </div>
         <hr height="30px" />
         <div

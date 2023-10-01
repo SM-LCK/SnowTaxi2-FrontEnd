@@ -5,7 +5,7 @@ import { BsPerson, BsPersonFill } from "react-icons/bs";
 import { Button } from "react-bootstrap";
 import PotModal from "./PotModal";
 
-const PotItemButton = (data) => {
+const ChattingComponent = (data) => {
   const gettedData = data.data;
   console.log("gettedData: ", gettedData);
   const [ridingTime, setRidingTime] = useState("");
@@ -139,4 +139,4 @@ const PotItemButton = (data) => {
   );
 };
 
-export default PotItemButton;
+export default ChattingComponent;

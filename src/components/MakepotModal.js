@@ -8,29 +8,17 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import axios from "axios";
 
-//Cannot read properties of undefined (reading 'getHours')
 const MakepotModal = (props) => {
-  const [isShow, setIsShow] = useState(props.show);
   const id = props.id;
   const navigate = useNavigate();
+  const [isShow, setIsShow] = useState(props.show);
   const [timeValue, setTimeValue] = useState("");
+  const [potId, setPotId] = useState(0);
 
   useEffect(() => {}, [timeValue]);
 
-  // if (timeValue.length != 0) {
-  //   const time = timeValue.$d; // 데이터에서 시간 정보를 가져옵니다
-  //   const hours = time.getHours(); // 시간을 얻어옵니다
-  //   const minutes = time.getMinutes(); // 분을 얻어옵니다
-  //   const formattedTime = `${hours.toString().padStart(2, "0")}:${minutes
-  //     .toString()
-  //     .padStart(2, "0")}`;
-  //   console.log("Formatted time:", formattedTime);
-  //   setTimeValue(formattedTime);
-  // }
-
   const handleTimeChange = (newTimeValue) => {
     setTimeValue(newTimeValue);
-    // console.log(timeValue);
   };
 
   const handleParticipating = async () => {
@@ -55,14 +43,17 @@ const MakepotModal = (props) => {
         },
       })
         .then((response) => {
-          console.log(response.data);
-          console.log(response.data.data);
-          if (response.data.data) {
-            console.log(response.data.message);
+          console.log(response.data.data); //생성되면 potId, 안되면 0
+          if (response.data.data != 0) {
+            console.log(response.data.data);
+            //setPotId();
+            // localStorage.setItem("@potId", potId);
+            // setStoragePotId(localStorage.getItem("@potId"));
             setIsShow(props.onHide);
             //navigate("/Home/Chatting");
           } else {
             alert(`이미 참여하는 팟이 있습니다!`);
+            setIsShow(props.onHide);
           }
         })
         .catch(function (error) {

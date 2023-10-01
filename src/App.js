@@ -11,6 +11,7 @@ import TaxiPotListPage from "./pages/TaxiPotListPage";
 import Home from "./pages/Home";
 import RePasswordPage from "./pages/RePasswordPage";
 import BottomNav from "./components/BottomNav";
+import MyChattingPage from "./pages/MyChattingPage";
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
         <Route path="MyPage" element={<MyPage />} />
         <Route path="Chatting" element={<ChattingPage />} />
         <Route path="TaxiPotList" element={<TaxiPotListPage />} />
-        {/* <Route path="TaxiRouteList" element={<TaxiRouteListPage />} /> */}
+        <Route path="MyChatting" element={<MyChattingPage />} />
       </Route>
 
       <Route path="/RePassword" element={<RePasswordPage />} />

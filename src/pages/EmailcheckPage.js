@@ -4,6 +4,27 @@ import { Button } from "react-bootstrap";
 import axios from "axios";
 
 const EmailcheckPage = () => {
+  const [windowDimensions, setWindowDimensions] = useState({
+    height: window.innerHeight,
+    width: window.innerWidth,
+  });
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowDimensions({
+        height: window.innerHeight,
+        width: window.innerWidth,
+      });
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // 컴포넌트가 언마운트될 때 이벤트 리스너를 제거
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [inputNumber, setInputNumber] = useState("");
@@ -51,7 +72,10 @@ const EmailcheckPage = () => {
   };
 
   return (
-    <div className="page">
+    <div
+      className="page"
+      style={{ height: windowDimensions.height, width: "100%" }}
+    >
       <div
         style={{
           marginTop: "100px",

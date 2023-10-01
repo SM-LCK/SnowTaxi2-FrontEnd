@@ -15,6 +15,7 @@ const TaxiPotListPage = () => {
   const navigate = useNavigate();
   const [modalShow, setModalShow] = useState(false);
   const [length, setLength] = useState(0);
+  const [dataArray, setDataArray] = useState([]);
   const { state } = useLocation();
   const id = state.id;
 
@@ -26,7 +27,7 @@ const TaxiPotListPage = () => {
       console.log("member", localStorage.getItem("@token"));
       memberAxios();
     }
-  }, []);
+  }, [dataArray]);
 
   //생성하기,참여하기 버튼은 로그인됐을때만 가능
   const handleCreatePot = () => {
@@ -46,10 +47,10 @@ const TaxiPotListPage = () => {
         params: { departure: id },
       })
         .then((response) => {
-          console.log("response.data.data:", response.data.data);
+          console.log("data: ", response.data.data);
           setDataArray(response.data.data);
           setLength(response.data.data.length);
-          console.log("length:", response.data.data.length);
+          console.log("length: ", response.data.data.length);
         })
         .catch(function (error) {
           console.log(error);
@@ -61,7 +62,6 @@ const TaxiPotListPage = () => {
 
   const memberAxios = async () => {
     try {
-      console.log("token", localStorage.getItem("@token"));
       axios({
         method: "get",
         url: `${process.env.REACT_APP_API_URL}/pot/valid`,
@@ -71,10 +71,10 @@ const TaxiPotListPage = () => {
         },
       })
         .then((response) => {
-          console.log("response.data.data:", response.data.data);
+          console.log("data: ", response.data.data);
           setDataArray(response.data.data);
           setLength(response.data.data.length);
-          console.log("length:", response.data.data.length);
+          console.log("length: ", response.data.data.length);
         })
         .catch(function (error) {
           console.log(error);
@@ -83,8 +83,6 @@ const TaxiPotListPage = () => {
       console.log(error);
     }
   };
-
-  const [dataArray, setDataArray] = useState([]);
 
   const currentdate = new Date();
   const year = currentdate.getFullYear();
@@ -114,7 +112,7 @@ const TaxiPotListPage = () => {
         postion: "absolute",
         width: "100%",
         height: "100%",
-        padding: "0 450px",
+        padding: "0 500px",
         backgroundColor: "#f7f7f7",
         paddingBottom: "100px",
       }}
@@ -140,13 +138,21 @@ const TaxiPotListPage = () => {
         </div>
 
         {id == "숙대입구역" ? (
-          <img src={sookmyung} alt="지도" />
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <img src={sookmyung} alt="지도" style={{ width: "500px" }} />
+          </div>
         ) : id == "효창공원역" ? (
-          <img src={hyochang} alt="지도" />
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <img src={hyochang} alt="지도" style={{ width: "500px" }} />
+          </div>
         ) : id == "서울역" ? (
-          <img src={seoul} alt="지도" />
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <img src={seoul} alt="지도" style={{ width: "500px" }} />
+          </div>
         ) : (
-          <img src={namyoung} alt="지도" />
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <img src={namyoung} alt="지도" style={{ width: "500px" }} />
+          </div>
         )}
 
         <div style={{ fontSize: "23px", fontWeight: "600", marginTop: "15px" }}>
@@ -200,10 +206,11 @@ const TaxiPotListPage = () => {
             팟을 만들어보세요!
           </div>
         ) : (
-          dataArray.map((data) => {
-            console.log("data.participating", data.participating);
-            <PotItemButton data={data} />;
-          })
+          <>
+            {dataArray.map((data) => {
+              return <PotItemButton data={data} />;
+            })}
+          </>
         )}
       </div>
     </div>

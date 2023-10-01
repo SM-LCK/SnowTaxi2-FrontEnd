@@ -39,11 +39,6 @@ const LoginPage = () => {
     setPassword(inputPassword);
   };
 
-  const handleLogin = async () => {
-    // 임시로 성공 메시지 출력 후 홈 페이지로 이동하는 예제
-    // alert(`Login 성공! 이메일: ${email}`);
-    navigate("/");
-  };
 
   const axioshandleLogin = async () => {
     const fullEmail = email + "@sookmyung.ac.kr";
@@ -58,12 +53,17 @@ const LoginPage = () => {
         },
       })
         .then((response) => {
-          console.log(response.headers.get("Authorization"));
+          console.log("headers: ", response.headers.get("Authorization"));
           alert(response.data.message);
+          console.log("data: ", response.data.data);
 
           if (response.data.code == 200) {
             const accessToken = response.headers.get("Authorization");
             localStorage.setItem("@token", accessToken);
+            const participatingId = response.data.data.participatingPotId;
+            localStorage.setItem("@potId", participatingId);
+            const userNickname = response.data.data.nickname;
+            localStorage.setItem("@nickname", userNickname);
             navigate("/");
           }
         })

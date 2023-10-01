@@ -21,13 +21,13 @@ const TaxiPotListPage = () => {
 
   useEffect(() => {
     if (localStorage.getItem("@token") == undefined) {
-      console.log("nomember", localStorage.getItem("@token"));
+      //console.log("nomember", localStorage.getItem("@token"));
       noMemberAxios();
     } else {
-      console.log("member", localStorage.getItem("@token"));
+      //console.log("member", localStorage.getItem("@token"));
       memberAxios();
     }
-  }, [dataArray]);
+  }, [modalShow]);
 
   //생성하기,참여하기 버튼은 로그인됐을때만 가능
   const handleCreatePot = () => {
@@ -47,10 +47,10 @@ const TaxiPotListPage = () => {
         params: { departure: id },
       })
         .then((response) => {
-          console.log("data: ", response.data.data);
+          //console.log("data: ", response.data.data);
           setDataArray(response.data.data);
           setLength(response.data.data.length);
-          console.log("length: ", response.data.data.length);
+          //console.log("length: ", response.data.data.length);
         })
         .catch(function (error) {
           console.log(error);
@@ -71,10 +71,10 @@ const TaxiPotListPage = () => {
         },
       })
         .then((response) => {
-          console.log("data: ", response.data.data);
+          //console.log("data: ", response.data.data);
           setDataArray(response.data.data);
           setLength(response.data.data.length);
-          console.log("length: ", response.data.data.length);
+          //console.log("length: ", response.data.data.length);
         })
         .catch(function (error) {
           console.log(error);

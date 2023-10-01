@@ -14,6 +14,7 @@ const MakepotModal = (props) => {
   const [isShow, setIsShow] = useState(props.show);
   const [timeValue, setTimeValue] = useState("");
   const [potId, setPotId] = useState(0);
+  // const [storagePotId, setStoragePotId] = useState(0);
 
   useEffect(() => {}, [timeValue]);
 
@@ -45,12 +46,12 @@ const MakepotModal = (props) => {
         .then((response) => {
           console.log(response.data.data); //생성되면 potId, 안되면 0
           if (response.data.data != 0) {
-            console.log(response.data.data);
-            //setPotId();
-            // localStorage.setItem("@potId", potId);
-            // setStoragePotId(localStorage.getItem("@potId"));
+            console.log("data: ", response.data.data);
+            setPotId(response.data.data);
+            localStorage.setItem("@potId", response.data.data);
+            // setStoragePotId(potId);
             setIsShow(props.onHide);
-            //navigate("/Home/Chatting");
+            navigate("/Home/Chatting");
           } else {
             alert(`이미 참여하는 팟이 있습니다!`);
             setIsShow(props.onHide);

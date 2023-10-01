@@ -42,7 +42,7 @@ const MyPage = () => {
       alert(`로그인이 필요한 기능입니다!`);
       navigate("/Login");
     } else {
-      setNickname(localStorage.getItem("@userNickname"));
+      setNickname(localStorage.getItem("@nickname"));
       console.log("nickname", nickname);
       const randomIndex = Math.floor(Math.random() * images.length);
       const selectedImage = images[randomIndex];
@@ -97,7 +97,7 @@ const MyPage = () => {
             borderRadius="100"
           />
           <div style={{ fontSize: "18px", marginLeft: "20px" }}>
-            {nickname}님, 안녕하세요!
+            {nickname} 님, 안녕하세요!
           </div>
         </div>
 

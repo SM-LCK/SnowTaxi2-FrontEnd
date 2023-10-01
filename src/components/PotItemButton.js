@@ -7,11 +7,11 @@ import PotModal from "./PotModal";
 
 const PotItemButton = (data) => {
   const gettedData = data.data;
-  console.log("gettedData: ", gettedData);
+  //console.log("gettedData: ", gettedData);
   const [ridingTime, setRidingTime] = useState("");
   const [headCount, setHeadCount] = useState(0);
   const [participating, setParticipating] = useState(false);
-  const [storagePotId, setStoragePotId] = useState(0);
+  // const [storagePotId, setStoragePotId] = useState(0);
   const [potId, setPotId] = useState(0);
   const navigate = useNavigate();
   const [modalShow, setModalShow] = useState(false);
@@ -21,7 +21,7 @@ const PotItemButton = (data) => {
     var ampm = "오전";
     var hour = timeArr[0];
     var min = timeArr[1];
-    console.log(hour, min);
+    //console.log(hour, min);
 
     if (timeArr[0] >= 12) {
       ampm = "오후";
@@ -30,54 +30,57 @@ const PotItemButton = (data) => {
       }
     }
     const string = ampm + "   " + hour + ":" + min;
-    console.log(string);
+    //console.log(string);
     return string;
   };
 
   useEffect(() => {
-    if (localStorage.getItem("@potId") != undefined) {
-      setStoragePotId(localStorage.getItem("@potId"));
-    }
+    // if (localStorage.getItem("@potId") != undefined) {
+    //   setStoragePotId(localStorage.getItem("@potId"));
+    // }
     setPotId(gettedData.id);
     setRidingTime(makeTime(gettedData.ridingTime));
     setHeadCount(gettedData.headCount);
     setParticipating(gettedData.participating);
   }, []);
 
-  const handleParticipating = async () => {
+  const handleParticipating = () => {
+    navigate("/Home/Chatting");
+  };
+
+  const handleParticipate = async () => {
+    // setStoragePotId(localStorage.getItem("@potId"));
+    console.log("storage id: ", localStorage.getItem("@potId"));
     if (localStorage.getItem("@token") == undefined) {
       alert(`로그인이 필요한 기능입니다!`);
       navigate("/Login");
     } else {
-      if (storagePotId != 0 && potId != storagePotId) {
-        alert(`이미 참여하는 팟이 있습니다.`);
-        console.log("storagePotId: ", storagePotId);
-      } else if (headCount == 4) alert(`이미 모집이 완료된 팟입니다.`);
+      if (headCount == 4) alert(`이미 모집이 완료된 팟입니다.`);
       else {
-        if (potId == storagePotId) {
-          navigate("/Home/Chatting");
-        } else {
-          setModalShow(true);
-          try {
-            axios({
-              method: "post",
-              url: `${process.env.REACT_APP_API_URL}/participation`,
-              params: { potId: potId },
-              headers: {
-                Authorization: `Bearer ${localStorage.getItem("@token")}`,
-              },
-            })
-              .then((response) => {
-                console.log("data: ", response.data.data);
+        try {
+          axios({
+            method: "post",
+            url: `${process.env.REACT_APP_API_URL}/participation`,
+            params: { potId: potId },
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("@token")}`,
+            },
+          })
+            .then((response) => {
+              console.log("data: ", response.data.data); //참여가능 true,아니면 false
+              if (response.data.data) {
+                setModalShow(true);
                 localStorage.setItem("@potId", potId);
-                setStoragePotId(localStorage.getItem("@potId"));
-              })
-              .catch(function (error) {
-                console.log(error);
-              });
-          } catch (error) {
-            console.log(error);
-          }
+                // setStoragePotId(potId);
+              } else {
+                alert(`이미 참여하는 팟이 있습니다.`);
+              }
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        } catch (error) {
+          console.log(error);
         }
       }
     }
@@ -128,7 +131,7 @@ const PotItemButton = (data) => {
               참여중
             </Button>
           ) : (
-            <Button variant="primary" size="md" onClick={handleParticipating}>
+            <Button variant="primary" size="md" onClick={handleParticipate}>
               참여하기
             </Button>
           )}

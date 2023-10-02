@@ -12,6 +12,8 @@ import Home from "./pages/Home";
 import RePasswordPage from "./pages/RePasswordPage";
 import BottomNav from "./components/BottomNav";
 import MyChattingPage from "./pages/MyChattingPage";
+import HistoryPage from "./pages/HistoryPage";
+
 
 function App() {
   return (
@@ -30,6 +32,7 @@ function App() {
         <Route path="Chatting" element={<ChattingPage />} />
         <Route path="TaxiPotList" element={<TaxiPotListPage />} />
         <Route path="MyChatting" element={<MyChattingPage />} />
+        <Route path="History" element={<HistoryPage />} />
       </Route>
 
       <Route path="/RePassword" element={<RePasswordPage />} />

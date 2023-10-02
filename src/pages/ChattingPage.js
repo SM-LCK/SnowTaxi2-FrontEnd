@@ -32,13 +32,6 @@ const ChattingPage = props => {
     "time": "12:30"
 }]); // 채팅 기록
 
-  // userSlice.js에 저장된 로그인된 유저의 코드를 받음
-  // const userId = useSelector((state) => {
-  //   return state.user.userCode;
-  // });
-
-  //컴포넌트가 변경될 때 객체가 유지되어야하므로 'ref'로 저장
-
   // 내가 보낸 메시지, 받은 메시지에 각각의 스타일을 지정해 주기 위함
   const msgBox = chatList.map((item, idx) => {
     if (item.sender == me) {

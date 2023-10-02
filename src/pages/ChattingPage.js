@@ -7,8 +7,7 @@ import profile1 from "../assets/profile1.png";
 import axios from "axios";
 
 
-// 호출할 떄 <ChattingPage id={localStorage.getItem("@potId")} />
-const ChattingPage = props => {
+const ChattingPage = () => {
   let me = localStorage.getItem("@nickname")
   let wWidth = window.innerWidth;
   let wHeight = window.innerHeight;
@@ -56,7 +55,7 @@ const ChattingPage = props => {
         debug: function (str) {
           console.log(str);
         },
-        reconnectDelay: 100, // 자동 재 연결
+        reconnectDelay: 5000, // 자동 재 연결
         heartbeatIncoming: 4000,
         heartbeatOutgoing: 4000,
       });
@@ -88,12 +87,9 @@ const ChattingPage = props => {
   };
 
   const sendChat = () => {
-    console.log("chat", chat)
-    console.log("chat", chat)
     if (chat === "") {
       return;
     }
-    console.log("me", me)
     client.publish({
       destination: "/pub/chat" ,
       body: JSON.stringify({

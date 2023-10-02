@@ -96,7 +96,9 @@ const MyPage = () => {
             roundedSize="10"
             borderRadius="100"
           />
-          <div style={{ fontSize: "18px", marginLeft: "20px" }}>
+          <div
+            style={{ fontSize: "20px", marginLeft: "20px", fontWeight: "500" }}
+          >
             {nickname} 님, 안녕하세요!
           </div>
         </div>

@@ -87,7 +87,7 @@ const PotItemButton = (data) => {
   };
 
   return (
-    <button
+    <div
       style={{
         backgroundColor: "white",
         borderRadius: "15px",
@@ -106,7 +106,12 @@ const PotItemButton = (data) => {
       >
         <div
           style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
             marginLeft: "20px",
+            marginTop: "15px",
+            marginBottom: "15px",
           }}
         >
           <div
@@ -116,16 +121,20 @@ const PotItemButton = (data) => {
           </div>
           <div
             style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
+              marginBottom: "15px",
             }}
           >
             {Array(headCount).fill(<BsPersonFill size="25" color="black" />)}
             {Array(4 - headCount).fill(<BsPerson size="25" color="black" />)}
           </div>
         </div>
-        <div style={{ marginRight: "20px" }}>
+        <div
+          style={{
+            marginRight: "20px",
+            marginTop: "15px",
+            marginBottom: "15px",
+          }}
+        >
           {participating ? (
             <Button variant="secondary" size="md" onClick={handleParticipating}>
               참여중
@@ -138,7 +147,7 @@ const PotItemButton = (data) => {
           <PotModal show={modalShow} onHide={() => setModalShow(false)} />
         </div>
       </div>
-    </button>
+    </div>
   );
 };
 

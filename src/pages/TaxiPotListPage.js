@@ -10,6 +10,7 @@ import hyochang from "../assets/map_hyochang.jpeg";
 import seoul from "../assets/map_seoul.jpeg";
 import namyoung from "../assets/map_namyoung.jpeg";
 import axios from "axios";
+import { WindowRounded } from "@mui/icons-material";
 
 const TaxiPotListPage = () => {
   const navigate = useNavigate();
@@ -82,6 +83,11 @@ const TaxiPotListPage = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handledropDown = (eventKey) => {
+    console.log(eventKey);
+    window.location.reload();
   };
 
   const currentdate = new Date();
@@ -168,9 +174,10 @@ const TaxiPotListPage = () => {
             <DropdownButton
               variant="secondary"
               id="dropdown-basic-button"
-              title="마감순"
+              title="정렬"
+              onSelect={handledropDown}
             >
-              <Dropdown.Item href="#/action-1">최신 생성순</Dropdown.Item>
+              <Dropdown.Item eventKey="item1">마감순</Dropdown.Item>
             </DropdownButton>
           </div>
           <div
@@ -206,11 +213,14 @@ const TaxiPotListPage = () => {
             팟을 만들어보세요!
           </div>
         ) : (
-          <>
-            {dataArray.map((data) => {
-              return <PotItemButton data={data} />;
-            })}
-          </>
+          dataArray.map((data) => {
+            return (
+              ///unique key prop 해결안됨
+              <div key={data.id}>
+                <PotItemButton data={data} />
+              </div>
+            );
+          })
         )}
       </div>
     </div>

@@ -27,8 +27,8 @@ const MyPage = () => {
   useEffect(() => {
     if (localStorage.getItem("@token") == undefined) {
       setLoginNeedModalShow(true);
-      alert(`로그인이 필요한 기능입니다!`);
-      navigate("/Login");
+      //alert(`로그인이 필요한 기능입니다!`);
+      //navigate("/Login");
     } else {
       setNickname(localStorage.getItem("@nickname"));
       console.log("nickname", nickname);
@@ -54,7 +54,7 @@ const MyPage = () => {
           >
             <div
               style={{
-                marginTop: "40px",
+                marginTop: "50px",
                 fontSize: "23px",
                 fontWeight: "600",
                 marginBottom: "40px",
@@ -65,7 +65,7 @@ const MyPage = () => {
             >
               마이페이지
             </div>
-            <div style={{ fontSize: "18px", fontWeight: "700" }}>나의정보</div>
+            <div style={{ fontSize: "15px", fontWeight: "700" }}>나의정보</div>
             <div
               style={{
                 marginTop: "10px",
@@ -77,7 +77,6 @@ const MyPage = () => {
               {" "}
               <ReactRoundedImage
                 image={avatar}
-                // roundedColor="#2196F3"
                 imageWidth="70"
                 imageHeight="70"
                 roundedSize="5"
@@ -86,7 +85,7 @@ const MyPage = () => {
               <div
                 style={{
                   marginLeft: "20px",
-                  fontSize: "18px",
+                  fontSize: "15px",
                 }}
               >
                 {nickname} 님, 안녕하세요! 🚖
@@ -104,10 +103,10 @@ const MyPage = () => {
               }}
               onClick={gotoHistory}
             >
-              <div style={{ fontSize: "18px", fontWeight: "700" }}>
+              <div style={{ fontSize: "15px", fontWeight: "700" }}>
                 참여내역
               </div>
-              <FiChevronRight size="25" color="black" />
+              <FiChevronRight size="23" color="black" />
             </div>
             <hr height="30px" />
             <div
@@ -119,11 +118,11 @@ const MyPage = () => {
                 marginBottom: "5px",
               }}
             >
-              <div style={{ fontSize: "18px", fontWeight: "700" }}>
+              <div style={{ fontSize: "15px", fontWeight: "700" }}>
                 로그아웃
               </div>
               <FiChevronRight
-                size="25"
+                size="23"
                 color="black"
                 onClick={() => setModalShow(true)}
               />
@@ -139,10 +138,10 @@ const MyPage = () => {
                 marginBottom: "5px",
               }}
             >
-              <div style={{ fontSize: "18px", fontWeight: "700" }}>
+              <div style={{ fontSize: "15px", fontWeight: "700" }}>
                 회원탈퇴
               </div>
-              <FiChevronRight size="25" color="black" />
+              <FiChevronRight size="23" color="black" />
             </div>
           </div>
         </div>
@@ -159,7 +158,7 @@ const MyPage = () => {
               <div
                 style={{
                   marginTop: "40px",
-                  fontSize: "23px",
+                  fontSize: "20px",
                   fontWeight: "700",
                   marginBottom: "40px",
                   justifyContent: "center",
@@ -169,7 +168,7 @@ const MyPage = () => {
               >
                 마이페이지
               </div>
-              <div style={{ fontSize: "18px", fontWeight: "700" }}>
+              <div style={{ fontSize: "13px", fontWeight: "700" }}>
                 나의 정보
               </div>
               <div
@@ -183,7 +182,6 @@ const MyPage = () => {
                 {" "}
                 <ReactRoundedImage
                   image={avatar}
-                  // roundedColor="#2196F3"
                   imageWidth="70"
                   imageHeight="70"
                   roundedSize="5"
@@ -191,11 +189,11 @@ const MyPage = () => {
                 />
                 <div
                   style={{
-                    fontSize: "18px",
+                    fontSize: "13px",
                     marginLeft: "20px",
                   }}
                 >
-                  {nickname} 님, 안녕하세요! 🚖
+                  {nickname} 님, 안녕하세요! 🍀
                 </div>
               </div>
 
@@ -210,10 +208,10 @@ const MyPage = () => {
                 }}
                 onClick={gotoHistory}
               >
-                <div style={{ fontSize: "18px", fontWeight: "700" }}>
+                <div style={{ fontSize: "13px", fontWeight: "700" }}>
                   참여 내역
                 </div>
-                <FiChevronRight size="25" color="black" />
+                <FiChevronRight size="20" color="black" />
               </div>
               <hr height="30px" />
               <div
@@ -225,11 +223,11 @@ const MyPage = () => {
                   marginBottom: "5px",
                 }}
               >
-                <div style={{ fontSize: "18px", fontWeight: "700" }}>
+                <div style={{ fontSize: "13px", fontWeight: "700" }}>
                   로그아웃
                 </div>
                 <FiChevronRight
-                  size="25"
+                  size="20"
                   color="black"
                   onClick={() => setModalShow(true)}
                 />
@@ -248,23 +246,23 @@ const MyPage = () => {
                   marginBottom: "5px",
                 }}
               >
-                <div style={{ fontSize: "18px", fontWeight: "700" }}>
+                <div style={{ fontSize: "13px", fontWeight: "700" }}>
                   회원탈퇴
                 </div>
-                <FiChevronRight size="25" color="black" />
+                <FiChevronRight size="20" color="black" />
               </div>
             </div>
-            <CheckModal
-              show={loginNeedModalShow}
-              onHide={() => setLoginNeedModalShow(false)}
-              main="로그인이 필요한 기능입니다."
-              sub="로그인 페이지로 이동하시겠습니까?"
-              check="확인"
-              okAction={toLoginPage}
-            />
           </div>
         </>
       </MobileView>
+      <CheckModal
+        show={loginNeedModalShow}
+        onHide={() => setLoginNeedModalShow(false)}
+        main="로그인이 필요한 기능입니다."
+        sub="로그인 페이지로 이동하시겠습니까?"
+        check="확인"
+        okAction={toLoginPage}
+      />
     </>
   );
 };

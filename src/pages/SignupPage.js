@@ -10,11 +10,11 @@ import ReactRoundedImage from "react-rounded-image";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { BrowserView, MobileView } from "react-device-detect";
+import AlertModal from "../components/AlertModal";
 
 const SignupPage = () => {
   const { state } = useLocation();
   const email = state.email;
-
   const navigate = useNavigate();
   const [avatar, setAvatar] = useState("");
   const [nickname, setNickname] = useState("");
@@ -24,6 +24,8 @@ const SignupPage = () => {
   const [isPasswordMatch, setIsPasswordMatch] = useState(true);
   const [isNicknameCheck, setIsNicknameCheck] = useState(false);
   const images = [profile1, profile2, profile3, profile4];
+  const [alreadyModalShow, setAlreadyModalShow] = useState(false);
+  const [alert, setAlert] = useState("");
 
   useEffect(() => {
     const randomIndex = Math.floor(Math.random() * images.length);
@@ -57,14 +59,16 @@ const SignupPage = () => {
         .then((response) => {
           console.log(response.data.data);
           console.log(response.data.code);
-          alert(response.data.message);
+          setAlert(response.data.message);
+          setAlreadyModalShow(true);
           if (response.data.code == 200) {
             setIsNicknameCheck(true);
           }
         })
         .catch(function (error) {
           if (error.response) {
-            alert("dd");
+            setAlert(error.response);
+            setAlreadyModalShow(true);
           }
         });
     } catch (error) {
@@ -84,7 +88,8 @@ const SignupPage = () => {
         },
       })
         .then(function (response) {
-          alert(response.data.message);
+          setAlert(response.data.message);
+          setAlreadyModalShow(true);
           if (response.data.code == 200) {
             navigate("/Login");
           }

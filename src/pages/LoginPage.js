@@ -3,11 +3,14 @@ import { useNavigate, Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import axios from "axios";
 import { BrowserView, MobileView } from "react-device-detect";
+import AlertModal from "../components/AlertModal";
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [alreadyModalShow, setAlreadyModalShow] = useState(false);
+  const [alert, setAlert] = useState("");
 
   const handleEmailChange = (e) => {
     const inputEmail = e.target.value;
@@ -33,8 +36,9 @@ const LoginPage = () => {
       })
         .then((response) => {
           console.log("headers: ", response.headers.get("Authorization"));
-          alert(response.data.message);
           console.log("data: ", response.data.data);
+          setAlert(response.data.message);
+          setAlreadyModalShow(true);
 
           if (response.data.code == 200) {
             const accessToken = response.headers.get("Authorization");
@@ -48,7 +52,8 @@ const LoginPage = () => {
         })
         .catch(function (error) {
           if (error.response) {
-            alert("회원이 아닙니다.");
+            setAlert("회원이 아닙니다.");
+            setAlreadyModalShow(true);
           }
         });
     } catch (error) {
@@ -202,6 +207,11 @@ const LoginPage = () => {
           </div>
         </>
       </MobileView>
+      <AlertModal
+        show={alreadyModalShow}
+        alertMessage={alert}
+        onHide={() => setAlreadyModalShow(false)}
+      />
     </>
   );
 };

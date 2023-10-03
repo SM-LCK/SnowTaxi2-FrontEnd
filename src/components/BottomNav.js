@@ -14,7 +14,7 @@ function BottomNav() {
             variant="tabs"
             style={{
               position: "fixed",
-              backgroundColor: "white",
+              backgroundColor: "#fcfcfc",
               zIndex: "1",
               width: "50%",
               bottom: 0,
@@ -53,7 +53,7 @@ function BottomNav() {
                 zIndex: "1",
                 width: "100%",
                 bottom: 0,
-                backgroundColor: "white",
+                backgroundColor: "#fcfcfc",
                 height: "70px",
               }}
             >

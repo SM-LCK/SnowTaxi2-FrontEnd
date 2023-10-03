@@ -50,8 +50,10 @@ const MakepotModal = (props) => {
             localStorage.setItem("@ridingTime", formattedTime);
             navigate("/Home/Chatting");
           } else {
-            {props.onHide()}
-            setAlreadyModalShow(true)
+            {
+              props.onHide();
+            }
+            setAlreadyModalShow(true);
           }
         })
         .catch(function (error) {
@@ -64,41 +66,45 @@ const MakepotModal = (props) => {
 
   return (
     <div>
-          <Modal
-      {...props}
-      size="md"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          <h4>새로운 팟을 만들어주세요!</h4>
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DemoContainer components={["TimePicker"]}>
-            <TimePicker
-              //label="Controlled picker"
-              value={timeValue}
-              onChange={handleTimeChange}
-            />
-          </DemoContainer>
-        </LocalizationProvider>
-        <p style={{ marginTop: "10px" }}>
-          방에 참여하신 후, 노쇼를 하게 되시면 벌금이 부과될 수 있습니다.
-        </p>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="success" onClick={handleParticipating}>
-          팟 만들기
-        </Button>
-        <Button variant="secondary" onClick={props.onHide}>
-          Close
-        </Button>
-      </Modal.Footer>
-    </Modal>
-    <AlertModal show={alreadyModalShow} alertMessage="이미 참여하고 있는 팟이 있습니다." onHide={() => setAlreadyModalShow(false)} />
+      <Modal
+        {...props}
+        size="sm"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            <h4>새로운 팟을 만들어주세요!</h4>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DemoContainer components={["TimePicker"]}>
+              <TimePicker
+                //label="Controlled picker"
+                value={timeValue}
+                onChange={handleTimeChange}
+              />
+            </DemoContainer>
+          </LocalizationProvider>
+          <p style={{ marginTop: "10px" }}>
+            방에 참여하신 후, 노쇼를 하게 되시면 벌금이 부과될 수 있습니다.
+          </p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" size="md" onClick={props.onHide}>
+            Close
+          </Button>
+          <Button style={{ backgroundColor: "#4274FF", borderColor: "#4274FF" }} size="md" onClick={handleParticipating}>
+            팟 만들기
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      <AlertModal
+        show={alreadyModalShow}
+        alertMessage="이미 참여하고 있는 팟이 있습니다."
+        onHide={() => setAlreadyModalShow(false)}
+      />
     </div>
   );
 };

@@ -4,6 +4,7 @@ import { Button } from "react-bootstrap";
 import axios from "axios";
 import { BrowserView, MobileView } from "react-device-detect";
 import style from '../modules/login.module.css'
+import AlertModal from "../components/AlertModal";
 
 const EmailcheckPage = () => {
   const navigate = useNavigate();
@@ -11,6 +12,8 @@ const EmailcheckPage = () => {
   const [inputNumber, setInputNumber] = useState("");
   const [certificateNumber, setCertificateNumber] = useState("");
   const [isNextBtn, setIsNextBtn] = useState(false);
+  const [alreadyModalShow, setAlreadyModalShow] = useState(false);
+  const [alert, setAlert] = useState("");
 
   const handleEmailChange = (e) => {
     const inputEmail = e.target.value;
@@ -32,7 +35,9 @@ const EmailcheckPage = () => {
       }).then((response) => {
         console.log(response.data.data);
         console.log(response.data.code);
-        alert(response.data.message);
+        setAlert(response.data.message);
+        setAlreadyModalShow(true);
+
         if (response.data.code == 200) {
           setCertificateNumber(response.data.data);
         }
@@ -45,10 +50,12 @@ const EmailcheckPage = () => {
   const handleCertificateNumber = () => {
     if (certificateNumber == inputNumber) {
       setIsNextBtn(true);
-      alert(`인증 성공`);
+      setAlert("인증 성공");
+      setAlreadyModalShow(true);
     } else {
       setIsNextBtn(false);
-      alert(`인증 실패`);
+      setAlert("인증 실패");
+      setAlreadyModalShow(true);
     }
   };
 

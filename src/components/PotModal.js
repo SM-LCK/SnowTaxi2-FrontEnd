@@ -29,10 +29,10 @@ const PotModal = (props) => {
         </p>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="success" onClick={handleParticipating}>
+        <Button variant="success" size="md" onClick={handleParticipating}>
           지금 참여하기
         </Button>
-        <Button variant="secondary" onClick={props.onHide}>
+        <Button variant="secondary" size="md" onClick={props.onHide}>
           Close
         </Button>
       </Modal.Footer>

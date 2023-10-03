@@ -10,7 +10,7 @@ import ReactRoundedImage from "react-rounded-image";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { BrowserView, MobileView } from "react-device-detect";
-import style from '../modules/login.module.css'
+import style from "../modules/login.module.css"
 import AlertModal from "../components/AlertModal";
 
 const SignupPage = () => {
@@ -152,7 +152,7 @@ const SignupPage = () => {
             
             <div className={style['group']}>
               <label className={style['label']}></label>
-              <input type="submit" className={style['button']} value="다음" ></input>
+              <input type="submit" className={style['button']} value="회원가입" onClick={axioshandleSignup}></input>
             </div>
             <div className={style['hr']}></div>
             <div className={style['foot-lnk']}>

@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import axios from "axios";
 import { BrowserView, MobileView } from "react-device-detect";
-import style from '../modules/login.module.css'
+import style from "../modules/login.module.css"
 import AlertModal from "../components/AlertModal";
 
 const LoginPage = () => {
@@ -63,6 +63,7 @@ const LoginPage = () => {
   };
 
   return (
+    <>
     <div className={style['login-wrap']}>
       <div className={style['login-html']}>
         <input id="tab-1"type="radio" name="tab" className={style['sign-in']} checked></input><label for="tab-1" className={style['tab']}>로그인</label>
@@ -90,6 +91,12 @@ const LoginPage = () => {
         </div>
       </div>
     </div>
+      <AlertModal
+        show={alreadyModalShow}
+        alertMessage={alert}
+        onHide={() => setAlreadyModalShow(false)}
+      />
+    </>
   );
     
 };

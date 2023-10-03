@@ -117,7 +117,7 @@ const TaxiPotListPage = () => {
       <BrowserView>
         <div
           className="page"
-          style={{ padding: "0 400px", paddingBottom: "150px" }}
+          style={{ padding: "0 400px", paddingBottom: "200px" }}
         >
           <div
             style={{
@@ -127,10 +127,10 @@ const TaxiPotListPage = () => {
           >
             <div
               style={{
-                marginTop: "25px",
-                marginBottom: "25px",
-                fontSize: "28px",
-                fontWeight: "600",
+                marginTop: "20px",
+                marginBottom: "20px",
+                fontSize: "20px",
+                fontWeight: "700",
                 justifyContent: "center",
                 alignItems: "center",
                 display: "flex",
@@ -141,52 +141,85 @@ const TaxiPotListPage = () => {
 
             {id == "숙대입구역" ? (
               <div style={{ display: "flex", justifyContent: "center" }}>
-                <img src={sookmyung} alt="지도" style={{ width: "500px" }} />
+                <img
+                  src={sookmyung}
+                  alt="지도"
+                  style={{ width: "100%", height: "200px" }}
+                />
               </div>
             ) : id == "효창공원역" ? (
               <div style={{ display: "flex", justifyContent: "center" }}>
-                <img src={hyochang} alt="지도" style={{ width: "500px" }} />
+                <img
+                  src={hyochang}
+                  alt="지도"
+                  style={{ width: "100%", height: "200px" }}
+                />
               </div>
             ) : id == "서울역" ? (
               <div style={{ display: "flex", justifyContent: "center" }}>
-                <img src={seoul} alt="지도" style={{ width: "500px" }} />
+                <img
+                  src={seoul}
+                  alt="지도"
+                  style={{ width: "100%", height: "200px" }}
+                />
               </div>
             ) : (
               <div style={{ display: "flex", justifyContent: "center" }}>
-                <img src={namyoung} alt="지도" style={{ width: "500px" }} />
+                <img
+                  src={namyoung}
+                  alt="지도"
+                  style={{ width: "100%", height: "200px" }}
+                />
               </div>
             )}
 
             <div
-              style={{ fontSize: "23px", fontWeight: "600", marginTop: "15px" }}
+              style={{
+                fontSize: "20px",
+                fontWeight: "700",
+                marginTop: "10px",
+                marginBottom: "5px",
+                textDecoration: "underline",
+                textDecorationColor: "#80A1FF",
+                textDecorationThickness: "3px",
+              }}
             >
               {today}
             </div>
-            <div style={{ marginTop: "5px", marginBottom: "15px" }}>
+            <div
+              style={{
+                fontSize: "13px",
+                marginBottom: "10px",
+              }}
+            >
               오늘 탈 택시 팟에만 참여할 수 있어요.
               <br />
               모든 정산 금액은 기본 요금인 4800원입니다.
             </div>
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <div style={{ marginBottom: "20px" }}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                marginBottom: "15px",
+              }}
+            >
+              <div>
                 <DropdownButton
                   variant="secondary"
                   id="dropdown-basic-button"
                   title="정렬"
                   onSelect={handledropDown}
+                  size="sm"
                 >
                   <Dropdown.Item eventKey="item1">마감순</Dropdown.Item>
                 </DropdownButton>
               </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  marginBottom: "15px",
-                  alignItems: "center",
-                }}
-              >
-                <Button variant="dark" size="md" onClick={handleCreatePot}>
+              <div>
+                <Button
+                  variant="outline-primary"
+                  size="sm"
+                  onClick={handleCreatePot}
+                >
                   + 팟 생성하기
                 </Button>
 
@@ -221,22 +254,11 @@ const TaxiPotListPage = () => {
               })
             )}
           </div>
-          <CheckModal
-            show={loginNeedModalShow}
-            onHide={() => setLoginNeedModalShow(false)}
-            main="로그인이 필요한 기능입니다."
-            sub="로그인 페이지로 이동하시겠습니까?"
-            check="확인"
-            okAction={toLoginPage}
-          />
         </div>
       </BrowserView>
       <MobileView>
         <>
-          <div
-            className="page"
-            style={{ padding: "0 50px", paddingBottom: "150px" }}
-          >
+          <div className="page" style={{ paddingBottom: "150px" }}>
             <div
               style={{
                 display: "flex",
@@ -245,10 +267,10 @@ const TaxiPotListPage = () => {
             >
               <div
                 style={{
-                  marginTop: "25px",
-                  marginBottom: "25px",
+                  marginTop: "15px",
+                  marginBottom: "15px",
                   fontSize: "20px",
-                  fontWeight: "600",
+                  fontWeight: "700",
                   justifyContent: "center",
                   alignItems: "center",
                   display: "flex",
@@ -259,107 +281,132 @@ const TaxiPotListPage = () => {
 
               {id == "숙대입구역" ? (
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                  <img src={sookmyung} alt="지도" style={{ width: "100%" }} />
+                  <img
+                    src={sookmyung}
+                    alt="지도"
+                    style={{ width: "100%", height: "200px" }}
+                  />
                 </div>
               ) : id == "효창공원역" ? (
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                  <img src={hyochang} alt="지도" style={{ width: "100%" }} />
+                  <img
+                    src={hyochang}
+                    alt="지도"
+                    style={{ width: "100%", height: "200px" }}
+                  />
                 </div>
               ) : id == "서울역" ? (
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                  <img src={seoul} alt="지도" style={{ width: "100%" }} />
+                  <img
+                    src={seoul}
+                    alt="지도"
+                    style={{ width: "100%", height: "200px" }}
+                  />
                 </div>
               ) : (
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                  <img src={namyoung} alt="지도" style={{ width: "100%" }} />
-                </div>
-              )}
-
-              <div
-                style={{
-                  fontSize: "20px",
-                  fontWeight: "700",
-                  marginTop: "15px",
-                }}
-              >
-                {today}
-              </div>
-              <div
-                style={{
-                  marginTop: "5px",
-                  marginBottom: "15px",
-                  fontSize: "13px",
-                }}
-              >
-                오늘 탈 택시 팟에만 참여할 수 있어요.
-                <br />
-                모든 정산 금액은 기본 요금인 4800원입니다.
-              </div>
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <div style={{ marginBottom: "20px" }}>
-                  <DropdownButton
-                    variant="secondary"
-                    id="dropdown-basic-button"
-                    title="정렬"
-                    onSelect={handledropDown}
-                  >
-                    <Dropdown.Item eventKey="item1">마감순</Dropdown.Item>
-                  </DropdownButton>
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    marginBottom: "15px",
-                    alignItems: "center",
-                  }}
-                >
-                  <Button variant="dark" size="md" onClick={handleCreatePot}>
-                    + 팟 생성하기
-                  </Button>
-
-                  <MakepotModal
-                    show={makePotModalShow}
-                    onHide={() => setMakePotModalShow(false)}
-                    id={id}
+                  <img
+                    src={namyoung}
+                    alt="지도"
+                    style={{ width: "100%", height: "200px" }}
                   />
                 </div>
-              </div>
-              {length == 0 ? (
+              )}
+              <div style={{ padding: "0 20px" }}>
+                <div
+                  style={{
+                    fontSize: "20px",
+                    fontWeight: "700",
+                    marginTop: "10px",
+                    marginBottom: "5px",
+                    textDecoration: "underline",
+                    textDecorationColor: "#80A1FF",
+                    textDecorationThickness: "3px",
+                  }}
+                >
+                  {today}
+                </div>
+                <div
+                  style={{
+                    fontSize: "13px",
+                    marginBottom: "10px",
+                  }}
+                >
+                  오늘 탈 택시 팟에만 참여할 수 있어요.
+                  <br />
+                  모든 정산 금액은 기본 요금인 4800원입니다.
+                </div>
                 <div
                   style={{
                     display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    marginTop: "100px",
+                    justifyContent: "space-between",
+                    marginBottom: "15px",
                   }}
                 >
-                  아직 모집 중인 팟이 없습니다.
-                  <br />
-                  팟을 만들어보세요!
+                  <div>
+                    <DropdownButton
+                      variant="outline-secondary"
+                      id="dropdown-basic-button"
+                      title="정렬"
+                      size="sm"
+                      onSelect={handledropDown}
+                    >
+                      <Dropdown.Item eventKey="item1">마감순</Dropdown.Item>
+                    </DropdownButton>
+                  </div>
+                  <div>
+                    <Button
+                      variant="outline-primary"
+                      size="sm"
+                      onClick={handleCreatePot}
+                    >
+                      + 팟 생성하기
+                    </Button>
+
+                    <MakepotModal
+                      show={makePotModalShow}
+                      onHide={() => setMakePotModalShow(false)}
+                      id={id}
+                    />
+                  </div>
                 </div>
-              ) : (
-                dataArray.map((data) => {
-                  return (
-                    ///unique key prop 해결안됨
-                    <div key={data.id}>
-                      <PotItemButton data={data} />
-                    </div>
-                  );
-                })
-              )}
+                {length == 0 ? (
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      marginTop: "70px",
+                      fontSize: "13px",
+                    }}
+                  >
+                    아직 모집 중인 팟이 없습니다.
+                    <br />
+                    팟을 만들어보세요!
+                  </div>
+                ) : (
+                  dataArray.map((data) => {
+                    return (
+                      ///unique key prop 해결안됨
+                      <div key={data.id}>
+                        <PotItemButton data={data} />
+                      </div>
+                    );
+                  })
+                )}
+              </div>
             </div>
-            <CheckModal
-              show={loginNeedModalShow}
-              onHide={() => setLoginNeedModalShow(false)}
-              main="로그인이 필요한 기능입니다."
-              sub="로그인 페이지로 이동하시겠습니까?"
-              check="확인"
-              okAction={toLoginPage}
-            />
           </div>
         </>
       </MobileView>
+      <CheckModal
+        show={loginNeedModalShow}
+        onHide={() => setLoginNeedModalShow(false)}
+        main="로그인이 필요한 기능입니다."
+        sub="로그인 페이지로 이동하시겠습니까?"
+        check="확인"
+        okAction={toLoginPage}
+      />
     </>
   );
 };

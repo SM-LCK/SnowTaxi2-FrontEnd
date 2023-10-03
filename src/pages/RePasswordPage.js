@@ -3,10 +3,13 @@ import { useNavigate, Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import axios from "axios";
 import { BrowserView, MobileView } from "react-device-detect";
+import AlertModal from "../components/AlertModal";
 
 const RePasswordPage = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
+  const [alreadyModalShow, setAlreadyModalShow] = useState(false);
+  const [alert, setAlert] = useState("");
 
   const handleEmailChange = (e) => {
     const inputEmail = e.target.value;
@@ -25,11 +28,8 @@ const RePasswordPage = () => {
         url: `${process.env.REACT_APP_API_URL}/email/password`,
         params: { mail: fullEmail },
       }).then((response) => {
-        console.log(response.data.code);
-        alert(response.data.message);
-        // if (response.data.code == 200) {
-        // } else {
-        // }
+        setAlert(response.data.message);
+        setAlreadyModalShow(true);
       });
     } catch (error) {
       console.log("fail get", error);
@@ -88,7 +88,7 @@ const RePasswordPage = () => {
             </div>
 
             <div className="d-grid gap-2" style={{}}>
-              <Button variant="primary" size="lg" onClick={handleToLogin}>
+              <Button style={{ backgroundColor: "#4274FF", borderColor: "#4274FF" }} size="lg" onClick={handleToLogin}>
                 로그인 페이지
               </Button>
             </div>
@@ -146,7 +146,7 @@ const RePasswordPage = () => {
               </div>
 
               <div className="d-grid gap-2" style={{}}>
-                <Button variant="primary" size="lg" onClick={handleToLogin}>
+                <Button style={{ backgroundColor: "#4274FF", borderColor: "#4274FF" }} size="lg" onClick={handleToLogin}>
                   로그인 페이지
                 </Button>
               </div>
@@ -154,6 +154,11 @@ const RePasswordPage = () => {
           </div>
         </>
       </MobileView>
+      <AlertModal
+        show={alreadyModalShow}
+        alertMessage={alert}
+        onHide={() => setAlreadyModalShow(false)}
+      />
     </>
   );
 };

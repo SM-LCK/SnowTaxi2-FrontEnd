@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import axios from "axios";
 import { BrowserView, MobileView } from "react-device-detect";
+import style from '../modules/login.module.css'
 import AlertModal from "../components/AlertModal";
 
 const LoginPage = () => {
@@ -62,158 +63,35 @@ const LoginPage = () => {
   };
 
   return (
-    <>
-      <BrowserView>
-        <div className="page" style={{ padding: "0 500px" }}>
-          <div
-            style={{
-              marginTop: "100px",
-              fontSize: "30px",
-              fontWeight: "700",
-            }}
-          >
-            ❄️ 숙명 이메일 로그인 ❄️
-          </div>
-          <div className="contentWrap" style={{ marginTop: "50px" }}>
-            <div className="inputTitle"> 이메일 </div>
-            <div className="inputWrap" style={{ marginTop: "10px" }}>
-              <input
-                className="input"
-                type="email"
-                id="email"
-                value={email}
-                onChange={handleEmailChange}
-              />
-              <div style={{ fontSize: "15px" }}>@sookmyung.ac.kr</div>
+    <div className={style['login-wrap']}>
+      <div className={style['login-html']}>
+        <input id="tab-1"type="radio" name="tab" className={style['sign-in']} checked></input><label for="tab-1" className={style['tab']}>로그인</label>
+        <input id="tab-2"type="radio" name="tab" className={style['sign-up']}></input><Link to="/Emailcheck"><label for="tab-1" className={style['tab']}>회원가입</label></Link>
+        <div className={style['login-form']}>
+            <div className={style['group']}>
+              <label for="user" className={style['label']}>숙명 이메일</label>
+              <div className={style['input']}>
+                <input id="user" type="email" className={style['email2']} value={email} onChange={handleEmailChange}></input>
+                <label for="user" className={style['email']}>@sookmyung.ac.kr</label>
+              </div>
             </div>
-
-            <div className="inputTitle" style={{ marginTop: "30px" }}>
-              비밀번호
+            <div className={style['group']}>
+              <label for="pass" className={style['label']}>비밀번호</label>
+              <input id="pass" type="password" className={style['input']} data-type="password" value={password} onChange={handlePasswordChange}></input>
             </div>
-            <div className="inputWrap" style={{ marginTop: "10px" }}>
-              <input
-                className="input"
-                type="password"
-                id="password"
-                value={password}
-                onChange={handlePasswordChange}
-              />
+            <div className={style['group']}>
+              <label className={style['label']}></label>
+              <input type="submit" className={style['button']} value="로그인" onClick={axioshandleLogin}></input>
             </div>
-
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                marginTop: "20px",
-              }}
-            >
-              <p> 비밀번호를 잊어버리셨나요?</p>
-              <Link to="/RePassword">
-                <p style={{ marginLeft: "10px" }}>비밀번호 재설정</p>
-              </Link>
+            <div className={style['hr']}></div>
+            <div className={style['foot-lnk']}>
+              <Link to="/RePassword">비밀번호를 잊으셨나요?</Link>
             </div>
-
-            <div className="d-grid gap-2" style={{ marginTop: "300px" }}>
-              <Button style={{ backgroundColor: "#4274FF", borderColor: "#4274FF" }} size="lg" onClick={axioshandleLogin}>
-                로그인
-              </Button>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                marginTop: "20px",
-                marginBottom: "100px",
-              }}
-            >
-              <p>아직 회원이 아니신가요?</p>
-              <Link to="/Emailcheck">
-                <p style={{ marginLeft: "10px" }}>회원가입</p>
-              </Link>
-            </div>
-          </div>
         </div>
-      </BrowserView>
-      <MobileView>
-        <>
-          <div className="page" style={{ padding: "0 30px" }}>
-            <div
-              style={{
-                marginTop: "100px",
-                fontSize: "25px",
-                fontWeight: "700",
-              }}
-            >
-              ❄️ 숙명 이메일 로그인 ❄️
-            </div>
-            <div className="contentWrap" style={{ marginTop: "50px" }}>
-              <div className="inputTitle"> 이메일 </div>
-              <div className="inputWrap" style={{ marginTop: "10px" }}>
-                <input
-                  className="input"
-                  type="email"
-                  id="email"
-                  value={email}
-                  onChange={handleEmailChange}
-                />
-                <div style={{ fontSize: "15px" }}>@sookmyung.ac.kr</div>
-              </div>
-
-              <div className="inputTitle" style={{ marginTop: "30px" }}>
-                비밀번호
-              </div>
-              <div className="inputWrap" style={{ marginTop: "10px" }}>
-                <input
-                  className="input"
-                  type="password"
-                  id="password"
-                  value={password}
-                  onChange={handlePasswordChange}
-                />
-              </div>
-
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  marginTop: "20px",
-                }}
-              >
-                <p> 비밀번호를 잊어버리셨나요?</p>
-                <Link to="/RePassword">
-                  <p style={{ marginLeft: "10px" }}>비밀번호 재설정</p>
-                </Link>
-              </div>
-
-              <div className="d-grid gap-2" style={{ marginTop: "300px" }}>
-                <Button style={{ backgroundColor: "#4274FF", borderColor: "#4274FF" }} size="lg" onClick={axioshandleLogin}>
-                  로그인
-                </Button>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  marginTop: "20px",
-                  marginBottom: "100px",
-                }}
-              >
-                <p>아직 회원이 아니신가요?</p>
-                <Link to="/Emailcheck">
-                  <p style={{ marginLeft: "10px" }}>회원가입</p>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </>
-      </MobileView>
-      <AlertModal
-        show={alreadyModalShow}
-        alertMessage={alert}
-        onHide={() => setAlreadyModalShow(false)}
-      />
-    </>
+      </div>
+    </div>
   );
+    
 };
 
 export default LoginPage;

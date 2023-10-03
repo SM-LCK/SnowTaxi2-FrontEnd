@@ -9,29 +9,9 @@ import profile4 from "../assets/profile4.png";
 import ReactRoundedImage from "react-rounded-image";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import { BrowserView, MobileView } from "react-device-detect";
 
 const SignupPage = () => {
-  const [windowDimensions, setWindowDimensions] = useState({
-    height: window.innerHeight,
-    width: window.innerWidth,
-  });
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowDimensions({
-        height: window.innerHeight,
-        width: window.innerWidth,
-      });
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    // 컴포넌트가 언마운트될 때 이벤트 리스너를 제거
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
   const { state } = useLocation();
   const email = state.email;
 
@@ -118,125 +98,262 @@ const SignupPage = () => {
   };
 
   return (
-    <div
-      className="page"
-      style={{ height: windowDimensions.height, width: "100%" }}
-    >
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          marginTop: "60px",
-        }}
-      >
-        <ReactRoundedImage
-          image={avatar}
-          roundedColor="#2196F3"
-          imageWidth="180"
-          imageHeight="180"
-          roundedSize="10"
-          borderRadius="100"
-        />
-      </div>
-
-      <div className="contentWrap" style={{ marginTop: "30px" }}>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <div className="inputTitle"> 닉네임 </div>
+    <>
+      <BrowserView>
+        <div className="page" style={{ padding: "0 500px" }}>
           <div
             style={{
               display: "flex",
-              marginTop: "10px",
-              borderRadius: "20px",
-              padding: "16px",
-              border: "1px solid #e2e0e0",
-              backgroundColor: "#ffffff",
-              width: "100%",
+              justifyContent: "center",
+              marginTop: "60px",
             }}
           >
-            <input
-              className="input"
-              // type="text"
-              id="nickname"
-              value={nickname}
-              onChange={(e) => setNickname(e.target.value)}
+            <ReactRoundedImage
+              image={avatar}
+              roundedColor="#2196F3"
+              imageWidth="180"
+              imageHeight="180"
+              roundedSize="10"
+              borderRadius="100"
             />
           </div>
-        </div>
 
-        <div
-          style={{
-            marginTop: "15px",
-            alignItems: "center",
-          }}
-        >
-          <Button variant="secondary" size="md" onClick={handleNicknameCheck}>
-            중복체크
-          </Button>
-          {isNicknameCheck && (
-            <p className="text-body-secondary">사용가능한 닉네임입니다.</p>
-          )}
-        </div>
+          <div className="contentWrap" style={{ marginTop: "30px" }}>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <div className="inputTitle"> 닉네임 </div>
+              <div
+                style={{
+                  display: "flex",
+                  marginTop: "10px",
+                  borderRadius: "20px",
+                  padding: "16px",
+                  border: "1px solid #e2e0e0",
+                  backgroundColor: "#ffffff",
+                  width: "100%",
+                }}
+              >
+                <input
+                  className="input"
+                  // type="text"
+                  id="nickname"
+                  value={nickname}
+                  onChange={(e) => setNickname(e.target.value)}
+                />
+              </div>
+            </div>
 
-        <div style={{ marginTop: "50px" }} className="inputTitle">
-          비밀번호
-        </div>
-        <div className="inputWrap" style={{ marginTop: "10px" }}>
-          <input
-            className="input"
-            type="password"
-            id="password"
-            value={password}
-            placeholder="알파벳과 숫자를 포함한 8글자 이상"
-            onChange={handlePasswordChange}
-          />
-        </div>
-        {!isPasswordValid && (
-          <p className="text-body-secondary" style={{ marginTop: "10px" }}>
-            유효한 비밀번호를 입력하세요.
-          </p>
-        )}
+            <div
+              style={{
+                marginTop: "15px",
+                alignItems: "center",
+              }}
+            >
+              <Button
+                variant="secondary"
+                size="md"
+                onClick={handleNicknameCheck}
+              >
+                중복체크
+              </Button>
+              {isNicknameCheck && (
+                <p className="text-body-secondary">사용가능한 닉네임입니다.</p>
+              )}
+            </div>
 
-        <div
-          style={{ marginTop: "20px", marginBottom: "10px" }}
-          className="inputTitle"
-        >
-          비밀번호 확인
-        </div>
-        <div className="inputWrap" style={{ marginTop: "10px" }}>
-          <input
-            className="input"
-            type="password"
-            id="checkPassword"
-            value={checkPassword}
-            onChange={handleCheckPasswordChange}
-          />
-        </div>
-        {!isPasswordMatch && (
-          <p className="text-body-secondary" style={{ marginTop: "10px" }}>
-            다시 확인해주세요.
-          </p>
-        )}
+            <div style={{ marginTop: "50px" }} className="inputTitle">
+              비밀번호
+            </div>
+            <div className="inputWrap" style={{ marginTop: "10px" }}>
+              <input
+                className="input"
+                type="password"
+                id="password"
+                value={password}
+                placeholder="알파벳과 숫자를 포함한 8글자 이상"
+                onChange={handlePasswordChange}
+              />
+            </div>
+            {!isPasswordValid && (
+              <p className="text-body-secondary" style={{ marginTop: "10px" }}>
+                유효한 비밀번호를 입력하세요.
+              </p>
+            )}
 
-        <div className="d-grid gap-2" style={{ marginTop: "150px" }}>
-          <Button variant="dark" size="lg" onClick={axioshandleSignup}>
-            회원가입
-          </Button>
+            <div
+              style={{ marginTop: "20px", marginBottom: "10px" }}
+              className="inputTitle"
+            >
+              비밀번호 확인
+            </div>
+            <div className="inputWrap" style={{ marginTop: "10px" }}>
+              <input
+                className="input"
+                type="password"
+                id="checkPassword"
+                value={checkPassword}
+                onChange={handleCheckPasswordChange}
+              />
+            </div>
+            {!isPasswordMatch && (
+              <p className="text-body-secondary" style={{ marginTop: "10px" }}>
+                다시 확인해주세요.
+              </p>
+            )}
+
+            <div className="d-grid gap-2" style={{ marginTop: "150px" }}>
+              <Button variant="dark" size="lg" onClick={axioshandleSignup}>
+                회원가입
+              </Button>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                marginTop: "20px",
+                marginBottom: "100px",
+              }}
+            >
+              <p>이미 회원이신가요?</p>
+              <Link to="/">
+                <p style={{ marginLeft: "10px" }}>로그인</p>
+              </Link>
+            </div>
+          </div>
         </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            marginTop: "20px",
-            marginBottom: "100px",
-          }}
-        >
-          <p>이미 회원이신가요?</p>
-          <Link to="/">
-            <p style={{ marginLeft: "10px" }}>로그인</p>
-          </Link>
-        </div>
-      </div>
-    </div>
+      </BrowserView>
+      <MobileView>
+        <>
+          <div className="page" style={{ padding: "0 30px" }}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "60px",
+              }}
+            >
+              <ReactRoundedImage
+                image={avatar}
+                roundedColor="#2196F3"
+                imageWidth="180"
+                imageHeight="180"
+                roundedSize="10"
+                borderRadius="100"
+              />
+            </div>
+
+            <div className="contentWrap" style={{ marginTop: "30px" }}>
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <div className="inputTitle"> 닉네임 </div>
+                <div
+                  style={{
+                    display: "flex",
+                    marginTop: "10px",
+                    borderRadius: "20px",
+                    padding: "16px",
+                    border: "1px solid #e2e0e0",
+                    backgroundColor: "#ffffff",
+                    width: "100%",
+                  }}
+                >
+                  <input
+                    className="input"
+                    // type="text"
+                    id="nickname"
+                    value={nickname}
+                    onChange={(e) => setNickname(e.target.value)}
+                  />
+                </div>
+              </div>
+
+              <div
+                style={{
+                  marginTop: "15px",
+                  alignItems: "center",
+                }}
+              >
+                <Button
+                  variant="secondary"
+                  size="md"
+                  onClick={handleNicknameCheck}
+                >
+                  중복체크
+                </Button>
+                {isNicknameCheck && (
+                  <p className="text-body-secondary">
+                    사용가능한 닉네임입니다.
+                  </p>
+                )}
+              </div>
+
+              <div style={{ marginTop: "50px" }} className="inputTitle">
+                비밀번호
+              </div>
+              <div className="inputWrap" style={{ marginTop: "10px" }}>
+                <input
+                  className="input"
+                  type="password"
+                  id="password"
+                  value={password}
+                  placeholder="알파벳과 숫자를 포함한 8글자 이상"
+                  onChange={handlePasswordChange}
+                />
+              </div>
+              {!isPasswordValid && (
+                <p
+                  className="text-body-secondary"
+                  style={{ marginTop: "10px" }}
+                >
+                  유효한 비밀번호를 입력하세요.
+                </p>
+              )}
+
+              <div
+                style={{ marginTop: "20px", marginBottom: "10px" }}
+                className="inputTitle"
+              >
+                비밀번호 확인
+              </div>
+              <div className="inputWrap" style={{ marginTop: "10px" }}>
+                <input
+                  className="input"
+                  type="password"
+                  id="checkPassword"
+                  value={checkPassword}
+                  onChange={handleCheckPasswordChange}
+                />
+              </div>
+              {!isPasswordMatch && (
+                <p
+                  className="text-body-secondary"
+                  style={{ marginTop: "10px" }}
+                >
+                  다시 확인해주세요.
+                </p>
+              )}
+
+              <div className="d-grid gap-2" style={{ marginTop: "150px" }}>
+                <Button variant="dark" size="lg" onClick={axioshandleSignup}>
+                  회원가입
+                </Button>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  marginTop: "20px",
+                  marginBottom: "100px",
+                }}
+              >
+                <p>이미 회원이신가요?</p>
+                <Link to="/">
+                  <p style={{ marginLeft: "10px" }}>로그인</p>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </>
+      </MobileView>
+    </>
   );
 };
 

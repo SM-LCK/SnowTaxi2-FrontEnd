@@ -2,29 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import axios from "axios";
+import { BrowserView, MobileView } from "react-device-detect";
 
 const RePasswordPage = () => {
-  const [windowDimensions, setWindowDimensions] = useState({
-    height: window.innerHeight,
-    width: window.innerWidth,
-  });
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowDimensions({
-        height: window.innerHeight,
-        width: window.innerWidth,
-      });
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    // 컴포넌트가 언마운트될 때 이벤트 리스너를 제거
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
 
@@ -57,64 +37,124 @@ const RePasswordPage = () => {
   };
 
   return (
-    <div
-      className="page"
-      style={{ height: windowDimensions.height, width: "100%" }}
-    >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <p
-          style={{
-            marginTop: "100px",
-            fontSize: "30px",
-            fontWeight: "700",
-          }}
-        >
-          {" "}
-          비밀번호 재설정
-        </p>
-        <p style={{ marginTop: "10px", fontSize: "18px" }}>
-          비밀번호를 재설정 할 계정의 이메일 주소를 입력해주세요.
-        </p>
-      </div>
+    <>
+      <BrowserView>
+        <div className="page" style={{ padding: "0 500px" }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <p
+              style={{
+                marginTop: "100px",
+                fontSize: "30px",
+                fontWeight: "700",
+              }}
+            >
+              {" "}
+              비밀번호 재설정
+            </p>
+            <p style={{ marginTop: "10px", fontSize: "18px" }}>
+              비밀번호를 재설정 할 계정의 이메일 주소를 입력해주세요.
+            </p>
+          </div>
 
-      <div className="inputWrap" style={{ marginTop: "30px" }}>
-        <input
-          className="input"
-          type="email"
-          id="email"
-          value={email}
-          onChange={handleEmailChange}
-        />
-        <div style={{ fontSize: "15px" }}>@sookmyung.ac.kr</div>
-      </div>
+          <div className="inputWrap" style={{ marginTop: "30px" }}>
+            <input
+              className="input"
+              type="email"
+              id="email"
+              value={email}
+              onChange={handleEmailChange}
+            />
+            <div style={{ fontSize: "15px" }}>@sookmyung.ac.kr</div>
+          </div>
 
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          marginTop: "50px",
-        }}
-      >
-        <div className="d-grid gap-2" style={{ marginRight: "20px" }}>
-          <Button variant="dark" size="lg" onClick={axiosSendEmail}>
-            이메일 전송
-          </Button>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              marginTop: "50px",
+            }}
+          >
+            <div className="d-grid gap-2" style={{ marginRight: "20px" }}>
+              <Button variant="dark" size="lg" onClick={axiosSendEmail}>
+                이메일 전송
+              </Button>
+            </div>
+
+            <div className="d-grid gap-2" style={{}}>
+              <Button variant="primary" size="lg" onClick={handleToLogin}>
+                로그인 페이지
+              </Button>
+            </div>
+          </div>
         </div>
+      </BrowserView>
+      <MobileView>
+        <>
+          <div className="page" style={{ padding: "0 30px" }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <p
+                style={{
+                  marginTop: "100px",
+                  fontSize: "30px",
+                  fontWeight: "700",
+                }}
+              >
+                {" "}
+                비밀번호 재설정
+              </p>
+              <p style={{ marginTop: "10px", fontSize: "18px" }}>
+                비밀번호를 재설정 할 계정의 이메일 주소를 입력해주세요.
+              </p>
+            </div>
 
-        <div className="d-grid gap-2" style={{}}>
-          <Button variant="primary" size="lg" onClick={handleToLogin}>
-            로그인 페이지
-          </Button>
-        </div>
-      </div>
-    </div>
+            <div className="inputWrap" style={{ marginTop: "30px" }}>
+              <input
+                className="input"
+                type="email"
+                id="email"
+                value={email}
+                onChange={handleEmailChange}
+              />
+              <div style={{ fontSize: "15px" }}>@sookmyung.ac.kr</div>
+            </div>
+
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                marginTop: "50px",
+              }}
+            >
+              <div className="d-grid gap-2" style={{ marginRight: "20px" }}>
+                <Button variant="dark" size="lg" onClick={axiosSendEmail}>
+                  이메일 전송
+                </Button>
+              </div>
+
+              <div className="d-grid gap-2" style={{}}>
+                <Button variant="primary" size="lg" onClick={handleToLogin}>
+                  로그인 페이지
+                </Button>
+              </div>
+            </div>
+          </div>
+        </>
+      </MobileView>
+    </>
   );
 };
 

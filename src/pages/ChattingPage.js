@@ -1,26 +1,23 @@
 import React, { useState, useEffect } from "react";
-import ChattingComponent from "../components/ChattingComponent";
 import ReactRoundedImage from "react-rounded-image";
 import * as StompJs from "@stomp/stompjs";
 import { Button } from "react-bootstrap";
 import profile1 from "../assets/profile1.png";
 import axios from "axios";
 
-
 const ChattingPage = () => {
-  let me = localStorage.getItem("@nickname")
+  let me = localStorage.getItem("@nickname");
   let wWidth = window.innerWidth;
   let wHeight = window.innerHeight;
-  let participaitngPotId = localStorage.getItem("@potId")
+  let participaitngPotId = localStorage.getItem("@potId");
 
   useEffect(() => {
     getChatsAxios();
     connect();
     return () => disConnect();
-    console.log("here", participaitngPotId)
+    console.log("here", participaitngPotId);
     // 그동안 채팅했던 내용 배열에 로드하기 axios로 메세지 불러오는 함수 호출 setChatList
   }, []);
-
 
   let [client, changeClient] = useState(null);
   const [chat, setChat] = useState(""); // 입력된 chat을 받을 변수
@@ -36,12 +33,12 @@ const ChattingPage = () => {
           Authorization: `Bearer ${localStorage.getItem("@token")}`,
         },
       })
-      .then((response) => {
-        setChatList(response.data.data)
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+        .then((response) => {
+          setChatList(response.data.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     } catch (error) {
       console.log(error);
     }
@@ -51,7 +48,7 @@ const ChattingPage = () => {
     // 소켓 연결
     try {
       const clientdata = new StompJs.Client({
-        brokerURL: "ws://localhost:8080/wschat",
+        brokerURL: `${process.env.REACT_APP_STOMP_URL}/wschat`,
         debug: function (str) {
           console.log(str);
         },
@@ -91,12 +88,12 @@ const ChattingPage = () => {
       return;
     }
     client.publish({
-      destination: "/pub/chat" ,
+      destination: "/pub/chat",
       body: JSON.stringify({
-          sender: me,
-          roomId: participaitngPotId,
-          content: chat,
-          type: "TALK"
+        sender: me,
+        roomId: participaitngPotId,
+        content: chat,
+        type: "TALK",
       }),
     });
 
@@ -114,62 +111,89 @@ const ChattingPage = () => {
     } else {
       if (item.sender == me) {
         return (
-          <div style={{display:"flex", justifyContent:"flex-end", padding:"3px"}}>
-            <div style={{display:"flex", justifyContent:"flex-end", width:wWidth/3}}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+              padding: "3px",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                width: wWidth / 3,
+              }}
+            >
               <div>{item.time}</div>
-              <div style={{padding:"10px"}}>
-                <div style={{
-                        width: "max-content",
-                        maxWidth: "380px",
-                        wordBreak: "break-all",
-                        backgroundColor: "#84BBFF", 
-                        fontSize:"20px", 
-                        marginTop:"10px",
-                        borderTopLeftRadius: "18px",
-                        borderBottomRightRadius: "18px",
-                        borderBottomLeftRadius: "18px",
-                        marginRight:"7px",
-                        padding:"18px"
-                      }}
+              <div style={{ padding: "10px" }}>
+                <div
+                  style={{
+                    width: "max-content",
+                    maxWidth: "380px",
+                    wordBreak: "break-all",
+                    backgroundColor: "#84BBFF",
+                    fontSize: "20px",
+                    marginTop: "10px",
+                    borderTopLeftRadius: "18px",
+                    borderBottomRightRadius: "18px",
+                    borderBottomLeftRadius: "18px",
+                    marginRight: "7px",
+                    padding: "18px",
+                  }}
                 >
                   {item.content}
                 </div>
               </div>
               <ReactRoundedImage
-                  image = {profile1}
-                  roundedColor="#5E5E5E"
-                  roundedSize="5"
-                  imageWidth="60"
-                  imageHeight="60"
-                />
+                image={profile1}
+                roundedColor="#5E5E5E"
+                roundedSize="5"
+                imageWidth="60"
+                imageHeight="60"
+              />
             </div>
           </div>
         );
       } else {
         return (
-          <div style={{display:"flex", justifyContent:"flex-start", padding:"10px"}}>
-            <div style={{display:"flex", justifyContent:"flex-start", width:wWidth/3, backgroundColor:"red"}}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "flex-start",
+              padding: "10px",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-start",
+                width: wWidth / 3,
+                backgroundColor: "red",
+              }}
+            >
               <ReactRoundedImage
-                  image = {profile1}
-                  roundedColor="#5E5E5E"
-                  roundedSize="5"
-                  imageWidth="60"
-                  imageHeight="60"
+                image={profile1}
+                roundedColor="#5E5E5E"
+                roundedSize="5"
+                imageWidth="60"
+                imageHeight="60"
               />
-              <div style={{padding:"5px"}}>
-                <div style={{
-                        width: "max-content",
-                        maxWidth: "380px",
-                        wordBreak: "break-all",
-                        backgroundColor: "#E0E0E0", 
-                        fontSize:"20px", 
-                        marginTop:"10px",
-                        borderTopRightRadius: "18px",
-                        borderBottomRightRadius: "18px",
-                        borderBottomLeftRadius: "18px",
-                        marginLeft:"7px",
-                        padding: "18px"
-                      }}
+              <div style={{ padding: "5px" }}>
+                <div
+                  style={{
+                    width: "max-content",
+                    maxWidth: "380px",
+                    wordBreak: "break-all",
+                    backgroundColor: "#E0E0E0",
+                    fontSize: "20px",
+                    marginTop: "10px",
+                    borderTopRightRadius: "18px",
+                    borderBottomRightRadius: "18px",
+                    borderBottomLeftRadius: "18px",
+                    marginLeft: "7px",
+                    padding: "18px",
+                  }}
                 >
                   {item.content}
                 </div>
@@ -180,11 +204,10 @@ const ChattingPage = () => {
         );
       }
     }
-
   });
 
   return (
-    <div style={{justifyContent: "center", display: "flex"}}>
+    <div style={{ justifyContent: "center", display: "flex" }}>
       <div>
         <div className="container">
           <div
@@ -197,21 +220,23 @@ const ChattingPage = () => {
           >
             ChattingPage
           </div>
-          <div style={{width: wWidth/(2.5), marginBottom:"100px"}}>{msgBox}</div>
+          <div style={{ width: wWidth / 2.5, marginBottom: "100px" }}>
+            {msgBox}
+          </div>
           <div style={{}}>
             <input
-                  style={{marginBottom:"100px"}}
-                  type="text"
-                  id="msg"
-                  value={chat}
-                  placeholder="메시지 보내기"
-                  onChange={onChangeChat}
-                  onKeyDown={(ev) => {
-                    if (ev.key === 'Enter') {
-                      sendChat();
-                    }
-                  }}
-                />
+              style={{ marginBottom: "100px" }}
+              type="text"
+              id="msg"
+              value={chat}
+              placeholder="메시지 보내기"
+              onChange={onChangeChat}
+              onKeyDown={(ev) => {
+                if (ev.key === "Enter") {
+                  sendChat();
+                }
+              }}
+            />
             <Button variant="dark" size="md" onClick={sendChat}>
               전송
             </Button>
@@ -219,7 +244,6 @@ const ChattingPage = () => {
         </div>
       </div>
     </div>
-  
   );
 };
 

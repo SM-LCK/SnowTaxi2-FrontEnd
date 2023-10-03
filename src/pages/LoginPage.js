@@ -135,7 +135,7 @@ const LoginPage = () => {
             <div
               style={{
                 marginTop: "100px",
-                fontSize: "30px",
+                fontSize: "25px",
                 fontWeight: "700",
               }}
             >

@@ -4,10 +4,13 @@ import { Button } from "react-bootstrap";
 import axios from "axios";
 import { BrowserView, MobileView } from "react-device-detect";
 import style from '../modules/login.module.css'
+import AlertModal from "../components/AlertModal";
 
 const RePasswordPage = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
+  const [alreadyModalShow, setAlreadyModalShow] = useState(false);
+  const [alert, setAlert] = useState("");
 
   const handleEmailChange = (e) => {
     const inputEmail = e.target.value;
@@ -26,11 +29,8 @@ const RePasswordPage = () => {
         url: `${process.env.REACT_APP_API_URL}/email/password`,
         params: { mail: fullEmail },
       }).then((response) => {
-        console.log(response.data.code);
-        alert(response.data.message);
-        // if (response.data.code == 200) {
-        // } else {
-        // }
+        setAlert(response.data.message);
+        setAlreadyModalShow(true);
       });
     } catch (error) {
       console.log("fail get", error);

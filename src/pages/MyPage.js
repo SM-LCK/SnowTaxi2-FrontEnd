@@ -13,12 +13,7 @@ import { BrowserView, MobileView } from "react-device-detect";
 
 const MyPage = () => {
   const navigate = useNavigate();
-  const [windowDimensions, setWindowDimensions] = useState({
-    height: window.innerHeight,
-    width: window.innerWidth,
-  });
   const [loginNeedModalShow, setLoginNeedModalShow] = useState(false);
-
   const [avatar, setAvatar] = useState("");
   const [nickname, setNickname] = useState("");
   const [modalShow, setModalShow] = useState(false);
@@ -32,8 +27,8 @@ const MyPage = () => {
   useEffect(() => {
     if (localStorage.getItem("@token") == undefined) {
       setLoginNeedModalShow(true);
-      alert(`로그인이 필요한 기능입니다!`);
-      navigate("/Login");
+      //alert(`로그인이 필요한 기능입니다!`);
+      //navigate("/Login");
     } else {
       setNickname(localStorage.getItem("@nickname"));
       console.log("nickname", nickname);
@@ -59,8 +54,8 @@ const MyPage = () => {
           >
             <div
               style={{
-                marginTop: "40px",
-                fontSize: "30px",
+                marginTop: "50px",
+                fontSize: "23px",
                 fontWeight: "600",
                 marginBottom: "40px",
                 justifyContent: "center",
@@ -70,11 +65,11 @@ const MyPage = () => {
             >
               마이페이지
             </div>
-            <div style={{ fontSize: "23px", fontWeight: "600" }}>나의정보</div>
+            <div style={{ fontSize: "15px", fontWeight: "700" }}>나의정보</div>
             <div
               style={{
-                marginTop: "5px",
-                marginBottom: "5px",
+                marginTop: "10px",
+                marginBottom: "10px",
                 display: "flex",
                 alignItems: "center",
               }}
@@ -82,20 +77,18 @@ const MyPage = () => {
               {" "}
               <ReactRoundedImage
                 image={avatar}
-                // roundedColor="#2196F3"
-                imageWidth="80"
-                imageHeight="80"
-                roundedSize="10"
+                imageWidth="70"
+                imageHeight="70"
+                roundedSize="5"
                 borderRadius="100"
               />
               <div
                 style={{
-                  fontSize: "20px",
                   marginLeft: "20px",
-                  fontWeight: "500",
+                  fontSize: "15px",
                 }}
               >
-                {nickname} 님, 안녕하세요!
+                {nickname} 님, 안녕하세요! 🚖
               </div>
             </div>
 
@@ -110,10 +103,10 @@ const MyPage = () => {
               }}
               onClick={gotoHistory}
             >
-              <div style={{ fontSize: "20px", fontWeight: "600" }}>
+              <div style={{ fontSize: "15px", fontWeight: "700" }}>
                 참여내역
               </div>
-              <FiChevronRight size="25" color="black" />
+              <FiChevronRight size="23" color="black" />
             </div>
             <hr height="30px" />
             <div
@@ -125,11 +118,11 @@ const MyPage = () => {
                 marginBottom: "5px",
               }}
             >
-              <div style={{ fontSize: "20px", fontWeight: "600" }}>
+              <div style={{ fontSize: "15px", fontWeight: "700" }}>
                 로그아웃
               </div>
               <FiChevronRight
-                size="25"
+                size="23"
                 color="black"
                 onClick={() => setModalShow(true)}
               />
@@ -145,10 +138,10 @@ const MyPage = () => {
                 marginBottom: "5px",
               }}
             >
-              <div style={{ fontSize: "20px", fontWeight: "600" }}>
+              <div style={{ fontSize: "15px", fontWeight: "700" }}>
                 회원탈퇴
               </div>
-              <FiChevronRight size="25" color="black" />
+              <FiChevronRight size="23" color="black" />
             </div>
           </div>
         </div>
@@ -165,8 +158,8 @@ const MyPage = () => {
               <div
                 style={{
                   marginTop: "40px",
-                  fontSize: "30px",
-                  fontWeight: "600",
+                  fontSize: "20px",
+                  fontWeight: "700",
                   marginBottom: "40px",
                   justifyContent: "center",
                   alignItems: "center",
@@ -175,13 +168,13 @@ const MyPage = () => {
               >
                 마이페이지
               </div>
-              <div style={{ fontSize: "23px", fontWeight: "600" }}>
-                나의정보
+              <div style={{ fontSize: "13px", fontWeight: "700" }}>
+                나의 정보
               </div>
               <div
                 style={{
-                  marginTop: "5px",
-                  marginBottom: "5px",
+                  marginTop: "10px",
+                  marginBottom: "10px",
                   display: "flex",
                   alignItems: "center",
                 }}
@@ -189,20 +182,18 @@ const MyPage = () => {
                 {" "}
                 <ReactRoundedImage
                   image={avatar}
-                  // roundedColor="#2196F3"
-                  imageWidth="80"
-                  imageHeight="80"
-                  roundedSize="10"
+                  imageWidth="70"
+                  imageHeight="70"
+                  roundedSize="5"
                   borderRadius="100"
                 />
                 <div
                   style={{
-                    fontSize: "20px",
+                    fontSize: "13px",
                     marginLeft: "20px",
-                    fontWeight: "500",
                   }}
                 >
-                  {nickname} 님, 안녕하세요! 🚖
+                  {nickname} 님, 안녕하세요! 🍀
                 </div>
               </div>
 
@@ -217,10 +208,10 @@ const MyPage = () => {
                 }}
                 onClick={gotoHistory}
               >
-                <div style={{ fontSize: "20px", fontWeight: "600" }}>
+                <div style={{ fontSize: "13px", fontWeight: "700" }}>
                   참여 내역
                 </div>
-                <FiChevronRight size="25" color="black" />
+                <FiChevronRight size="20" color="black" />
               </div>
               <hr height="30px" />
               <div
@@ -232,11 +223,11 @@ const MyPage = () => {
                   marginBottom: "5px",
                 }}
               >
-                <div style={{ fontSize: "20px", fontWeight: "600" }}>
+                <div style={{ fontSize: "13px", fontWeight: "700" }}>
                   로그아웃
                 </div>
                 <FiChevronRight
-                  size="25"
+                  size="20"
                   color="black"
                   onClick={() => setModalShow(true)}
                 />
@@ -255,23 +246,23 @@ const MyPage = () => {
                   marginBottom: "5px",
                 }}
               >
-                <div style={{ fontSize: "20px", fontWeight: "600" }}>
+                <div style={{ fontSize: "13px", fontWeight: "700" }}>
                   회원탈퇴
                 </div>
-                <FiChevronRight size="25" color="black" />
+                <FiChevronRight size="20" color="black" />
               </div>
             </div>
-            <CheckModal
-              show={loginNeedModalShow}
-              onHide={() => setLoginNeedModalShow(false)}
-              main="로그인이 필요한 기능입니다."
-              sub="로그인 페이지로 이동하시겠습니까?"
-              check="확인"
-              okAction={toLoginPage}
-            />
           </div>
         </>
       </MobileView>
+      <CheckModal
+        show={loginNeedModalShow}
+        onHide={() => setLoginNeedModalShow(false)}
+        main="로그인이 필요한 기능입니다."
+        sub="로그인 페이지로 이동하시겠습니까?"
+        check="확인"
+        okAction={toLoginPage}
+      />
     </>
   );
 };

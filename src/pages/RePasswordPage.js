@@ -38,6 +38,7 @@ const RePasswordPage = () => {
   };
 
   return (
+    <>
     <div className={style['login-wrap']}>
       <div className={style['login-html']}>
         <input id="tab-1"type="radio" name="tab" className={style['sign-in']} checked></input><label for="tab-1" className={style['tab']}>비밀번호 재설정</label>
@@ -60,6 +61,12 @@ const RePasswordPage = () => {
         </div>
       </div>
     </div>
+      <AlertModal
+        show={alreadyModalShow}
+        alertMessage={alert}
+        onHide={() => setAlreadyModalShow(false)}
+      />
+    </>
   );
 };
 

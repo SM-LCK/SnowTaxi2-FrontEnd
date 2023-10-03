@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import axios from "axios";
 import { BrowserView, MobileView } from "react-device-detect";
-import style from '../modules/login.module.css'
+import style from "../modules/login.module.css"
 import AlertModal from "../components/AlertModal";
 
 const EmailcheckPage = () => {
@@ -89,7 +89,14 @@ const EmailcheckPage = () => {
             </div>
             <div className={style['group']}>
               <label className={style['label']}></label>
-              <input type="submit" className={style['button']} value="다음" onClick={handleToNext}></input>
+              {!isNextBtn ? (
+                <input type="submit" className={style['button']} value="다음" onClick={() => {
+                  setAlert("인증번호를 확인해주세요.");
+                  setAlreadyModalShow(true);
+                }} ></input>
+              ) : (
+                <input type="submit" className={style['button']} value="다음" onClick={handleToNext} ></input>
+              )}
             </div>
             <div className={style['hr']}></div>
             <div className={style['foot-lnk']}>

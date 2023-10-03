@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { BrowserView, MobileView } from "react-device-detect";
 
 const MyChattingPage = () => {
   const navigate = useNavigate();
@@ -14,24 +15,25 @@ const MyChattingPage = () => {
   }, []);
 
   return (
-    <div
-      className="page"
-      style={{ height: windowDimensions.height, width: "100%" }}
-    >
-      <div
-        style={{
-          marginTop: "40px",
-          fontSize: "30px",
-          fontWeight: "600",
-          marginBottom: "40px",
-          justifyContent: "center",
-          alignItems: "center",
-          display: "flex",
-        }}
-      >
-        채팅페이지
-      </div>
-    </div>
+    <>
+      <BrowserView>
+        <div className="page">
+          <div
+            style={{
+              marginTop: "40px",
+              fontSize: "30px",
+              fontWeight: "600",
+              marginBottom: "40px",
+              justifyContent: "center",
+              alignItems: "center",
+              display: "flex",
+            }}
+          >
+            채팅페이지
+          </div>
+        </div>
+      </BrowserView>
+    </>
   );
 };
 

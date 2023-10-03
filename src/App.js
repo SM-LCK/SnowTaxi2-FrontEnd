@@ -12,8 +12,18 @@ import Home from "./pages/Home";
 import RePasswordPage from "./pages/RePasswordPage";
 import BottomNav from "./components/BottomNav";
 import MyChattingPage from "./pages/MyChattingPage";
+import { useMediaQuery } from "react-responsive";
+import { BrowserView, MobileView } from 'react-device-detect'
 
 function App() {
+  // const isPc = useMediaQuery({
+  //   query: "(min-width:1024px)",
+  // });
+  // const isMobile = useMediaQuery({
+  //   query: "(max-width:767px)",
+  // });
+  const isDesktopOrMobile = useMediaQuery({query: '(max-width:768px)'});
+
   return (
     <Routes>
       <Route

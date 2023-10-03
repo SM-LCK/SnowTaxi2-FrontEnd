@@ -4,29 +4,9 @@ import sookmyung from "../assets/sookmyung.png";
 import hyochang from "../assets/hyochang.png";
 import seoul from "../assets/seoul.png";
 import namyoung from "../assets/namyoung.png";
+import image3 from "../assets/image3.jpeg";
 
 const TaxiRouteListPage = () => {
-  const [windowDimensions, setWindowDimensions] = useState({
-    height: window.innerHeight,
-    width: window.innerWidth,
-  });
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowDimensions({
-        height: window.innerHeight,
-        width: window.innerWidth,
-      });
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    // 컴포넌트가 언마운트될 때 이벤트 리스너를 제거
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
   const navigate = useNavigate();
 
   const handleRouteClick = (e, message) => {
@@ -36,16 +16,10 @@ const TaxiRouteListPage = () => {
   return (
     <div
       className="page"
-      // style={{
-      //   //  height: windowDimensions.height,
-      //   height: "100%",
-      //   width: "100%",
-      // }}
       style={{
+        backgroundImage: `url(${image3})`,
+        backgroundSize: "cover",
         postion: "absolute",
-        width: "100%",
-        height: "100%",
-        padding: "0 500px",
         backgroundColor: "#f7f7f7",
         paddingBottom: "100px",
       }}
@@ -77,8 +51,8 @@ const TaxiRouteListPage = () => {
             justifyContent: "center",
           }}
         >
-          <div>도착지는 숙대입구 후문입니다.</div>
-          <div>출발지를 선택해주세요.</div>
+          <div style={{ fontSize: "18px" }}>도착지는 숙대입구 후문입니다.</div>
+          <div style={{ fontSize: "18px" }}>출발지를 선택해주세요.</div>
         </div>
       </div>
 

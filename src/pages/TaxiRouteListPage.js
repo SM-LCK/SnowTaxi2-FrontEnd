@@ -9,6 +9,7 @@ import { BrowserView, MobileView } from "react-device-detect";
 
 const TaxiRouteListPage = () => {
   const navigate = useNavigate();
+  let wHeight = window.innerHeight;
 
   const handleRouteClick = (e, message) => {
     navigate("/Home/TaxiPotList", { state: { id: message } });
@@ -121,7 +122,7 @@ const TaxiRouteListPage = () => {
             >
               <img
                 src={HomeLogo}
-                style={{ width: "150px", marginTop: "30px" }}
+                style={{ width: "155px", marginTop: wHeight/8 }}
               />
               {/* <div
           style={{
@@ -138,23 +139,23 @@ const TaxiRouteListPage = () => {
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  marginTop: "30px",
+                  marginTop: wHeight/25,
                   justifyContent: "center",
                 }}
               >
                 <div
                   style={{
-                    fontSize: "13px",
+                    fontSize: wHeight/47,
                     fontWeight: "700",
                     textDecoration: "underline",
-                    textDecorationColor: "#80A1FF",
-                    textDecorationThickness: "3px",
+                    textDecorationColor: "#9EB9FF",
+                    textDecorationThickness: wHeight/190,
                   }}
                 >
                   출발지를 선택해주세요.
                 </div>
-                <div style={{ fontSize: "13px" }}>
-                  도착지는 숙대입구 후문입니다.
+                <div style={{ fontSize: wHeight/60, marginTop: "4px" }}>
+                  도착지는 숙명여대 후문입니다.
                 </div>
               </div>
             </div>
@@ -169,7 +170,7 @@ const TaxiRouteListPage = () => {
                 alignContent: "center",
               }}
             >
-              <div style={{ marginTop: "40px" }}>
+              <div style={{ marginTop: wHeight/13, }}>
                 <img
                   src={sookmyung}
                   alt="숙명"

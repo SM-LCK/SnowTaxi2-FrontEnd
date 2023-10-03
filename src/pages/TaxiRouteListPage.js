@@ -17,8 +17,8 @@ const TaxiRouteListPage = () => {
     <div
       className="page"
       style={{
-        backgroundImage: `url(${image3})`,
-        backgroundSize: "cover",
+        // backgroundImage: `url(${image3})`,
+        // backgroundSize: "cover",
         postion: "absolute",
         backgroundColor: "#f7f7f7",
         paddingBottom: "100px",
@@ -36,8 +36,8 @@ const TaxiRouteListPage = () => {
           style={{
             display: "flex",
             marginTop: "40px",
-            fontSize: "30px",
-            fontWeight: "600",
+            fontSize: "25px",
+            fontWeight: "700",
           }}
         >
           출발지
@@ -51,8 +51,8 @@ const TaxiRouteListPage = () => {
             justifyContent: "center",
           }}
         >
-          <div style={{ fontSize: "18px" }}>도착지는 숙대입구 후문입니다.</div>
-          <div style={{ fontSize: "18px" }}>출발지를 선택해주세요.</div>
+          <div style={{ fontSize: "13px" }}>도착지는 숙대입구 후문입니다.</div>
+          <div style={{ fontSize: "13px" }}>출발지를 선택해주세요.</div>
         </div>
       </div>
 

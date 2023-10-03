@@ -5,10 +5,10 @@ import { Button } from "react-bootstrap";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import MakepotModal from "../components/MakepotModal";
-import sookmyung from "../assets/map_sookmyung.jpeg";
-import hyochang from "../assets/map_hyochang.jpeg";
-import seoul from "../assets/map_seoul.jpeg";
-import namyoung from "../assets/map_namyoung.jpeg";
+import sookmyung from "../assets/map_sookmyung.png";
+import hyochang from "../assets/map_hyochang.png";
+import seoul from "../assets/map_seoul.png";
+import namyoung from "../assets/map_namyoung.png";
 import axios from "axios";
 import CheckModal from "../components/CheckModal";
 import { BrowserView, MobileView } from "react-device-detect";
@@ -136,7 +136,7 @@ const TaxiPotListPage = () => {
                 display: "flex",
               }}
             >
-              {id} 🔜 후문
+              {id} → 후문
             </div>
 
             {id == "숙대입구역" ? (
@@ -221,9 +221,9 @@ const TaxiPotListPage = () => {
               })
             )}
           </div>
-          <CheckModal 
-            show={loginNeedModalShow} 
-            onHide={() => setLoginNeedModalShow(false)} 
+          <CheckModal
+            show={loginNeedModalShow}
+            onHide={() => setLoginNeedModalShow(false)}
             main="로그인이 필요한 기능입니다."
             sub="로그인 페이지로 이동하시겠습니까?"
             check="확인"
@@ -247,44 +247,50 @@ const TaxiPotListPage = () => {
                 style={{
                   marginTop: "25px",
                   marginBottom: "25px",
-                  fontSize: "28px",
+                  fontSize: "20px",
                   fontWeight: "600",
                   justifyContent: "center",
                   alignItems: "center",
                   display: "flex",
                 }}
               >
-                {id} 🔜 후문
+                {id} → 후문
               </div>
 
               {id == "숙대입구역" ? (
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                  <img src={sookmyung} alt="지도" style={{ width: "300px" }} />
+                  <img src={sookmyung} alt="지도" style={{ width: "100%" }} />
                 </div>
               ) : id == "효창공원역" ? (
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                  <img src={hyochang} alt="지도" style={{ width: "300px" }} />
+                  <img src={hyochang} alt="지도" style={{ width: "100%" }} />
                 </div>
               ) : id == "서울역" ? (
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                  <img src={seoul} alt="지도" style={{ width: "300px" }} />
+                  <img src={seoul} alt="지도" style={{ width: "100%" }} />
                 </div>
               ) : (
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                  <img src={namyoung} alt="지도" style={{ width: "300px" }} />
+                  <img src={namyoung} alt="지도" style={{ width: "100%" }} />
                 </div>
               )}
 
               <div
                 style={{
-                  fontSize: "23px",
-                  fontWeight: "600",
+                  fontSize: "20px",
+                  fontWeight: "700",
                   marginTop: "15px",
                 }}
               >
                 {today}
               </div>
-              <div style={{ marginTop: "5px", marginBottom: "15px" }}>
+              <div
+                style={{
+                  marginTop: "5px",
+                  marginBottom: "15px",
+                  fontSize: "13px",
+                }}
+              >
                 오늘 탈 택시 팟에만 참여할 수 있어요.
                 <br />
                 모든 정산 금액은 기본 요금인 4800원입니다.
@@ -343,14 +349,14 @@ const TaxiPotListPage = () => {
                 })
               )}
             </div>
-            <CheckModal 
-            show={loginNeedModalShow} 
-            onHide={() => setLoginNeedModalShow(false)} 
-            main="로그인이 필요한 기능입니다."
-            sub="로그인 페이지로 이동하시겠습니까?"
-            check="확인"
-            okAction={toLoginPage}
-          />
+            <CheckModal
+              show={loginNeedModalShow}
+              onHide={() => setLoginNeedModalShow(false)}
+              main="로그인이 필요한 기능입니다."
+              sub="로그인 페이지로 이동하시겠습니까?"
+              check="확인"
+              okAction={toLoginPage}
+            />
           </div>
         </>
       </MobileView>

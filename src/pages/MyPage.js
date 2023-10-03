@@ -19,7 +19,6 @@ const MyPage = () => {
   });
   const [loginNeedModalShow, setLoginNeedModalShow] = useState(false);
 
-
   const [avatar, setAvatar] = useState("");
   const [nickname, setNickname] = useState("");
   const [modalShow, setModalShow] = useState(false);
@@ -32,7 +31,7 @@ const MyPage = () => {
 
   useEffect(() => {
     if (localStorage.getItem("@token") == undefined) {
-      setLoginNeedModalShow(true)
+      setLoginNeedModalShow(true);
       alert(`로그인이 필요한 기능입니다!`);
       navigate("/Login");
     } else {
@@ -109,11 +108,12 @@ const MyPage = () => {
                 marginTop: "5px",
                 marginBottom: "5px",
               }}
+              onClick={gotoHistory}
             >
               <div style={{ fontSize: "20px", fontWeight: "600" }}>
                 참여내역
               </div>
-              <FiChevronRight size="25" color="black" onClick={gotoChatting} />
+              <FiChevronRight size="25" color="black" />
             </div>
             <hr height="30px" />
             <div
@@ -216,15 +216,11 @@ const MyPage = () => {
                   marginBottom: "5px",
                 }}
                 onClick={gotoHistory}
-        >
+              >
                 <div style={{ fontSize: "20px", fontWeight: "600" }}>
                   참여 내역
                 </div>
-                <FiChevronRight
-                  size="25"
-                  color="black"
-                 
-                />
+                <FiChevronRight size="25" color="black" />
               </div>
               <hr height="30px" />
               <div
@@ -265,15 +261,15 @@ const MyPage = () => {
                 <FiChevronRight size="25" color="black" />
               </div>
             </div>
-            <CheckModal 
-            show={loginNeedModalShow} 
-            onHide={() => setLoginNeedModalShow(false)} 
-            main="로그인이 필요한 기능입니다."
-            sub="로그인 페이지로 이동하시겠습니까?"
-            check="확인"
-            okAction={toLoginPage}
-          />
-    </div>
+            <CheckModal
+              show={loginNeedModalShow}
+              onHide={() => setLoginNeedModalShow(false)}
+              main="로그인이 필요한 기능입니다."
+              sub="로그인 페이지로 이동하시겠습니까?"
+              check="확인"
+              okAction={toLoginPage}
+            />
+          </div>
         </>
       </MobileView>
     </>

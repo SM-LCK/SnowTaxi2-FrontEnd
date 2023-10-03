@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import ReactRoundedImage from "react-rounded-image";
 import * as StompJs from "@stomp/stompjs";
 import { Button } from "react-bootstrap";
-import profile1 from "../assets/profile1.png";
 import axios from "axios";
 import { BsSend } from "react-icons/bs";
 import ChattingBubble from "../components/ChattingBubbles";
 import CheckModal from "../components/CheckModal";
 import { useNavigate } from "react-router-dom";
+import logo from "../assets/logo.png"
+import AlertModal from "../components/AlertModal";
 
 const ChattingPage = () => {
   const navigate = useNavigate();
@@ -18,13 +19,16 @@ const ChattingPage = () => {
   let wHeight = window.innerHeight;
   let participaitngPotId = localStorage.getItem("@potId");
   const [loginNeedModalShow, setLoginNeedModalShow] = useState(false);
+  const [outModalShow, setOutModalShow] = useState(false);
+  const [finishModalShow, setFinishModalShow] = useState(false);
+  
 
   useEffect(() => {
     if (localStorage.getItem("@token") == undefined) {
       setLoginNeedModalShow(true);
       // alert(`로그인이 필요한 기능입니다!`);
       // navigate("/Login");
-    } else {
+    } else if (localStorage.getItem("@potId") != 0) {
       getChatsAxios();
       connect();
     }
@@ -142,6 +146,7 @@ const ChattingPage = () => {
 
   const finishAxios = async () => {
     try {
+      setFinishModalShow(true);
       axios({
         method: "get",
         url: `${process.env.REACT_APP_API_URL}/pot/finish`,
@@ -170,40 +175,31 @@ const ChattingPage = () => {
     .then(response => {
       console.log(response.data);
       localStorage.setItem("@potId", 0);
-      handleSendOutMsg();
+      setOutModalShow(false)
     })
     .catch(error => {
       console.log(error);
     });
   };
 
-  const handleSendOutMsg = async () => {
-    try {
-      axios({
-        method: "post",
-        url: `${process.env.REACT_APP_API_URL}/chatroom/inout`,
-        data: {
-          roomId: localStorage.getItem("@potId"),
-          sender: localStorage.getItem("@nickname"),
-          type: "OUT"
-        },
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("@token")}`,
-        },
-      })
-      .then((response) => {
-        console.log(response.data.data)
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    } catch (error) {
-      console.log(error);
-    }
+  const outHandle = () => {
+
   };
 
   return (
     <div>
+      <AlertModal
+        show={finishModalShow}
+        alertMessage={"[" + localStorage.getItem("@ridingTime") + "]  택시 팟 탑승을 완료했습니다!"}
+        onHide={() => setFinishModalShow(false)}
+      />
+      <CheckModal
+        show={outModalShow}
+        onHide={() => setOutModalShow(false)}
+        main={"정말  [" + localStorage.getItem("@ridingTime") + "]  팟을 나가시겠습니까?"}
+        check="나가기"
+        okAction={outAxios}
+      />
       <CheckModal
         show={loginNeedModalShow}
         onHide={toHome}
@@ -214,10 +210,17 @@ const ChattingPage = () => {
       />
     { (participaitngPotId == 0 || participaitngPotId == undefined) ? (
       <div className="centerNoMsg">
-        <div >
-          아직 참여한 택시 팟이 없습니다.
-          <br />
-          팟에 참여해 보세요!
+        <div>
+          <img
+            src={logo}
+            style={{ width: "130px", marginBottom:"30px"}}
+          />
+          <div >
+            참여 중인 택시 팟이 없습니다.
+            <br />
+            팟에 참여해 보세요!
+          </div>
+          <div style={{height:70}}></div>
         </div>
       </div>
       ) : (
@@ -231,7 +234,7 @@ const ChattingPage = () => {
 
               { isBefore(ridingTime) ? (
                 
-                <Button style={{backgroundColor:"#FF8A48", border:"none", fontSize:"13px"}} size="sm" onClick={outAxios}>
+                <Button style={{backgroundColor:"#FF8A48", border:"none", fontSize:"13px"}} size="sm" onClick={() => setOutModalShow(true)}>
                   팟 나가기
                 </Button>
               ) : (

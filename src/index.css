@@ -161,6 +161,9 @@ code {
 .centerNoMsg {
   display: grid;
   place-items: center;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
   min-height: 100dvh;
   font-size: 15px;
   text-align: center;

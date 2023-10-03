@@ -215,7 +215,11 @@ const TaxiPotListPage = () => {
                 </DropdownButton>
               </div>
               <div>
-                <Button variant="success" size="sm" onClick={handleCreatePot}>
+                <Button
+                  variant="outline-primary"
+                  size="sm"
+                  onClick={handleCreatePot}
+                >
                   + 팟 생성하기
                 </Button>
 
@@ -341,7 +345,7 @@ const TaxiPotListPage = () => {
                 >
                   <div>
                     <DropdownButton
-                      variant="secondary"
+                      variant="outline-secondary"
                       id="dropdown-basic-button"
                       title="정렬"
                       size="sm"
@@ -352,7 +356,7 @@ const TaxiPotListPage = () => {
                   </div>
                   <div>
                     <Button
-                      variant="primary"
+                      variant="outline-primary"
                       size="sm"
                       onClick={handleCreatePot}
                     >

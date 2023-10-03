@@ -88,7 +88,7 @@ const RePasswordPage = () => {
             </div>
 
             <div className="d-grid gap-2" style={{}}>
-              <Button variant="primary" size="lg" onClick={handleToLogin}>
+              <Button style={{ backgroundColor: "#4274FF", borderColor: "#4274FF" }} size="lg" onClick={handleToLogin}>
                 로그인 페이지
               </Button>
             </div>
@@ -146,7 +146,7 @@ const RePasswordPage = () => {
               </div>
 
               <div className="d-grid gap-2" style={{}}>
-                <Button variant="primary" size="lg" onClick={handleToLogin}>
+                <Button style={{ backgroundColor: "#4274FF", borderColor: "#4274FF" }} size="lg" onClick={handleToLogin}>
                   로그인 페이지
                 </Button>
               </div>

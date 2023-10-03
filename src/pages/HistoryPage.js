@@ -34,48 +34,16 @@ const HistoryPage = () => {
     const navigate = useNavigate();
 
     return (
-        <div
-        className="page"
-        style={{
-            postion: "absolute",
-            width: "100%",
-            height: "100%",
-            padding: "0 500px",
-            backgroundColor: "#f7f7f7",
-            paddingBottom: "100px",
-        }}
-        >
-        <div
-            style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            }}
-        >
-            <div
-            style={{
-                display: "flex",
-                marginTop: "40px",
-                fontSize: "30px",
-                fontWeight: "600",
-            }}
-            >
+      <div>
+        <div>
             참여 내역
-            </div>
         </div>
+        <div>
             {historyList.length == 0 ? (
-            <div
-                style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                marginTop: "100px",
-                }}
-            >
-                아직 참여한 팟이 없습니다.
+            <div className="centerNoMsg">
+                아직 참여한 택시 팟이 없습니다.
                 <br />
-                팟에 참여해 보세요!
+                택시 팟에 참여해 보세요!
             </div>
             ) : (
             <>
@@ -85,6 +53,7 @@ const HistoryPage = () => {
             </>
             )}
         </div>
+      </div>
     );
 };
 

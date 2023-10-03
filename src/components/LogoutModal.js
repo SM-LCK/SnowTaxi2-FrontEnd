@@ -36,14 +36,14 @@ const LogoutModal = (props) => {
       </Modal.Body>
       <Modal.Footer>
         <Button
-          style={{ backgroundColor: "#757575", borderColor: "#757575" }}
+          variant="secondary"
           size="md"
           onClick={props.onHide}
         >
           취소
         </Button>
         <Button
-          style={{ backgroundColor: "#FF8642", borderColor: "#FF8642" }}
+          variant="primary"
           size="md"
           onClick={handleLogout}
         >

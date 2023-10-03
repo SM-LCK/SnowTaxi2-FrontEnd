@@ -92,11 +92,11 @@ const MakepotModal = (props) => {
           </p>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="success" size="md" onClick={handleParticipating}>
-            팟 만들기
-          </Button>
           <Button variant="secondary" size="md" onClick={props.onHide}>
             Close
+          </Button>
+          <Button variant="primary" size="md" onClick={handleParticipating}>
+            팟 만들기
           </Button>
         </Modal.Footer>
       </Modal>

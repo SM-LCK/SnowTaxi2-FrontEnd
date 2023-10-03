@@ -18,14 +18,16 @@ const CheckModal = (props) => {
       </Modal.Body>
       <Modal.Footer>
         <Button
-          style={{ backgroundColor: "#757575", borderColor: "#757575" }}
+          variant="secondary"
+          // style={{ backgroundColor: "#757575", borderColor: "#757575" }}
           size="md"
           onClick={props.onHide}
         >
           취소
         </Button>
         <Button
-          style={{ backgroundColor: "#FF8642", borderColor: "#FF8642" }}
+          variant="primary"
+          // style={{ backgroundColor: "#FF8642", borderColor: "#FF8642" }}
           size="md"
           onClick={props.okAction}
         >

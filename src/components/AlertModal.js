@@ -19,11 +19,7 @@ const AlertModal = (props) => {
           }}
         >
           <p style={{ textAlign: "center" }}>{props.alertMessage}</p>
-          <Button
-            size="md"
-            style={{ backgroundColor: "#4274FF" }}
-            onClick={props.onHide}
-          >
+          <Button size="md" variant="primary" onClick={props.onHide}>
             확인
           </Button>
         </div>

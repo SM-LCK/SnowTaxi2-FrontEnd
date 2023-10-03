@@ -82,7 +82,8 @@ const PotItemButton = (data) => {
                 setModalShow(true);
                 localStorage.setItem("@potId", potId);
                 localStorage.setItem("@ridingTime", ridingTime);
-                // setStoragePotId(potId);
+                console.log("in msg 보내야댐")
+                // handleSendInMsg();
               } else {
                 setAlreadyModalShow(true)
                 // alert(`이미 참여하는 팟이 있습니다.`);
@@ -96,6 +97,33 @@ const PotItemButton = (data) => {
           console.log(error);
         }
       }
+    }
+  };
+
+  const handleSendInMsg = async () => {
+    try {
+      axios({
+        method: "post",
+        url: `${process.env.REACT_APP_API_URL}/chatroom/inout`,
+        data: {
+          roomId: potId,
+          sender: localStorage.getItem("@nickname"),
+          type: "IN",
+          content:""
+        },
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("@token")}`,
+        },
+      })
+      .then((response) => {
+        console.log("in msg 보냄")
+        console.log(response.data.data)
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    } catch (error) {
+      console.log(error);
     }
   };
 

@@ -178,6 +178,7 @@ const TaxiPotListPage = () => {
                 fontSize: "20px",
                 fontWeight: "700",
                 marginTop: "10px",
+                marginBottom: "5px",
                 textDecoration: "underline",
                 textDecorationColor: "#80A1FF",
                 textDecorationThickness: "3px",
@@ -214,7 +215,7 @@ const TaxiPotListPage = () => {
                 </DropdownButton>
               </div>
               <div>
-                <Button variant="dark" size="sm" onClick={handleCreatePot}>
+                <Button variant="success" size="sm" onClick={handleCreatePot}>
                   + 팟 생성하기
                 </Button>
 
@@ -307,12 +308,13 @@ const TaxiPotListPage = () => {
                   />
                 </div>
               )}
-              <div style={{ padding: "0 40px" }}>
+              <div style={{ padding: "0 20px" }}>
                 <div
                   style={{
                     fontSize: "20px",
                     fontWeight: "700",
                     marginTop: "10px",
+                    marginBottom: "5px",
                     textDecoration: "underline",
                     textDecorationColor: "#80A1FF",
                     textDecorationThickness: "3px",
@@ -349,7 +351,11 @@ const TaxiPotListPage = () => {
                     </DropdownButton>
                   </div>
                   <div>
-                    <Button variant="dark" size="sm" onClick={handleCreatePot}>
+                    <Button
+                      variant="primary"
+                      size="sm"
+                      onClick={handleCreatePot}
+                    >
                       + 팟 생성하기
                     </Button>
 

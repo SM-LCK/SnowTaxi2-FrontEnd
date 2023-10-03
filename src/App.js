@@ -15,6 +15,7 @@ import MyChattingPage from "./pages/MyChattingPage";
 import { useMediaQuery } from "react-responsive";
 import { BrowserView, MobileView } from 'react-device-detect'
 import HistoryPage from "./pages/HistoryPage";
+import HistoryChattingPage from "./pages/HistoryChattingPage";
 
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
         <Route path="History" element={<HistoryPage />} />
       </Route>
 
+      <Route path="/History/:potId" element={<HistoryChattingPage />} />
       <Route path="/RePassword" element={<RePasswordPage />} />
       <Route path="/Emailcheck" element={<EmailcheckPage />} />
       <Route path="/Signup" element={<SignupPage />} />

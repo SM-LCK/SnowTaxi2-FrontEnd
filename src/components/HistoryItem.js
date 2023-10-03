@@ -20,7 +20,7 @@ const HistoryItem = (data) => {
     }, []);
 
     const goToChatting = () => {
-        // navigate("/");
+        navigate(`/History/${gettedData.id}`);
     };
 
   return (

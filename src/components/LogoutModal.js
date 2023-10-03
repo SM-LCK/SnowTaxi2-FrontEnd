@@ -43,7 +43,7 @@ const LogoutModal = (props) => {
           취소
         </Button>
         <Button
-          variant="primary"
+          style={{ backgroundColor: "#FF8642", borderColor: "#FF8642" }}
           size="md"
           onClick={handleLogout}
         >

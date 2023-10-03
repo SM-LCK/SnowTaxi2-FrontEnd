@@ -149,7 +149,11 @@ const PotItemButton = (data) => {
               참여중
             </Button>
           ) : (
-            <Button variant="primary" size="sm" onClick={handleParticipate}>
+            <Button
+              style={{ backgroundColor: "#4274FF", borderColor: "#4274FF" }}
+              size="sm"
+              onClick={handleParticipate}
+            >
               참여하기
             </Button>
           )}

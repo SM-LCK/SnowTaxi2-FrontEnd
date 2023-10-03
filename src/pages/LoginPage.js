@@ -114,7 +114,7 @@ const LoginPage = () => {
             </div>
 
             <div className="d-grid gap-2" style={{ marginTop: "300px" }}>
-              <Button variant="primary" size="lg" onClick={axioshandleLogin}>
+              <Button style={{ backgroundColor: "#4274FF", borderColor: "#4274FF" }} size="lg" onClick={axioshandleLogin}>
                 로그인
               </Button>
             </div>
@@ -186,7 +186,7 @@ const LoginPage = () => {
               </div>
 
               <div className="d-grid gap-2" style={{ marginTop: "300px" }}>
-                <Button variant="primary" size="lg" onClick={axioshandleLogin}>
+                <Button style={{ backgroundColor: "#4274FF", borderColor: "#4274FF" }} size="lg" onClick={axioshandleLogin}>
                   로그인
                 </Button>
               </div>

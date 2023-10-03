@@ -95,7 +95,7 @@ const MakepotModal = (props) => {
           <Button variant="secondary" size="md" onClick={props.onHide}>
             Close
           </Button>
-          <Button variant="primary" size="md" onClick={handleParticipating}>
+          <Button style={{ backgroundColor: "#4274FF", borderColor: "#4274FF" }} size="md" onClick={handleParticipating}>
             팟 만들기
           </Button>
         </Modal.Footer>

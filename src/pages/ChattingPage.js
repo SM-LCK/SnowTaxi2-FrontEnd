@@ -281,7 +281,11 @@ const ChattingPage = () => {
               팟 나가기
             </Button>
           ) : (
-            <Button variant="primary" size="md" onClick={finishAxios}>
+            <Button
+              style={{ backgroundColor: "#4274FF", borderColor: "#4274FF" }}
+              size="md"
+              onClick={finishAxios}
+            >
               탑승 완료
             </Button>
           )}

@@ -147,7 +147,7 @@ const EmailcheckPage = () => {
                 />
               </div>
               <Button
-                variant="success"
+                style={{ backgroundColor: "#4274FF", borderColor: "#4274FF" }}
                 size="md"
                 onClick={handleCertificateNumber}
               >
@@ -267,7 +267,7 @@ const EmailcheckPage = () => {
                   />
                 </div>
                 <Button
-                  variant="success"
+                  style={{ backgroundColor: "#4274FF", borderColor: "#4274FF" }}
                   size="md"
                   onClick={handleCertificateNumber}
                 >

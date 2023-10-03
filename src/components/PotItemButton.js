@@ -59,70 +59,47 @@ const PotItemButton = (data) => {
     navigate("/Login");
   };
 
-  const handleParticipate = async () => {
-    console.log("storage id: ", localStorage.getItem("@potId"));
-    if (localStorage.getItem("@token") == undefined) {
-      setLoginNeedModalShow(true);
-    } else {
-      if (headCount == 4) alert(`이미 모집이 완료된 팟입니다.`);
-      else {
-        try {
-          axios({
-            method: "post",
-            url: `${process.env.REACT_APP_API_URL}/participation`,
-            params: { potId: potId },
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("@token")}`,
-            },
-          })
-            .then((response) => {
-              console.log("data: ", response.data.data); //참여가능 true,아니면 false
-              if (response.data.data) {
-                setModalShow(true);
-                localStorage.setItem("@potId", potId);
-                localStorage.setItem("@ridingTime", ridingTime);
-                console.log("in msg 보내야댐")
-                // handleSendInMsg();
-              } else {
-                setAlreadyModalShow(true);
-                // alert(`이미 참여하는 팟이 있습니다.`);
-                // setAlreadyModalShow(true)
-              }
-            })
-            .catch(function (error) {
-              console.log(error);
-            });
-        } catch (error) {
-          console.log(error);
-        }
-      }
-    }
-  };
-
-  const handleSendInMsg = async () => {
+  const participate = async () => {
     try {
+      setModalShow(false)
       axios({
         method: "post",
-        url: `${process.env.REACT_APP_API_URL}/chatroom/inout`,
-        data: {
-          roomId: potId,
-          sender: localStorage.getItem("@nickname"),
-          type: "IN",
-          content:""
-        },
+        url: `${process.env.REACT_APP_API_URL}/participation`,
+        params: { potId: potId },
         headers: {
           Authorization: `Bearer ${localStorage.getItem("@token")}`,
         },
       })
-      .then((response) => {
-        console.log("in msg 보냄")
-        console.log(response.data.data)
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+        .then((response) => {
+          console.log("data: ", response.data.data); //참여가능 true,아니면 false
+          if (response.data.data) {
+            localStorage.setItem("@potId", potId);
+            localStorage.setItem("@ridingTime", ridingTime);
+            navigate("/Home/Chatting");
+          } else {
+            setAlreadyModalShow(true);
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const handleParticipate = async () => {
+    if (localStorage.getItem("@token") == undefined) {
+      setLoginNeedModalShow(true);
+    } else {
+      if (headCount == 4) {
+        alert(`이미 모집이 완료된 팟입니다.`);
+      }
+      else if (localStorage.getItem("@potId") != 0) {
+        setAlreadyModalShow(true);
+      } else {
+        setModalShow(true);
+      }
     }
   };
 
@@ -185,7 +162,14 @@ const PotItemButton = (data) => {
               참여하기
             </Button>
           )}
-          <PotModal show={modalShow} onHide={() => setModalShow(false)} />
+          <CheckModal
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+            main={ridingTime + "택시 팟에 참여하시겠습니까?"}
+            sub="탑승 시간 3분 전까지만 팟에서 나갈 수 있습니다."
+            check="참여하기"
+            okAction={participate}
+          />
           <CheckModal
             show={loginNeedModalShow}
             onHide={() => setLoginNeedModalShow(false)}

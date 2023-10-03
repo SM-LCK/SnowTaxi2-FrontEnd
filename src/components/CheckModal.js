@@ -8,12 +8,12 @@ const CheckModal = (props) => {
   const navigate = useNavigate();
 
   return (
-    <Modal {...props} size="sm" centered style={{ padding: "10px" }}>
+    <Modal {...props} size="sm" centered style={{ padding: "0px" }}>
       <Modal.Body>
         <div style={{ textAlign: "center" }}>
           <br />
-          <h4>{props.main}</h4>
-          <p>{props.sub}</p>
+          <div style={{fontSize:"19px", fontWeight:"bold", marginBottom:'10px'}}>{props.main}</div>
+          <div style={{fontSize:"14px", fontWeight:"light", marginBottom:'20px'}}>{props.sub}</div>
         </div>
       </Modal.Body>
       <Modal.Footer>

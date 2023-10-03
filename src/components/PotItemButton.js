@@ -22,7 +22,6 @@ const PotItemButton = (data) => {
   const [alreadyModalShow, setAlreadyModalShow] = useState(false);
   const [loginNeedModalShow, setLoginNeedModalShow] = useState(false);
 
-
   const makeTime = (ridingTime) => {
     const timeArr = ridingTime.split(":");
     var ampm = "오전";
@@ -84,7 +83,7 @@ const PotItemButton = (data) => {
                 localStorage.setItem("@ridingTime", ridingTime);
                 // setStoragePotId(potId);
               } else {
-                setAlreadyModalShow(true)
+                setAlreadyModalShow(true);
                 // alert(`이미 참여하는 팟이 있습니다.`);
                 // setAlreadyModalShow(true)
               }
@@ -102,10 +101,10 @@ const PotItemButton = (data) => {
   return (
     <div
       style={{
-        backgroundColor: "white",
+        backgroundColor: "#f7f7f7",
         borderRadius: "15px",
         border: "none",
-        height: "100px",
+        height: "80px",
         marginBottom: "15px",
       }}
     >
@@ -113,60 +112,61 @@ const PotItemButton = (data) => {
         style={{
           display: "flex",
           flexDirection: "row",
-          alignItems: "center",
           justifyContent: "space-between",
+          // alignItems: "center",
         }}
       >
         <div
           style={{
             display: "flex",
             flexDirection: "column",
+            justifyContent: "center",
             alignItems: "center",
+            marginTop: "13px",
             marginLeft: "20px",
-            marginTop: "15px",
-            marginBottom: "15px",
+            // marginTop: "15px",
+            // marginBottom: "15px",
           }}
         >
-          <div
-            style={{ marginBottom: "5px", fontSize: "20px", fontWeight: "600" }}
-          >
+          <div style={{ fontSize: "18px", fontWeight: "600" }}>
             {ridingTime}
           </div>
-          <div
-            style={{
-              marginBottom: "15px",
-            }}
-          >
-            {Array(headCount).fill(<BsPersonFill size="25" color="black" />)}
-            {Array(4 - headCount).fill(<BsPerson size="25" color="black" />)}
+          <div style={{}}>
+            {Array(headCount).fill(<BsPersonFill size="20" color="black" />)}
+            {Array(4 - headCount).fill(<BsPerson size="20" color="black" />)}
           </div>
         </div>
         <div
           style={{
             marginRight: "20px",
-            marginTop: "15px",
-            marginBottom: "15px",
+            marginTop: "23px",
+            // marginTop: "15px",
+            // marginBottom: "15px",
           }}
         >
           {participating ? (
-            <Button variant="secondary" size="md" onClick={handleParticipating}>
+            <Button variant="secondary" size="sm" onClick={handleParticipating}>
               참여중
             </Button>
           ) : (
-            <Button variant="primary" size="md" onClick={handleParticipate}>
+            <Button variant="primary" size="sm" onClick={handleParticipate}>
               참여하기
             </Button>
           )}
           <PotModal show={modalShow} onHide={() => setModalShow(false)} />
-          <CheckModal 
-            show={loginNeedModalShow} 
-            onHide={() => setLoginNeedModalShow(false)} 
+          <CheckModal
+            show={loginNeedModalShow}
+            onHide={() => setLoginNeedModalShow(false)}
             main="로그인이 필요한 기능입니다."
             sub="로그인 페이지로 이동하시겠습니까?"
             check="확인"
             okAction={toLoginPage}
           />
-          <AlertModal show={alreadyModalShow} alertMessage="이미 참여하고 있는 팟이 있습니다." onHide={() => setAlreadyModalShow(false)} />
+          <AlertModal
+            show={alreadyModalShow}
+            alertMessage="이미 참여하고 있는 팟이 있습니다."
+            onHide={() => setAlreadyModalShow(false)}
+          />
         </div>
       </div>
     </div>

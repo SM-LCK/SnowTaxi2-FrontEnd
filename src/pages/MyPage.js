@@ -13,12 +13,7 @@ import { BrowserView, MobileView } from "react-device-detect";
 
 const MyPage = () => {
   const navigate = useNavigate();
-  const [windowDimensions, setWindowDimensions] = useState({
-    height: window.innerHeight,
-    width: window.innerWidth,
-  });
   const [loginNeedModalShow, setLoginNeedModalShow] = useState(false);
-
   const [avatar, setAvatar] = useState("");
   const [nickname, setNickname] = useState("");
   const [modalShow, setModalShow] = useState(false);
@@ -60,7 +55,7 @@ const MyPage = () => {
             <div
               style={{
                 marginTop: "40px",
-                fontSize: "30px",
+                fontSize: "23px",
                 fontWeight: "600",
                 marginBottom: "40px",
                 justifyContent: "center",
@@ -70,11 +65,11 @@ const MyPage = () => {
             >
               마이페이지
             </div>
-            <div style={{ fontSize: "23px", fontWeight: "600" }}>나의정보</div>
+            <div style={{ fontSize: "18px", fontWeight: "700" }}>나의정보</div>
             <div
               style={{
-                marginTop: "5px",
-                marginBottom: "5px",
+                marginTop: "10px",
+                marginBottom: "10px",
                 display: "flex",
                 alignItems: "center",
               }}
@@ -83,19 +78,18 @@ const MyPage = () => {
               <ReactRoundedImage
                 image={avatar}
                 // roundedColor="#2196F3"
-                imageWidth="80"
-                imageHeight="80"
-                roundedSize="10"
+                imageWidth="70"
+                imageHeight="70"
+                roundedSize="5"
                 borderRadius="100"
               />
               <div
                 style={{
-                  fontSize: "20px",
                   marginLeft: "20px",
-                  fontWeight: "500",
+                  fontSize: "18px",
                 }}
               >
-                {nickname} 님, 안녕하세요!
+                {nickname} 님, 안녕하세요! 🚖
               </div>
             </div>
 
@@ -110,7 +104,7 @@ const MyPage = () => {
               }}
               onClick={gotoHistory}
             >
-              <div style={{ fontSize: "20px", fontWeight: "600" }}>
+              <div style={{ fontSize: "18px", fontWeight: "700" }}>
                 참여내역
               </div>
               <FiChevronRight size="25" color="black" />
@@ -125,7 +119,7 @@ const MyPage = () => {
                 marginBottom: "5px",
               }}
             >
-              <div style={{ fontSize: "20px", fontWeight: "600" }}>
+              <div style={{ fontSize: "18px", fontWeight: "700" }}>
                 로그아웃
               </div>
               <FiChevronRight
@@ -145,7 +139,7 @@ const MyPage = () => {
                 marginBottom: "5px",
               }}
             >
-              <div style={{ fontSize: "20px", fontWeight: "600" }}>
+              <div style={{ fontSize: "18px", fontWeight: "700" }}>
                 회원탈퇴
               </div>
               <FiChevronRight size="25" color="black" />
@@ -165,8 +159,8 @@ const MyPage = () => {
               <div
                 style={{
                   marginTop: "40px",
-                  fontSize: "30px",
-                  fontWeight: "600",
+                  fontSize: "23px",
+                  fontWeight: "700",
                   marginBottom: "40px",
                   justifyContent: "center",
                   alignItems: "center",
@@ -175,13 +169,13 @@ const MyPage = () => {
               >
                 마이페이지
               </div>
-              <div style={{ fontSize: "23px", fontWeight: "600" }}>
-                나의정보
+              <div style={{ fontSize: "18px", fontWeight: "700" }}>
+                나의 정보
               </div>
               <div
                 style={{
-                  marginTop: "5px",
-                  marginBottom: "5px",
+                  marginTop: "10px",
+                  marginBottom: "10px",
                   display: "flex",
                   alignItems: "center",
                 }}
@@ -190,16 +184,15 @@ const MyPage = () => {
                 <ReactRoundedImage
                   image={avatar}
                   // roundedColor="#2196F3"
-                  imageWidth="80"
-                  imageHeight="80"
-                  roundedSize="10"
+                  imageWidth="70"
+                  imageHeight="70"
+                  roundedSize="5"
                   borderRadius="100"
                 />
                 <div
                   style={{
-                    fontSize: "20px",
+                    fontSize: "18px",
                     marginLeft: "20px",
-                    fontWeight: "500",
                   }}
                 >
                   {nickname} 님, 안녕하세요! 🚖
@@ -217,7 +210,7 @@ const MyPage = () => {
                 }}
                 onClick={gotoHistory}
               >
-                <div style={{ fontSize: "20px", fontWeight: "600" }}>
+                <div style={{ fontSize: "18px", fontWeight: "700" }}>
                   참여 내역
                 </div>
                 <FiChevronRight size="25" color="black" />
@@ -232,7 +225,7 @@ const MyPage = () => {
                   marginBottom: "5px",
                 }}
               >
-                <div style={{ fontSize: "20px", fontWeight: "600" }}>
+                <div style={{ fontSize: "18px", fontWeight: "700" }}>
                   로그아웃
                 </div>
                 <FiChevronRight
@@ -255,7 +248,7 @@ const MyPage = () => {
                   marginBottom: "5px",
                 }}
               >
-                <div style={{ fontSize: "20px", fontWeight: "600" }}>
+                <div style={{ fontSize: "18px", fontWeight: "700" }}>
                   회원탈퇴
                 </div>
                 <FiChevronRight size="25" color="black" />

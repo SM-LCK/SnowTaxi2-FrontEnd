@@ -20,7 +20,7 @@ const TaxiRouteListPage = () => {
         // backgroundImage: `url(${image3})`,
         // backgroundSize: "cover",
         postion: "absolute",
-        backgroundColor: "#f7f7f7",
+        backgroundColor: "white",
         paddingBottom: "100px",
       }}
     >
@@ -36,7 +36,7 @@ const TaxiRouteListPage = () => {
           style={{
             display: "flex",
             marginTop: "40px",
-            fontSize: "25px",
+            fontSize: "23px",
             fontWeight: "700",
           }}
         >
@@ -57,14 +57,21 @@ const TaxiRouteListPage = () => {
       </div>
 
       <div
-        className="container"
-        style={{ marginTop: "20px", marginBottom: "100px" }}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          marginTop: "30px",
+          justifyContent: "center",
+          alignItems: "center",
+          alignContent: "center",
+        }}
       >
         <div style={{ marginTop: "40px" }}>
           <img
             src={sookmyung}
             alt="숙명"
             onClick={(e) => handleRouteClick(e, "숙대입구역")}
+            style={{ width: "200px" }}
           />
         </div>
         <div style={{ marginTop: "40px" }}>
@@ -72,6 +79,7 @@ const TaxiRouteListPage = () => {
             src={hyochang}
             alt="효창"
             onClick={(e) => handleRouteClick(e, "효창공원역")}
+            style={{ width: "200px" }}
           />
         </div>
         <div style={{ marginTop: "40px" }}>
@@ -79,6 +87,7 @@ const TaxiRouteListPage = () => {
             src={seoul}
             alt="서울"
             onClick={(e) => handleRouteClick(e, "서울역")}
+            style={{ width: "200px" }}
           />
         </div>
         <div style={{ marginTop: "40px" }}>
@@ -86,6 +95,7 @@ const TaxiRouteListPage = () => {
             src={namyoung}
             alt="남영"
             onClick={(e) => handleRouteClick(e, "남영역")}
+            style={{ width: "200px" }}
           />
         </div>
       </div>

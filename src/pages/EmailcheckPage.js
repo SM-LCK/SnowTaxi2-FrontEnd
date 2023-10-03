@@ -60,6 +60,7 @@ const EmailcheckPage = () => {
   };
 
   return (
+    <>
     <div className={style['login-wrap']}>
       <div className={style['login-html']}>
         <input id="tab-1"type="radio" name="tab" className={style['sign-in']}></input><Link to="/Login"><label for="tab-1" className={style['tab']}>로그인</label></Link>
@@ -105,6 +106,12 @@ const EmailcheckPage = () => {
         </div>
       </div>
     </div>
+      <AlertModal
+        show={alreadyModalShow}
+        alertMessage={alert}
+        onHide={() => setAlreadyModalShow(false)}
+      />
+    </>
   );
 };
 

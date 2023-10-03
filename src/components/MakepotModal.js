@@ -68,7 +68,7 @@ const MakepotModal = (props) => {
     <div>
       <Modal
         {...props}
-        size="md"
+        size="sm"
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
@@ -92,10 +92,10 @@ const MakepotModal = (props) => {
           </p>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="success" onClick={handleParticipating}>
+          <Button variant="success" size="md" onClick={handleParticipating}>
             팟 만들기
           </Button>
-          <Button variant="secondary" onClick={props.onHide}>
+          <Button variant="secondary" size="md" onClick={props.onHide}>
             Close
           </Button>
         </Modal.Footer>

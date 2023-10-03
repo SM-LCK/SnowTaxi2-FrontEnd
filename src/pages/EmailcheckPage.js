@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import axios from "axios";
 import { BrowserView, MobileView } from "react-device-detect";
+import style from '../modules/login.module.css'
 
 const EmailcheckPage = () => {
   const navigate = useNavigate();
@@ -52,246 +53,44 @@ const EmailcheckPage = () => {
   };
 
   return (
-    <>
-      <BrowserView>
-        <div className="page" style={{ padding: "0 500px" }}>
-          <div
-            style={{
-              marginTop: "100px",
-              fontSize: "30px",
-              fontWeight: "700",
-            }}
-          >
-            ❄️ 숙명 이메일 인증 ❄️
-          </div>
-          <p style={{ marginTop: "10px" }}>
-            숙명여대 학생들만 이용 가능한 서비스입니다.
-          </p>
-          <div className="contentWrap" style={{ marginTop: "80px" }}>
-            <div className="inputTitle"> 이메일 </div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              {/* <div style={{ display: "flex", flexDirection: "column" }}>
-            <div className="inputTitle"> 이메일 </div> */}
-              <div
-                style={{
-                  display: "flex",
-                  marginTop: "10px",
-                  borderRadius: "20px",
-                  padding: "16px",
-                  border: "1px solid #e2e0e0",
-                  backgroundColor: "#ffffff",
-                  width: "70%",
-                }}
-              >
-                <input
-                  className="input"
-                  type="email"
-                  id="email"
-                  value={email}
-                  onChange={handleEmailChange}
-                />
-                <div style={{ fontSize: "15px" }}>@sookmyung.ac.kr</div>
+    <div className={style['login-wrap']}>
+      <div className={style['login-html']}>
+        <input id="tab-1"type="radio" name="tab" className={style['sign-in']}></input><Link to="/Login"><label for="tab-1" className={style['tab']}>로그인</label></Link>
+        <input id="tab-2"type="radio" name="tab" className={style['sign-up']} checked></input><label for="tab-1" className={style['tab']}>회원가입</label>
+        <div className={style['login-form']}>
+            <div className={style['group']}>
+              <label for="user" className={style['label']}>숙명 이메일로 인증하기</label>
+              <div className={style['input']}>
+                <input id="user" type="email" className={style['email2']} value={email} onChange={handleEmailChange}></input>
+                <label for="user" className={style['email']}>@sookmyung.ac.kr</label>
               </div>
-              {/* </div> */}
-
-              <Button variant="dark" onClick={axiosCertificateEmail}>
-                보내기
-              </Button>
             </div>
-
-            <div
-              style={{
-                marginTop: "30px",
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  borderRadius: "20px",
-                  padding: "16px",
-                  border: "1px solid #e2e0e0",
-                  backgroundColor: "#ffffff",
-                  width: "70%",
-                }}
-              >
-                <input
-                  style={{
-                    width: "100%",
-                    outline: "none",
-                    border: "none",
-                    height: "25px",
-                    fontSize: "15px",
-                    fontWeight: "400",
-                  }}
-                  //type="number"
-                  id="inputNumber"
-                  value={inputNumber}
-                  onChange={(e) => setInputNumber(e.target.value)}
-                  placeholder="인증번호를 입력하세요"
-                />
-              </div>
-              <Button
-                variant="success"
-                size="md"
-                onClick={handleCertificateNumber}
-              >
-                인증하기
-              </Button>
-            </div>
-
-            <div
-              className="d-grid gap-2"
-              style={{ marginTop: "300px", marginBottom: "100px" }}
-            >
-              {!isNextBtn ? (
-                <Button
-                  variant="secondary"
-                  size="lg"
-                  onClick={() => {
-                    alert(`인증번호를 확인해주세요.`);
-                  }}
-                >
-                  다음
-                </Button>
-              ) : (
-                <Button variant="dark" size="lg" onClick={handleToNext}>
-                  다음
-                </Button>
-              )}
-            </div>
-          </div>
-        </div>
-      </BrowserView>
-      <MobileView>
-        <>
-          <div className="page" style={{ padding: "0 30px" }}>
-            <div
-              style={{
-                marginTop: "100px",
-                fontSize: "30px",
-                fontWeight: "700",
-              }}
-            >
-              ❄️ 숙명 이메일 인증 ❄️
-            </div>
-            <p style={{ marginTop: "10px" }}>
-              숙명여대 학생들만 이용 가능한 서비스입니다.
-            </p>
-            <div className="contentWrap" style={{ marginTop: "80px" }}>
-              <div className="inputTitle"> 이메일 </div>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
-                {/* <div style={{ display: "flex", flexDirection: "column" }}>
-            <div className="inputTitle"> 이메일 </div> */}
-                <div
-                  style={{
-                    display: "flex",
-                    marginTop: "10px",
-                    borderRadius: "20px",
-                    padding: "16px",
-                    border: "1px solid #e2e0e0",
-                    backgroundColor: "#ffffff",
-                    width: "70%",
-                  }}
-                >
-                  <input
-                    className="input"
-                    type="email"
-                    id="email"
-                    value={email}
-                    onChange={handleEmailChange}
-                  />
-                  <div style={{ fontSize: "15px" }}>@sookmyung.ac.kr</div>
-                </div>
-                {/* </div> */}
-
-                <Button variant="dark" onClick={axiosCertificateEmail}>
+            <div align="right" className={style['group']}>
+                <Button variant="dark" className={style['button2']} onClick={axiosCertificateEmail}>
                   보내기
                 </Button>
-              </div>
-
-              <div
-                style={{
-                  marginTop: "30px",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    borderRadius: "20px",
-                    padding: "16px",
-                    border: "1px solid #e2e0e0",
-                    backgroundColor: "#ffffff",
-                    width: "70%",
-                  }}
-                >
-                  <input
-                    style={{
-                      width: "100%",
-                      outline: "none",
-                      border: "none",
-                      height: "25px",
-                      fontSize: "15px",
-                      fontWeight: "400",
-                    }}
-                    //type="number"
-                    id="inputNumber"
-                    value={inputNumber}
-                    onChange={(e) => setInputNumber(e.target.value)}
-                    placeholder="인증번호를 입력하세요"
-                  />
-                </div>
-                <Button
-                  variant="success"
-                  size="md"
-                  onClick={handleCertificateNumber}
-                >
+            </div>
+            <div className={style['group']}>
+              <input id="pass" type="password" className={style['input']} value={inputNumber}
+                  onChange={(e) => setInputNumber(e.target.value)}
+                  placeholder="인증번호를 입력하세요"></input>
+            </div>
+            <div align="right" className={style['group']}>
+                <Button variant="success" className={style['button2']} onClick={handleCertificateNumber}>
                   인증하기
                 </Button>
-              </div>
-
-              <div
-                className="d-grid gap-2"
-                style={{ marginTop: "300px", marginBottom: "100px" }}
-              >
-                {!isNextBtn ? (
-                  <Button
-                    variant="secondary"
-                    size="lg"
-                    onClick={() => {
-                      alert(`인증번호를 확인해주세요.`);
-                    }}
-                  >
-                    다음
-                  </Button>
-                ) : (
-                  <Button variant="dark" size="lg" onClick={handleToNext}>
-                    다음
-                  </Button>
-                )}
-              </div>
             </div>
-          </div>
-        </>
-      </MobileView>
-    </>
+            <div className={style['group']}>
+              <label className={style['label']}></label>
+              <input type="submit" className={style['button']} value="다음" onClick={handleToNext}></input>
+            </div>
+            <div className={style['hr']}></div>
+            <div className={style['foot-lnk']}>
+              <Link to="/Login">이미 회원이신가요?</Link>
+            </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

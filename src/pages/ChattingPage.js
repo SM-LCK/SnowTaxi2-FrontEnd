@@ -6,7 +6,9 @@ import profile1 from "../assets/profile1.png";
 import axios from "axios";
 
 const ChattingPage = () => {
-  let me = localStorage.getItem("@nickname");
+  var moment = require('moment');
+  let ridingTime = moment().format('yyyy-MM-DD') + " " + localStorage.getItem("@ridingTime") + ':00'
+  let me = localStorage.getItem("@nickname")
   let wWidth = window.innerWidth;
   let wHeight = window.innerHeight;
   let participaitngPotId = localStorage.getItem("@potId");
@@ -100,6 +102,20 @@ const ChattingPage = () => {
     setChat("");
   };
 
+  function isBefore(ridingTime) {
+    console.log(ridingTime)
+    let rt = new Date(ridingTime);
+    let now = Date.now();
+    console.log("타는 시간", rt);
+    console.log("오늘 시간", now)
+
+    if (rt < now) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   const onChangeChat = (e) => {
     setChat(e.target.value);
   };
@@ -157,21 +173,8 @@ const ChattingPage = () => {
         );
       } else {
         return (
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "flex-start",
-              padding: "10px",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "flex-start",
-                width: wWidth / 3,
-                backgroundColor: "red",
-              }}
-            >
+          <div style={{display:"flex", justifyContent:"flex-start", padding:"10px"}}>
+            <div style={{display:"flex", justifyContent:"flex-start", width:wWidth/3}}>
               <ReactRoundedImage
                 image={profile1}
                 roundedColor="#5E5E5E"
@@ -206,6 +209,42 @@ const ChattingPage = () => {
     }
   });
 
+  const finishAxios = async () => {
+    try {
+      axios({
+        method: "get",
+        url: `${process.env.REACT_APP_API_URL}/pot/finish`,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("@token")}`,
+        },
+      })
+      .then((response) => {
+        console.log(response.data.message);
+        localStorage.setItem("@potId", 0);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const outAxios = async () => {
+    axios.delete(`${process.env.REACT_APP_API_URL}/participation`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("@token")}`,
+      }
+    })
+    .then(response => {
+      console.log(response.data);
+      localStorage.setItem("@potId", 0);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  };
+
   return (
     <div style={{ justifyContent: "center", display: "flex" }}>
       <div>
@@ -220,9 +259,16 @@ const ChattingPage = () => {
           >
             ChattingPage
           </div>
-          <div style={{ width: wWidth / 2.5, marginBottom: "100px" }}>
-            {msgBox}
-          </div>
+            { isBefore(ridingTime) ? (
+              <Button variant="secondary" size="md" onClick={outAxios}>
+                팟 나가기
+              </Button>
+            ) : (
+              <Button variant="primary" size="md" onClick={finishAxios}>
+                탑승 완료
+              </Button>
+            )}
+          <div style={{width: wWidth/(2.5), marginBottom:"100px"}}>{msgBox}</div>
           <div style={{}}>
             <input
               style={{ marginBottom: "100px" }}

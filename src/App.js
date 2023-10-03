@@ -14,6 +14,8 @@ import BottomNav from "./components/BottomNav";
 import MyChattingPage from "./pages/MyChattingPage";
 import { useMediaQuery } from "react-responsive";
 import { BrowserView, MobileView } from 'react-device-detect'
+import HistoryPage from "./pages/HistoryPage";
+
 
 function App() {
   // const isPc = useMediaQuery({
@@ -40,6 +42,7 @@ function App() {
         <Route path="Chatting" element={<ChattingPage />} />
         <Route path="TaxiPotList" element={<TaxiPotListPage />} />
         <Route path="MyChatting" element={<MyChattingPage />} />
+        <Route path="History" element={<HistoryPage />} />
       </Route>
 
       <Route path="/RePassword" element={<RePasswordPage />} />

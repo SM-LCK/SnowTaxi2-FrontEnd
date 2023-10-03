@@ -10,34 +10,39 @@ import hyochang from "../assets/map_hyochang.jpeg";
 import seoul from "../assets/map_seoul.jpeg";
 import namyoung from "../assets/map_namyoung.jpeg";
 import axios from "axios";
+import CheckModal from "../components/CheckModal";
 import { BrowserView, MobileView } from "react-device-detect";
 
 const TaxiPotListPage = () => {
   const navigate = useNavigate();
-  const [modalShow, setModalShow] = useState(false);
+  const [makePotModalShow, setMakePotModalShow] = useState(false);
   const [length, setLength] = useState(0);
   const [dataArray, setDataArray] = useState([]);
   const { state } = useLocation();
+  const [loginNeedModalShow, setLoginNeedModalShow] = useState(false);
+
   const id = state.id;
 
   useEffect(() => {
     if (localStorage.getItem("@token") == undefined) {
-      //console.log("nomember", localStorage.getItem("@token"));
       noMemberAxios();
     } else {
-      //console.log("member", localStorage.getItem("@token"));
       memberAxios();
     }
-  }, [modalShow]);
+  }, [makePotModalShow]);
 
-  //생성하기,참여하기 버튼은 로그인됐을때만 가능
+  // 생성하기,참여하기 버튼은 로그인됐을때만 가능
   const handleCreatePot = () => {
     if (localStorage.getItem("@token") == undefined) {
-      alert(`로그인이 필요한 기능입니다!`);
-      navigate("/Login");
+      setLoginNeedModalShow(true);
     } else {
-      setModalShow(true);
+      setMakePotModalShow(true);
     }
+  };
+
+  const toLoginPage = () => {
+    setLoginNeedModalShow(false);
+    navigate("/Login");
   };
 
   const noMemberAxios = async () => {
@@ -48,10 +53,8 @@ const TaxiPotListPage = () => {
         params: { departure: id },
       })
         .then((response) => {
-          //console.log("data: ", response.data.data);
           setDataArray(response.data.data);
           setLength(response.data.data.length);
-          //console.log("length: ", response.data.data.length);
         })
         .catch(function (error) {
           console.log(error);
@@ -72,10 +75,8 @@ const TaxiPotListPage = () => {
         },
       })
         .then((response) => {
-          //console.log("data: ", response.data.data);
           setDataArray(response.data.data);
           setLength(response.data.data.length);
-          //console.log("length: ", response.data.data.length);
         })
         .catch(function (error) {
           console.log(error);
@@ -190,8 +191,8 @@ const TaxiPotListPage = () => {
                 </Button>
 
                 <MakepotModal
-                  show={modalShow}
-                  onHide={() => setModalShow(false)}
+                  show={makePotModalShow}
+                  onHide={() => setMakePotModalShow(false)}
                   id={id}
                 />
               </div>
@@ -220,6 +221,14 @@ const TaxiPotListPage = () => {
               })
             )}
           </div>
+          <CheckModal 
+            show={loginNeedModalShow} 
+            onHide={() => setLoginNeedModalShow(false)} 
+            main="로그인이 필요한 기능입니다."
+            sub="로그인 페이지로 이동하시겠습니까?"
+            check="확인"
+            okAction={toLoginPage}
+          />
         </div>
       </BrowserView>
       <MobileView>
@@ -304,8 +313,8 @@ const TaxiPotListPage = () => {
                   </Button>
 
                   <MakepotModal
-                    show={modalShow}
-                    onHide={() => setModalShow(false)}
+                    show={makePotModalShow}
+                    onHide={() => setMakePotModalShow(false)}
                     id={id}
                   />
                 </div>
@@ -334,6 +343,14 @@ const TaxiPotListPage = () => {
                 })
               )}
             </div>
+            <CheckModal 
+            show={loginNeedModalShow} 
+            onHide={() => setLoginNeedModalShow(false)} 
+            main="로그인이 필요한 기능입니다."
+            sub="로그인 페이지로 이동하시겠습니까?"
+            check="확인"
+            okAction={toLoginPage}
+          />
           </div>
         </>
       </MobileView>

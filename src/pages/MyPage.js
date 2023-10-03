@@ -8,18 +8,31 @@ import profile3 from "../assets/profile3.png";
 import profile4 from "../assets/profile4.png";
 import ReactRoundedImage from "react-rounded-image";
 import { useNavigate } from "react-router-dom";
+import CheckModal from "../components/CheckModal";
 import { BrowserView, MobileView } from "react-device-detect";
 
 const MyPage = () => {
   const navigate = useNavigate();
+  const [windowDimensions, setWindowDimensions] = useState({
+    height: window.innerHeight,
+    width: window.innerWidth,
+  });
+  const [loginNeedModalShow, setLoginNeedModalShow] = useState(false);
+
 
   const [avatar, setAvatar] = useState("");
   const [nickname, setNickname] = useState("");
   const [modalShow, setModalShow] = useState(false);
   const images = [profile1, profile2, profile3, profile4];
 
+  const toLoginPage = () => {
+    setLoginNeedModalShow(false);
+    navigate("/Login");
+  };
+
   useEffect(() => {
     if (localStorage.getItem("@token") == undefined) {
+      setLoginNeedModalShow(true)
       alert(`로그인이 필요한 기능입니다!`);
       navigate("/Login");
     } else {
@@ -31,8 +44,8 @@ const MyPage = () => {
     }
   }, []);
 
-  const gotoChatting = () => {
-    navigate("/Home/MyChatting");
+  const gotoHistory = () => {
+    navigate("/Home/History");
   };
 
   return (
@@ -202,14 +215,15 @@ const MyPage = () => {
                   marginTop: "5px",
                   marginBottom: "5px",
                 }}
-              >
+                onClick={gotoHistory}
+        >
                 <div style={{ fontSize: "20px", fontWeight: "600" }}>
-                  참여내역
+                  참여 내역
                 </div>
                 <FiChevronRight
                   size="25"
                   color="black"
-                  onClick={gotoChatting}
+                 
                 />
               </div>
               <hr height="30px" />
@@ -251,7 +265,15 @@ const MyPage = () => {
                 <FiChevronRight size="25" color="black" />
               </div>
             </div>
-          </div>
+            <CheckModal 
+            show={loginNeedModalShow} 
+            onHide={() => setLoginNeedModalShow(false)} 
+            main="로그인이 필요한 기능입니다."
+            sub="로그인 페이지로 이동하시겠습니까?"
+            check="확인"
+            okAction={toLoginPage}
+          />
+    </div>
         </>
       </MobileView>
     </>

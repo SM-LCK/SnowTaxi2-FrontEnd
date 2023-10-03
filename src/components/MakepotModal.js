@@ -7,14 +7,15 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import axios from "axios";
+import AlertModal from "./AlertModal";
 
 const MakepotModal = (props) => {
   const id = props.id;
   const navigate = useNavigate();
   const [isShow, setIsShow] = useState(props.show);
   const [timeValue, setTimeValue] = useState("");
-  const [potId, setPotId] = useState(0);
   // const [storagePotId, setStoragePotId] = useState(0);
+  const [alreadyModalShow, setAlreadyModalShow] = useState(false);
 
   useEffect(() => {}, [timeValue]);
 
@@ -44,17 +45,13 @@ const MakepotModal = (props) => {
         },
       })
         .then((response) => {
-          console.log(response.data.data); //생성되면 potId, 안되면 0
           if (response.data.data != 0) {
-            console.log("data: ", response.data.data);
-            setPotId(response.data.data);
             localStorage.setItem("@potId", response.data.data);
-            // setStoragePotId(potId);
-            setIsShow(props.onHide);
+            localStorage.setItem("@ridingTime", formattedTime);
             navigate("/Home/Chatting");
           } else {
-            alert(`이미 참여하는 팟이 있습니다!`);
-            setIsShow(props.onHide);
+            {props.onHide()}
+            setAlreadyModalShow(true)
           }
         })
         .catch(function (error) {
@@ -66,7 +63,8 @@ const MakepotModal = (props) => {
   };
 
   return (
-    <Modal
+    <div>
+          <Modal
       {...props}
       size="md"
       aria-labelledby="contained-modal-title-vcenter"
@@ -100,6 +98,8 @@ const MakepotModal = (props) => {
         </Button>
       </Modal.Footer>
     </Modal>
+    <AlertModal show={alreadyModalShow} alertMessage="이미 참여하고 있는 팟이 있습니다." onHide={() => setAlreadyModalShow(false)} />
+    </div>
   );
 };
 

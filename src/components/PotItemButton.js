@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { BsPerson, BsPersonFill } from "react-icons/bs";
 import { Button } from "react-bootstrap";
 import PotModal from "./PotModal";
+import AlertModal from "./AlertModal";
+import CheckModal from "./CheckModal";
 
 const PotItemButton = (data) => {
   const gettedData = data.data;
@@ -15,6 +17,11 @@ const PotItemButton = (data) => {
   const [potId, setPotId] = useState(0);
   const navigate = useNavigate();
   const [modalShow, setModalShow] = useState(false);
+
+  const [participateModalshow, setParticipateModalshow] = useState(false);
+  const [alreadyModalShow, setAlreadyModalShow] = useState(false);
+  const [loginNeedModalShow, setLoginNeedModalShow] = useState(false);
+
 
   const makeTime = (ridingTime) => {
     const timeArr = ridingTime.split(":");
@@ -48,12 +55,15 @@ const PotItemButton = (data) => {
     navigate("/Home/Chatting");
   };
 
+  const toLoginPage = () => {
+    setLoginNeedModalShow(false);
+    navigate("/Login");
+  };
+
   const handleParticipate = async () => {
-    // setStoragePotId(localStorage.getItem("@potId"));
     console.log("storage id: ", localStorage.getItem("@potId"));
     if (localStorage.getItem("@token") == undefined) {
-      alert(`로그인이 필요한 기능입니다!`);
-      navigate("/Login");
+      setLoginNeedModalShow(true);
     } else {
       if (headCount == 4) alert(`이미 모집이 완료된 팟입니다.`);
       else {
@@ -71,9 +81,12 @@ const PotItemButton = (data) => {
               if (response.data.data) {
                 setModalShow(true);
                 localStorage.setItem("@potId", potId);
+                localStorage.setItem("@ridingTime", ridingTime);
                 // setStoragePotId(potId);
               } else {
-                alert(`이미 참여하는 팟이 있습니다.`);
+                setAlreadyModalShow(true)
+                // alert(`이미 참여하는 팟이 있습니다.`);
+                // setAlreadyModalShow(true)
               }
             })
             .catch(function (error) {
@@ -145,6 +158,15 @@ const PotItemButton = (data) => {
             </Button>
           )}
           <PotModal show={modalShow} onHide={() => setModalShow(false)} />
+          <CheckModal 
+            show={loginNeedModalShow} 
+            onHide={() => setLoginNeedModalShow(false)} 
+            main="로그인이 필요한 기능입니다."
+            sub="로그인 페이지로 이동하시겠습니까?"
+            check="확인"
+            okAction={toLoginPage}
+          />
+          <AlertModal show={alreadyModalShow} alertMessage="이미 참여하고 있는 팟이 있습니다." onHide={() => setAlreadyModalShow(false)} />
         </div>
       </div>
     </div>

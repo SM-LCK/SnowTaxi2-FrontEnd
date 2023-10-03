@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import axios from "axios";
 import { BrowserView, MobileView } from "react-device-detect";
+import style from '../modules/login.module.css'
 
 const RePasswordPage = () => {
   const navigate = useNavigate();
@@ -37,124 +38,28 @@ const RePasswordPage = () => {
   };
 
   return (
-    <>
-      <BrowserView>
-        <div className="page" style={{ padding: "0 500px" }}>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <p
-              style={{
-                marginTop: "100px",
-                fontSize: "30px",
-                fontWeight: "700",
-              }}
-            >
-              {" "}
-              비밀번호 재설정
-            </p>
-            <p style={{ marginTop: "10px", fontSize: "18px" }}>
-              비밀번호를 재설정 할 계정의 이메일 주소를 입력해주세요.
-            </p>
-          </div>
-
-          <div className="inputWrap" style={{ marginTop: "30px" }}>
-            <input
-              className="input"
-              type="email"
-              id="email"
-              value={email}
-              onChange={handleEmailChange}
-            />
-            <div style={{ fontSize: "15px" }}>@sookmyung.ac.kr</div>
-          </div>
-
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              marginTop: "50px",
-            }}
-          >
-            <div className="d-grid gap-2" style={{ marginRight: "20px" }}>
-              <Button variant="dark" size="lg" onClick={axiosSendEmail}>
-                이메일 전송
-              </Button>
+    <div className={style['login-wrap']}>
+      <div className={style['login-html']}>
+        <input id="tab-1"type="radio" name="tab" className={style['sign-in']} checked></input><label for="tab-1" className={style['tab']}>비밀번호 재설정</label>
+        <div className={style['login-form']}>
+            <div className={style['group']}>
+              <label for="user" className={style['label']}>비밀번호를 재설정할 계정을 입력하세요.</label>
+              <div className={style['input']}>
+                <input id="user" type="email" className={style['email2']} value={email} onChange={handleEmailChange}></input>
+                <label for="user" className={style['email']}>@sookmyung.ac.kr</label>
+              </div>
             </div>
-
-            <div className="d-grid gap-2" style={{}}>
-              <Button variant="primary" size="lg" onClick={handleToLogin}>
-                로그인 페이지
-              </Button>
+            <div className={style['group']}>
+              <label className={style['label']}></label>
+              <input type="submit" className={style['button']} value="이메일 전송" onClick={axiosSendEmail}></input>
             </div>
-          </div>
+            <div className={style['hr']}></div>
+            <div className={style['foot-lnk']}>
+              <Link to="/Login">로그인 하러 가기</Link>
+            </div>
         </div>
-      </BrowserView>
-      <MobileView>
-        <>
-          <div className="page" style={{ padding: "0 30px" }}>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
-              <p
-                style={{
-                  marginTop: "100px",
-                  fontSize: "30px",
-                  fontWeight: "700",
-                }}
-              >
-                {" "}
-                비밀번호 재설정
-              </p>
-              <p style={{ marginTop: "10px", fontSize: "18px" }}>
-                비밀번호를 재설정 할 계정의 이메일 주소를 입력해주세요.
-              </p>
-            </div>
-
-            <div className="inputWrap" style={{ marginTop: "30px" }}>
-              <input
-                className="input"
-                type="email"
-                id="email"
-                value={email}
-                onChange={handleEmailChange}
-              />
-              <div style={{ fontSize: "15px" }}>@sookmyung.ac.kr</div>
-            </div>
-
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                marginTop: "50px",
-              }}
-            >
-              <div className="d-grid gap-2" style={{ marginRight: "20px" }}>
-                <Button variant="dark" size="lg" onClick={axiosSendEmail}>
-                  이메일 전송
-                </Button>
-              </div>
-
-              <div className="d-grid gap-2" style={{}}>
-                <Button variant="primary" size="lg" onClick={handleToLogin}>
-                  로그인 페이지
-                </Button>
-              </div>
-            </div>
-          </div>
-        </>
-      </MobileView>
-    </>
+      </div>
+    </div>
   );
 };
 

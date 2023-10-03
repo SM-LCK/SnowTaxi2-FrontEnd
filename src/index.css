@@ -101,3 +101,83 @@ code {
 .input::placeholder {
   color: #dadada;
 }
+
+
+
+.inputChat {
+  display: flex;
+  flex-direction: "row";
+  background-color: #DFE8FF;
+  border: none;
+  margin-right: 10px;
+  padding: 10px;
+  border-radius: 12px;
+  font-size: 14px;
+}
+
+.sendBtnn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background-color: #5E79EB;
+  border-radius: 15%;
+  border-width: 3;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bottomChat {
+  position: sticky;
+  bottom: 70px;
+  right: 0px;
+  padding: 12px;
+  cursor: pointer;
+  background-color: white;
+}
+
+.chatTitle {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  background-color: white;
+}
+
+.fixTop {
+  background-color: white;
+  position: sticky;
+  top: -10px;
+  right: 0px;
+
+  border: none;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  padding: 12px;
+  font-weight: bold;
+  box-shadow: 0px 5px 15px rgb(210, 210, 210);
+  cursor: pointer;
+}
+
+.inOutMsg {
+  font-size: 11px;
+  color: #393939;
+  background-color: #e9e9e9;
+  border-radius: 13px;
+  border: none;
+  margin-top: 30px;
+  margin-bottom: 5px;
+  text-align: center;
+  padding: 5px;
+  padding-left: 12px;
+  padding-right: 12px;
+  width: max-content;
+}
+
+.centerNoMsg {
+  display: grid;
+  place-items: center;
+  min-height: 100dvh;
+  font-size: 15px;
+  text-align: center;
+}

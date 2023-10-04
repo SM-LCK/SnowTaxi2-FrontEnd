@@ -5,6 +5,7 @@ import axios from "axios";
 import { BrowserView, MobileView } from "react-device-detect";
 import style from '../modules/login.module.css'
 import AlertModal from "../components/AlertModal";
+import loginLogo from "../assets/LoginLogo.png";
 
 const RePasswordPage = () => {
   const navigate = useNavigate();
@@ -40,10 +41,12 @@ const RePasswordPage = () => {
   return (
     <>
     <div className={style['login-wrap']}>
+    <div style={{width: "100%"}} align="center"><img src={loginLogo} alt="로고" style={{ width: "330px", marginTop: "0px" }}/></div>
       <div className={style['login-html']}>
         <input id="tab-1"type="radio" name="tab" className={style['sign-in']} checked></input><label for="tab-1" className={style['tab']}>비밀번호 재설정</label>
         <div className={style['login-form']}>
             <div className={style['group']}>
+            <label className={style['label']}></label>
               <label for="user" className={style['label']}>비밀번호를 재설정할 계정을 입력하세요.</label>
               <div className={style['input']}>
                 <input id="user" type="email" className={style['email2']} value={email} onChange={handleEmailChange}></input>
@@ -51,6 +54,7 @@ const RePasswordPage = () => {
               </div>
             </div>
             <div className={style['group']}>
+              <label className={style['label']}></label>
               <label className={style['label']}></label>
               <input type="submit" className={style['button']} value="이메일 전송" onClick={axiosSendEmail}></input>
             </div>

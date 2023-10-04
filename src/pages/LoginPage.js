@@ -5,6 +5,7 @@ import axios from "axios";
 import { BrowserView, MobileView } from "react-device-detect";
 import style from "../modules/login.module.css"
 import AlertModal from "../components/AlertModal";
+import loginLogo from "../assets/LoginLogo.png";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -65,11 +66,13 @@ const LoginPage = () => {
   return (
     <>
     <div className={style['login-wrap']}>
+    <div style={{width: "100%"}} align="center"><img src={loginLogo} alt="로고" style={{ width: "330px", marginTop: "0px" }}/></div>
       <div className={style['login-html']}>
         <input id="tab-1"type="radio" name="tab" className={style['sign-in']} checked></input><label for="tab-1" className={style['tab']}>로그인</label>
         <input id="tab-2"type="radio" name="tab" className={style['sign-up']}></input><Link to="/Emailcheck"><label for="tab-1" className={style['tab']}>회원가입</label></Link>
         <div className={style['login-form']}>
             <div className={style['group']}>
+              <label className={style['label']}></label>
               <label for="user" className={style['label']}>숙명 이메일</label>
               <div className={style['input']}>
                 <input id="user" type="email" className={style['email2']} value={email} onChange={handleEmailChange}></input>
@@ -81,6 +84,7 @@ const LoginPage = () => {
               <input id="pass" type="password" className={style['input']} data-type="password" value={password} onChange={handlePasswordChange}></input>
             </div>
             <div className={style['group']}>
+              <label className={style['label']}></label>
               <label className={style['label']}></label>
               <input type="submit" className={style['button']} value="로그인" onClick={axioshandleLogin}></input>
             </div>

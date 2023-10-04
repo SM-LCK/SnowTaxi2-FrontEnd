@@ -5,6 +5,7 @@ import axios from "axios";
 import { BrowserView, MobileView } from "react-device-detect";
 import style from "../modules/login.module.css"
 import AlertModal from "../components/AlertModal";
+import loginLogo from "../assets/LoginLogo.png";
 
 const EmailcheckPage = () => {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ const EmailcheckPage = () => {
   const [isNextBtn, setIsNextBtn] = useState(false);
   const [alreadyModalShow, setAlreadyModalShow] = useState(false);
   const [alert, setAlert] = useState("");
+  const [mailsend, setmailsend] = useState(false);
 
   const handleEmailChange = (e) => {
     const inputEmail = e.target.value;
@@ -26,6 +28,7 @@ const EmailcheckPage = () => {
   };
 
   const axiosCertificateEmail = async () => {
+    setmailsend(true);
     const fullEmail = email + "@sookmyung.ac.kr";
     try {
       axios({
@@ -62,36 +65,51 @@ const EmailcheckPage = () => {
   return (
     <>
     <div className={style['login-wrap']}>
+    <div style={{width: "100%"}} align="center"><img src={loginLogo} alt="로고" style={{ width: "330px", marginTop: "0px" }}/></div>
       <div className={style['login-html']}>
         <input id="tab-1"type="radio" name="tab" className={style['sign-in']}></input><Link to="/Login"><label for="tab-1" className={style['tab']}>로그인</label></Link>
         <input id="tab-2"type="radio" name="tab" className={style['sign-up']} checked></input><label for="tab-1" className={style['tab']}>회원가입</label>
         <div className={style['login-form']}>
             <div className={style['group']}>
-              <label for="user" className={style['label']}>숙명 이메일로 인증하기</label>
+              <label className={style['label']}></label>
+              <label for="user" className={style['label']}>숙명 이메일로 인증</label>
               <div className={style['input']}>
                 <input id="user" type="email" className={style['email2']} value={email} onChange={handleEmailChange}></input>
                 <label for="user" className={style['email']}>@sookmyung.ac.kr</label>
               </div>
+                <div align="right" className={style['button3']}>
+                {!mailsend ? (
+                  <Button className={style['button2']} onClick={axiosCertificateEmail}>
+                  인증번호 발송
+                  </Button>
+                ) : (
+                  <Button className={style['button22']} onClick={axiosCertificateEmail}>
+                  인증번호 재발송
+                  </Button>
+                )}
+                </div>
             </div>
-            <div align="right" className={style['group']}>
-                <Button variant="dark" className={style['button2']} onClick={axiosCertificateEmail}>
-                  보내기
-                </Button>
-            </div>
+            
             <div className={style['group']}>
               <input id="pass" type="password" className={style['input']} value={inputNumber}
                   onChange={(e) => setInputNumber(e.target.value)}
                   placeholder="인증번호를 입력하세요"></input>
-            </div>
-            <div align="right" className={style['group']}>
-                <Button variant="success" className={style['button2']} onClick={handleCertificateNumber}>
-                  인증하기
-                </Button>
+                <div align="right" className={style['button3']}>
+                {!isNextBtn ? (
+                  <Button className={style['button2']} onClick={handleCertificateNumber}>
+                  인증번호 확인
+                  </Button>
+                ) : (
+                  <Button className={style['button22']}>
+                  인증번호 확인
+                  </Button>
+                )}
+                </div>
             </div>
             <div className={style['group']}>
               <label className={style['label']}></label>
               {!isNextBtn ? (
-                <input type="submit" className={style['button']} value="다음" onClick={() => {
+                <input type="submit" className={style['buttongray']} value="다음" onClick={() => {
                   setAlert("인증번호를 확인해주세요.");
                   setAlreadyModalShow(true);
                 }} ></input>

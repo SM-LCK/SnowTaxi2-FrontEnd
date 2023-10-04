@@ -22,6 +22,23 @@ const ChattingPage = () => {
   const [outModalShow, setOutModalShow] = useState(false);
   const [finishModalShow, setFinishModalShow] = useState(false);
   
+  const makeTime = (ridingTime) => {
+    const timeArr = ridingTime.split(":");
+    var ampm = "오전";
+    var hour = timeArr[0];
+    var min = timeArr[1];
+    //console.log(hour, min);
+
+    if (timeArr[0] >= 12) {
+      ampm = "오후";
+      if (timeArr[0] > 12) {
+        hour = timeArr[0] - 12;
+      }
+    }
+    const string = ampm + "   " + hour + ":" + min;
+    //console.log(string);
+    return string;
+  };
 
   useEffect(() => {
     if (localStorage.getItem("@token") == undefined) {
@@ -209,36 +226,41 @@ const ChattingPage = () => {
         okAction={toLoginPage}
       />
     { (participaitngPotId == 0 || participaitngPotId == undefined) ? (
-      <div className="centerNoMsg">
-        <div>
-          <img
-            src={logo}
-            style={{ width: "130px", marginBottom:"30px"}}
-          />
-          <div >
-            참여 중인 택시 팟이 없습니다.
-            <br />
-            팟에 참여해 보세요!
+      <div>
+        <div className="pageChatTitle" style={{height:wHeight*(0.13)}}>
+          <p>채팅 방</p>
+        </div>
+        <div className="centerNoMsg">
+          <div>
+            <img
+              src={logo}
+              style={{ width: "130px", marginBottom:"30px"}}
+            />
+            <div >
+              참여 중인 택시 팟이 없습니다.
+              <br />
+              팟에 참여해 보세요!
+            </div>
+            <div style={{height:70}}></div>
           </div>
-          <div style={{height:70}}></div>
         </div>
       </div>
       ) : (
         <div>
-          <div className="fixTop" style={{}}>
+          <div className="fixTop" style={{height:wHeight * (0.1)}}>
             <div className="chatTitle">  
-              <div></div>      
-              <div>
-                ChattingPage
+              {/* <div></div>       */}
+              <div className="pageTitle">
+                {makeTime(localStorage.getItem("@ridingTime")) + " 🚕 택시 팟"}
               </div>
 
               { isBefore(ridingTime) ? (
                 
-                <Button style={{backgroundColor:"#FF8A48", border:"none", fontSize:"13px"}} size="sm" onClick={() => setOutModalShow(true)}>
+                <Button style={{backgroundColor:"#FF8A48", border:"none", fontSize:"14px"}} size="md" onClick={() => setOutModalShow(true)}>
                   팟 나가기
                 </Button>
               ) : (
-                <Button style={{backgroundColor:"#FF8A48", border:"none", fontSize:"13px"}} size="sm" onClick={finishAxios}>
+                <Button style={{backgroundColor:"#FF8A48", border:"none", fontSize:"14px"}} size="md" onClick={finishAxios}>
                   탑승 완료
                 </Button>
               )}

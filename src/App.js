@@ -44,9 +44,9 @@ function App() {
         <Route path="TaxiPotList" element={<TaxiPotListPage />} />
         <Route path="MyChatting" element={<MyChattingPage />} />
         <Route path="History" element={<HistoryPage />} />
+        <Route path="History/:potId" element={<HistoryChattingPage />} />
       </Route>
 
-      <Route path="/History/:potId" element={<HistoryChattingPage />} />
       <Route path="/RePassword" element={<RePasswordPage />} />
       <Route path="/Emailcheck" element={<EmailcheckPage />} />
       <Route path="/Signup" element={<SignupPage />} />

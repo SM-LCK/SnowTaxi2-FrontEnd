@@ -165,7 +165,7 @@ const PotItemButton = (data) => {
           <CheckModal
             show={modalShow}
             onHide={() => setModalShow(false)}
-            main={ridingTime + "택시 팟에 참여하시겠습니까?"}
+            main={ridingTime + " 택시 팟에 참여하시겠습니까?"}
             sub="탑승 시간 3분 전까지만 팟에서 나갈 수 있습니다."
             check="참여하기"
             okAction={participate}

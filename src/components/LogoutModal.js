@@ -13,10 +13,7 @@ const LogoutModal = (props) => {
         method: "get",
         url: `${process.env.REACT_APP_API_URL}/auth/logout`,
       }).then((response) => {
-        console.log(response.data.data);
-        console.log(response.data.code);
         if (response.data.code == 200) {
-          localStorage.removeItem("@token");
           localStorage.clear();
           navigate("/");
         }

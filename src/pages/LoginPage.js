@@ -42,12 +42,10 @@ const LoginPage = () => {
           setAlreadyModalShow(true);
 
           if (response.data.code == 200) {
-            const accessToken = response.headers.get("Authorization");
-            localStorage.setItem("@token", accessToken);
-            const participatingId = response.data.data.participatingPotId;
-            localStorage.setItem("@potId", participatingId);
-            const userNickname = response.data.data.nickname;
-            localStorage.setItem("@nickname", userNickname);
+            localStorage.setItem("@token", response.headers.get("Authorization"));
+            localStorage.setItem("@potId", response.data.data.potInfo.potId);
+            localStorage.setItem("@ridingTime", response.data.data.potInfo.ridingTime);
+            localStorage.setItem("@nickname", response.data.data.nickname);
             navigate("/");
           }
         })

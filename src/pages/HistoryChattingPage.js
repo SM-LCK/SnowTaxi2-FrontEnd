@@ -1,7 +1,8 @@
 import React, { useState, useEffect, userPa } from "react";
 import axios from "axios";
 import ChattingBubble from "../components/ChattingBubbles";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import {BsChevronLeft} from "react-icons/bs";
 
 const HistoryChattingPage = () => {
 
@@ -9,10 +10,17 @@ const HistoryChattingPage = () => {
   const [pot, setPot] = useState({});
   const [chatList, setChatList] = useState([]); // 채팅 기록
   let wHeight = window.innerHeight;
+  const navigate = useNavigate();
+  
 
   useEffect(() => {
     getChatsAxios();
   }, []);
+
+  const toHistoryPage = () => {
+    navigate("/Home/History");
+  };
+
 
   const getChatsAxios = async () => {
     try {
@@ -25,11 +33,8 @@ const HistoryChattingPage = () => {
         },
       })
         .then((response) => {
-            console.log(response.data)
-            console.log("in")
           setChatList(response.data.data.chats);
           setPot(response.data.data.pot);
-          console.log("innnnnn", pot, chatList);
         })
         .catch(function (error) {
           console.log(error);
@@ -41,15 +46,17 @@ const HistoryChattingPage = () => {
 
   return (
     <div>
-        <div className="fixTop" style={{}}>
-            <div>
-                {pot.ridingDate + "   " + pot.ridingTime}
+        <div className="fixTop" style={{height:wHeight * (0.1)}}>
+            <div className="chatTitle">
+                <BsChevronLeft className="backBtn" onClick={toHistoryPage}/>
+                <div className="chatTitleFont">
+                  {pot.ridingDate} 🚕 {pot.ridingTime}
+                </div>
             </div>
         </div>
 
-        <div style={{paddingTop:wHeight/30, paddingBottom:wHeight/30}}>
-            <ChattingBubble chatList={chatList} />
-        </div>
+        <ChattingBubble chatList={chatList} />
+
     </div>
   );
 };

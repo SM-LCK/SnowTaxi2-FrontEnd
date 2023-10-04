@@ -81,7 +81,7 @@ const ChattingBubble = (props) => {
     });
 
     return (
-        <div style={{width: wWidth, minHeight:wHeight, paddingBottom:"80px", paddingTop:"10px"}}>
+        <div style={{width: wWidth, minHeight:wHeight * 0.9 - 70, paddingBottom:"80px", paddingTop:"10px"}}>
             {msgBox}
         </div>
     );

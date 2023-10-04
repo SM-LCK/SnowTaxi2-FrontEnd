@@ -17,6 +17,7 @@ const PotItemButton = (data) => {
   const [potId, setPotId] = useState(0);
   const navigate = useNavigate();
   const [modalShow, setModalShow] = useState(false);
+  let wWidth = window.innerWidth
 
   const [participateModalshow, setParticipateModalshow] = useState(false);
   const [alreadyModalShow, setAlreadyModalShow] = useState(false);
@@ -105,11 +106,16 @@ const PotItemButton = (data) => {
   return (
     <div
       style={{
-        backgroundColor: "#f7f7f7",
-        borderRadius: "15px",
+        backgroundColor: "#F0F1F3",
+        borderRadius: "13px",
         border: "none",
-        height: "80px",
-        marginBottom: "15px",
+        paddingRight: "2%",
+        paddingLeft: "5%",
+        paddingTop: "3%",
+        paddingBottom: "4%",
+        // height: "80px",
+        marginTop:"12px"
+        // marginBottom: "20px",
       }}
     >
       <div
@@ -117,39 +123,28 @@ const PotItemButton = (data) => {
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-between",
-          // alignItems: "center",
         }}
       >
         <div
           style={{
             display: "flex",
             flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            marginTop: "13px",
-            marginLeft: "20px",
-            // marginTop: "15px",
-            // marginBottom: "15px",
+            justifyContent: "flex-start",
           }}
         >
-          <div style={{ fontSize: "18px", fontWeight: "600" }}>
+          <div style={{ fontSize: "18px", fontWeight: "bold", marginInlineStart:"3px" }}>
             {ridingTime}
           </div>
-          <div style={{}}>
-            {Array(headCount).fill(<BsPersonFill size="20" color="black" />)}
-            {Array(4 - headCount).fill(<BsPerson size="20" color="black" />)}
+
+          <div style={{marginTop:"7px"}}>
+            {Array(headCount).fill(<BsPersonFill style={{marginRight:"2px"}} size="20" color="black" />)}
+            {Array(4 - headCount).fill(<BsPersonFill style={{marginRight:"2px"}} size="20" color="#D7D7D7" />)}
           </div>
+
         </div>
-        <div
-          style={{
-            marginRight: "20px",
-            marginTop: "23px",
-            // marginTop: "15px",
-            // marginBottom: "15px",
-          }}
-        >
+        <div className="centerC">
           {participating ? (
-            <Button variant="secondary" size="sm" onClick={handleParticipating}>
+            <Button style={{ backgroundColor: "#AEB2B7", borderColor: "#AEB2B7" }} size="sm" onClick={handleParticipating}>
               참여중
             </Button>
           ) : (
@@ -164,11 +159,7 @@ const PotItemButton = (data) => {
           <CheckModal
             show={modalShow}
             onHide={() => setModalShow(false)}
-<<<<<<< HEAD
             main={ridingTime + " 택시 팟에 참여하시겠습니까?"}
-=======
-            main={ridingTime + "의 팟에 참여하시겠습니까?"}
->>>>>>> 45e6676a1038b85d75ca149657e16eacada11504
             sub="탑승 시간 3분 전까지만 팟에서 나갈 수 있습니다."
             check="참여하기"
             okAction={participate}

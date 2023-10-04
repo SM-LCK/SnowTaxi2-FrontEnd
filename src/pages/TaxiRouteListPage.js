@@ -124,16 +124,6 @@ const TaxiRouteListPage = () => {
                 src={HomeLogo}
                 style={{ width: "155px", marginTop: wHeight / 10 }}
               />
-              {/* <div
-          style={{
-            display: "flex",
-            marginTop: "40px",
-            fontSize: "20px",
-            fontWeight: "700",
-          }}
-        >
-          출발지
-        </div> */}
               <div
                 style={{
                   display: "flex",

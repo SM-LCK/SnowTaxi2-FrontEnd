@@ -17,7 +17,7 @@ const HistoryItem = (data) => {
         <p>{gettedData.ridingTime}</p>
       </div>
       <div className="historyHead">
-        {Array(gettedData.headCount).fill(<BsPersonFill size="24" color="black" />)}
+        {Array(gettedData.headCount).fill(<BsPersonFill style={{marginRight:"2px"}} size="21" color="black" />)}
       </div>
     </div>
   );

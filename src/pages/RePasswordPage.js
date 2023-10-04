@@ -12,6 +12,7 @@ const RePasswordPage = () => {
   const [email, setEmail] = useState("");
   const [alreadyModalShow, setAlreadyModalShow] = useState(false);
   const [alert, setAlert] = useState("");
+  let wHeight = window.innerHeight
 
   const handleEmailChange = (e) => {
     const inputEmail = e.target.value;
@@ -41,7 +42,7 @@ const RePasswordPage = () => {
   return (
     <>
     <div className={style['login-wrap']}>
-    <div style={{width: "100%"}} align="center"><img src={loginLogo} alt="로고" className={style['img']}/></div>
+    <div style={{width: "100%", marginBottom:wHeight/20, marginTop:wHeight/20}} align="center"><img src={loginLogo} alt="로고" className={style['img']}/></div>
       <div className={style['login-html']}>
         <input id="tab-1"type="radio" name="tab" className={style['sign-in']} checked></input><label for="tab-1" className={style['tab']}>비밀번호 재설정</label>
         <div className={style['login-form']}>
@@ -60,7 +61,7 @@ const RePasswordPage = () => {
             </div>
             <div className={style['hr']}></div>
             <div className={style['foot-lnk']}>
-              <Link to="/Login">로그인 하러 가기</Link>
+            <Link to="/Login" style={{color:"#4274FF", fontSize:"15px"}}>로그인 하러 가기</Link>
             </div>
         </div>
       </div>

@@ -66,14 +66,12 @@ const HistoryPage = () => {
               </div>
             </div>
             ) : (
-            <div>
-              <div className="minTxt">클릭하시면 이전 채팅 내역을 확인하실 수 있습니다.</div>
-              <>
-                  {historyList.map((data) => {
+              <div>
+                <div className="minTxt">클릭하시면 이전 채팅 내역을 확인하실 수 있습니다.</div>
+                { historyList.map((data) => {
                   return <HistoryItem data={data} />;
-                  })}
-              </>
-            </div>
+                })}
+              </div>
             )}
         </div>
       </div>

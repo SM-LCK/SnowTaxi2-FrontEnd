@@ -13,6 +13,12 @@
     min-height:670px;
     position:relative;
   }
+
+  .img{
+    width: 360px;
+    margin-top: 10px;
+  }
+
   .login-html .sign-in-htm,
   .login-html .sign-up-htm{
     top:0;
@@ -41,7 +47,7 @@
     text-transform:uppercase;
   }
   .login-html .tab{
-    font-size:25px;
+    font-size:20px;
     font-weight: 700;
     margin-right:15px;
     padding-bottom:5px;

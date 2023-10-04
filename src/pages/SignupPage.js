@@ -6,6 +6,7 @@ import profile1 from "../assets/profile1.png";
 import profile2 from "../assets/profile2.png";
 import profile3 from "../assets/profile3.png";
 import profile4 from "../assets/profile4.png";
+import loginLogo from "../assets/LoginLogo.png";
 import ReactRoundedImage from "react-rounded-image";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
@@ -105,6 +106,7 @@ const SignupPage = () => {
 
   return (
     <div className={style['login-wrap']}>
+      <div style={{width: "100%"}} align="center"><img src={loginLogo} alt="로고" className={style['img']}/></div>
       <div className={style['login-html']}>
         <input id="tab-1"type="radio" name="tab" className={style['sign-in']}></input><Link to="/Login"><label for="tab-1" className={style['tab']}>로그인</label></Link>
         <input id="tab-2"type="radio" name="tab" className={style['sign-up']} checked></input><label for="tab-1" className={style['tab']}>회원가입</label>
@@ -112,10 +114,10 @@ const SignupPage = () => {
           <div style={{display: "flex", justifyContent: "center", marginTop: "20px"}}>
             <ReactRoundedImage
               image={avatar}
-              roundedColor="#2196F3"
+              roundedColor="#4274FF"
               imageWidth="120"
               imageHeight="120"
-              roundedSize="3"
+              roundedSize="5"
               borderRadius="100"
             />
           </div>
@@ -126,12 +128,19 @@ const SignupPage = () => {
               {isNicknameCheck && (
                 <label align="right" for="pass" className={style['label']}>사용가능한 닉네임입니다.</label>
               )}
-            </div>
-            <div align="right" className={style['group']}>
-                <Button variant="dark" className={style['button2']} onClick={handleNicknameCheck}>
+              <div align="right" className={style['button3']}>
+                {!isNicknameCheck ? (
+                  <Button className={style['button2']} onClick={handleNicknameCheck}>
                   중복 체크
-                </Button>
+                  </Button>
+                ) : (
+                  <Button className={style['button22']} onClick={handleNicknameCheck}>
+                  중복 체크
+                  </Button>
+                )}
             </div>
+            </div>
+            
             <div className={style['group']}>
               <label for="pass" className={style['label']}>비밀번호</label>
               <input id="pass" type="password" className={style['input']} data-type="password" value={password}
@@ -152,7 +161,11 @@ const SignupPage = () => {
             
             <div className={style['group']}>
               <label className={style['label']}></label>
-              <input type="submit" className={style['button']} value="회원가입" onClick={axioshandleSignup}></input>
+              {(isNicknameCheck && isPasswordValid && isPasswordMatch && password)? (
+                <input type="submit" className={style['button']} value="회원가입" onClick={axioshandleSignup}></input>
+              ) : (
+                <input type="submit" className={style['buttongray']} value="회원가입"></input>
+              )}
             </div>
             <div className={style['hr']}></div>
             <div className={style['foot-lnk']}>

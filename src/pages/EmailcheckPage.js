@@ -16,6 +16,7 @@ const EmailcheckPage = () => {
   const [alreadyModalShow, setAlreadyModalShow] = useState(false);
   const [alert, setAlert] = useState("");
   const [mailsend, setmailsend] = useState(false);
+  let wHeight = window.innerHeight
 
   const handleEmailChange = (e) => {
     const inputEmail = e.target.value;
@@ -65,7 +66,7 @@ const EmailcheckPage = () => {
   return (
     <>
     <div className={style['login-wrap']}>
-    <div style={{width: "100%"}} align="center"><img src={loginLogo} alt="로고" className={style['img']}/></div>
+    <div style={{width: "100%", marginBottom:wHeight/20, marginTop:wHeight/20}} align="center"><img src={loginLogo} alt="로고" className={style['img']}/></div>
       <div className={style['login-html']}>
         <input id="tab-1"type="radio" name="tab" className={style['sign-in']}></input><Link to="/Login"><label for="tab-1" className={style['tab']}>로그인</label></Link>
         <input id="tab-2"type="radio" name="tab" className={style['sign-up']} checked></input><label for="tab-1" className={style['tab']}>회원가입</label>
@@ -77,7 +78,7 @@ const EmailcheckPage = () => {
                 <input id="user" type="email" className={style['email2']} value={email} onChange={handleEmailChange}></input>
                 <label for="user" className={style['email']}>@sookmyung.ac.kr</label>
               </div>
-                <div align="right" className={style['button3']}>
+                <div align="right" className={style['button3']} style={{marginTop:"5px"}}>
                 {!mailsend ? (
                   <Button className={style['button2']} onClick={axiosCertificateEmail}>
                   인증번호 발송
@@ -94,7 +95,7 @@ const EmailcheckPage = () => {
               <input id="pass" type="password" className={style['input']} value={inputNumber}
                   onChange={(e) => setInputNumber(e.target.value)}
                   placeholder="인증번호를 입력하세요"></input>
-                <div align="right" className={style['button3']}>
+                <div align="right" className={style['button3']} style={{marginTop:"5px"}}>
                 {!isNextBtn ? (
                   <Button className={style['button2']} onClick={handleCertificateNumber}>
                   인증번호 확인
@@ -119,7 +120,7 @@ const EmailcheckPage = () => {
             </div>
             <div className={style['hr']}></div>
             <div className={style['foot-lnk']}>
-              <Link to="/Login">이미 회원이신가요?</Link>
+            <Link to="/Login" style={{color:"#4274FF", fontSize:"15px"}}>이미 회원이신가요?</Link>
             </div>
         </div>
       </div>

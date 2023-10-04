@@ -201,9 +201,8 @@ code {
 
 .pageTitle {
   display: flex;
-  font-size: 20px;
+  font-size: 19px;
   font-weight: bold;
-  /* background-color: red; */
   flex-direction: row;
 }
 
@@ -220,11 +219,11 @@ code {
 .historyItemBack {
   background-color: #F0F1F3;
   border-radius: 13px;
-  margin: 10px;
-  padding-left: 6%;
-  padding-right: 6%;
-  padding-top: 4%;
-  padding-bottom: 4%;
+  margin: 12px;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 3%;
+  padding-bottom: 3%;
 }
 
 .historyDate {
@@ -239,10 +238,28 @@ code {
   justify-content: flex-end;
 }
 
+.centerR {
+  display: flex;
+  justify-content: center;
+}
+
 .minTxt {
   font-size: 14px;
   color: #777777;
   display: flex;
   justify-content: center;
   margin-bottom: 8%;
+}
+
+.minTxt2 {
+  font-size: 13px;
+  color: #525252;
+}
+
+.blueUnderLine {
+  font-size: 22px;
+  font-weight: bold;
+  text-decoration: underline;
+  text-decoration-color: #80A1FF;
+  text-decoration-thickness: 5px;
 }

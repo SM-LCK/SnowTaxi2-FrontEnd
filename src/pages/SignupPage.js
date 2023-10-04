@@ -28,6 +28,7 @@ const SignupPage = () => {
   const images = [profile1, profile2, profile3, profile4];
   const [alreadyModalShow, setAlreadyModalShow] = useState(false);
   const [alert, setAlert] = useState("");
+  let wHeight = window.innerHeight
 
   useEffect(() => {
     const randomIndex = Math.floor(Math.random() * images.length);
@@ -106,7 +107,7 @@ const SignupPage = () => {
 
   return (
     <div className={style['login-wrap']}>
-      <div style={{width: "100%"}} align="center"><img src={loginLogo} alt="로고" className={style['img']}/></div>
+      <div style={{width: "100%", marginBottom:wHeight/20, marginTop:wHeight/20}} align="center"><img src={loginLogo} alt="로고" className={style['img']}/></div>
       <div className={style['login-html']}>
         <input id="tab-1"type="radio" name="tab" className={style['sign-in']}></input><Link to="/Login"><label for="tab-1" className={style['tab']}>로그인</label></Link>
         <input id="tab-2"type="radio" name="tab" className={style['sign-up']} checked></input><label for="tab-1" className={style['tab']}>회원가입</label>
@@ -169,7 +170,7 @@ const SignupPage = () => {
             </div>
             <div className={style['hr']}></div>
             <div className={style['foot-lnk']}>
-              <Link to="/Login">이미 회원이신가요?</Link>
+              <Link to="/Login" style={{color:"#4274FF", fontSize:"15px"}}>이미 회원이신가요?</Link>
             </div>
         </div>
       </div>

@@ -7,21 +7,24 @@ import { BsSend } from "react-icons/bs";
 import ChattingBubble from "../components/ChattingBubbles";
 import CheckModal from "../components/CheckModal";
 import { useNavigate } from "react-router-dom";
-import logo from "../assets/logo.png"
+import logo from "../assets/logo.png";
 import AlertModal from "../components/AlertModal";
 
 const ChattingPage = () => {
   const navigate = useNavigate();
-  var moment = require('moment');
-  let ridingTime = moment().format('yyyy-MM-DD') + " " + localStorage.getItem("@ridingTime") + ':00'
-  let me = localStorage.getItem("@nickname")
+  var moment = require("moment");
+  let ridingTime =
+    moment().format("yyyy-MM-DD") +
+    " " +
+    localStorage.getItem("@ridingTime") +
+    ":00";
+  let me = localStorage.getItem("@nickname");
   let wWidth = window.innerWidth;
   let wHeight = window.innerHeight;
   let participaitngPotId = localStorage.getItem("@potId");
   const [loginNeedModalShow, setLoginNeedModalShow] = useState(false);
   const [outModalShow, setOutModalShow] = useState(false);
   const [finishModalShow, setFinishModalShow] = useState(false);
-  
 
   useEffect(() => {
     if (localStorage.getItem("@token") == undefined) {
@@ -43,7 +46,7 @@ const ChattingPage = () => {
   const toHome = () => {
     setLoginNeedModalShow(false);
     navigate("/");
-  }
+  };
 
   let [client, changeClient] = useState(null);
   const [chat, setChat] = useState(""); // 입력된 chat을 받을 변수
@@ -127,11 +130,11 @@ const ChattingPage = () => {
   };
 
   function isBefore(ridingTime) {
-    console.log(ridingTime)
+    console.log(ridingTime);
     let rt = new Date(ridingTime);
     let now = Date.now();
     console.log("타는 시간", rt);
-    console.log("오늘 시간", now)
+    console.log("오늘 시간", now);
 
     if (rt < now) {
       return false;
@@ -154,49 +157,54 @@ const ChattingPage = () => {
           Authorization: `Bearer ${localStorage.getItem("@token")}`,
         },
       })
-      .then((response) => {
-        console.log(response.data.message);
-        localStorage.setItem("@potId", 0);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+        .then((response) => {
+          console.log(response.data.message);
+          localStorage.setItem("@potId", 0);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     } catch (error) {
       console.log(error);
     }
   };
 
   const outAxios = async () => {
-    axios.delete(`${process.env.REACT_APP_API_URL}/participation`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("@token")}`,
-      }
-    })
-    .then(response => {
-      console.log(response.data);
-      localStorage.setItem("@potId", 0);
-      setOutModalShow(false)
-    })
-    .catch(error => {
-      console.log(error);
-    });
+    axios
+      .delete(`${process.env.REACT_APP_API_URL}/participation`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("@token")}`,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        localStorage.setItem("@potId", 0);
+        setOutModalShow(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
-  const outHandle = () => {
-
-  };
+  const outHandle = () => {};
 
   return (
     <div>
       <AlertModal
         show={finishModalShow}
-        alertMessage={"[" + localStorage.getItem("@ridingTime") + "]  택시 팟 탑승을 완료했습니다!"}
+        alertMessage={
+          "[" +
+          localStorage.getItem("@ridingTime") +
+          "]  택시 팟 탑승을 완료했습니다!"
+        }
         onHide={() => setFinishModalShow(false)}
       />
       <CheckModal
         show={outModalShow}
         onHide={() => setOutModalShow(false)}
-        main={"정말  [" + localStorage.getItem("@ridingTime") + "]  팟을 나가시겠습니까?"}
+        main={
+          "[" + localStorage.getItem("@ridingTime") + "]  팟을 나가시겠습니까?"
+        }
         check="나가기"
         okAction={outAxios}
       />
@@ -208,50 +216,63 @@ const ChattingPage = () => {
         check="확인"
         okAction={toLoginPage}
       />
-    { (participaitngPotId == 0 || participaitngPotId == undefined) ? (
-      <div className="centerNoMsg">
-        <div>
-          <img
-            src={logo}
-            style={{ width: "130px", marginBottom:"30px"}}
-          />
-          <div >
-            참여 중인 택시 팟이 없습니다.
-            <br />
-            팟에 참여해 보세요!
+      {participaitngPotId == 0 || participaitngPotId == undefined ? (
+        <div className="centerNoMsg">
+          <div>
+            <img src={logo} style={{ width: "130px", marginBottom: "30px" }} />
+            <div>
+              참여 중인 택시 팟이 없습니다.
+              <br />
+              팟에 참여해 보세요!
+            </div>
+            <div style={{ height: 70 }}></div>
           </div>
-          <div style={{height:70}}></div>
         </div>
-      </div>
       ) : (
         <div>
           <div className="fixTop" style={{}}>
-            <div className="chatTitle">  
-              <div></div>      
-              <div>
-                ChattingPage
-              </div>
+            <div className="chatTitle">
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <div style={{ fontSize: "20px", fontWeight: "700" }}>
+                  Snow Chat
+                </div>
 
-              { isBefore(ridingTime) ? (
-                
-                <Button style={{backgroundColor:"#FF8A48", border:"none", fontSize:"13px"}} size="sm" onClick={() => setOutModalShow(true)}>
-                  팟 나가기
-                </Button>
-              ) : (
-                <Button style={{backgroundColor:"#FF8A48", border:"none", fontSize:"13px"}} size="sm" onClick={finishAxios}>
-                  탑승 완료
-                </Button>
-              )}
+                {isBefore(ridingTime) ? (
+                  <Button
+                    style={{
+                      backgroundColor: "#FF8A48",
+                      border: "none",
+                      fontSize: "13px",
+                    }}
+                    size="sm"
+                    onClick={() => setOutModalShow(true)}
+                  >
+                    팟 나가기
+                  </Button>
+                ) : (
+                  <Button
+                    style={{
+                      backgroundColor: "#FF8A48",
+                      border: "none",
+                      fontSize: "13px",
+                    }}
+                    size="sm"
+                    onClick={finishAxios}
+                  >
+                    탑승 완료
+                  </Button>
+                )}
+              </div>
             </div>
           </div>
 
           <ChattingBubble chatList={chatList} />
 
           <div className="bottomChat">
-            <div style={{display:"flex", flexDirection:"row"}}>
+            <div style={{ display: "flex", flexDirection: "row" }}>
               <input
                 className="inputChat"
-                style={{width: wWidth - 70}}
+                style={{ width: wWidth - 70 }}
                 type="text"
                 value={chat}
                 placeholder="채팅을 입력해주세요"
@@ -261,12 +282,10 @@ const ChattingPage = () => {
               <div className="sendBtnn" onClick={sendChat}>
                 <BsSend size="20" />
               </div>
-
             </div>
           </div>
         </div>
-      )
-    }
+      )}
     </div>
   );
 };

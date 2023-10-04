@@ -61,7 +61,7 @@ const PotItemButton = (data) => {
 
   const participate = async () => {
     try {
-      setModalShow(false)
+      setModalShow(false);
       axios({
         method: "post",
         url: `${process.env.REACT_APP_API_URL}/participation`,
@@ -94,8 +94,7 @@ const PotItemButton = (data) => {
     } else {
       if (headCount == 4) {
         alert(`이미 모집이 완료된 팟입니다.`);
-      }
-      else if (localStorage.getItem("@potId") != 0) {
+      } else if (localStorage.getItem("@potId") != 0) {
         setAlreadyModalShow(true);
       } else {
         setModalShow(true);
@@ -165,7 +164,7 @@ const PotItemButton = (data) => {
           <CheckModal
             show={modalShow}
             onHide={() => setModalShow(false)}
-            main={ridingTime + "택시 팟에 참여하시겠습니까?"}
+            main={ridingTime + "의 팟에 참여하시겠습니까?"}
             sub="탑승 시간 3분 전까지만 팟에서 나갈 수 있습니다."
             check="참여하기"
             okAction={participate}

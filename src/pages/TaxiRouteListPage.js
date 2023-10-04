@@ -122,7 +122,7 @@ const TaxiRouteListPage = () => {
             >
               <img
                 src={HomeLogo}
-                style={{ width: "155px", marginTop: wHeight/8 }}
+                style={{ width: "155px", marginTop: wHeight / 10 }}
               />
               {/* <div
           style={{
@@ -139,22 +139,22 @@ const TaxiRouteListPage = () => {
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  marginTop: wHeight/25,
+                  marginTop: wHeight / 25,
                   justifyContent: "center",
                 }}
               >
                 <div
                   style={{
-                    fontSize: wHeight/47,
+                    fontSize: wHeight / 47,
                     fontWeight: "700",
                     textDecoration: "underline",
                     textDecorationColor: "#9EB9FF",
-                    textDecorationThickness: wHeight/190,
+                    textDecorationThickness: wHeight / 190,
                   }}
                 >
                   출발지를 선택해주세요.
                 </div>
-                <div style={{ fontSize: wHeight/60, marginTop: "4px" }}>
+                <div style={{ fontSize: wHeight / 60, marginTop: "4px" }}>
                   도착지는 숙명여대 후문입니다.
                 </div>
               </div>
@@ -170,7 +170,7 @@ const TaxiRouteListPage = () => {
                 alignContent: "center",
               }}
             >
-              <div style={{ marginTop: wHeight/13, }}>
+              <div style={{ marginTop: wHeight / 13 }}>
                 <img
                   src={sookmyung}
                   alt="숙명"

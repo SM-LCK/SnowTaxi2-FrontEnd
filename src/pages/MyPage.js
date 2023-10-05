@@ -24,6 +24,11 @@ const MyPage = () => {
     navigate("/Login");
   };
 
+  const toHome = () => {
+    setLoginNeedModalShow(false);
+    navigate("/");
+  }
+
   useEffect(() => {
     if (localStorage.getItem("@token") == undefined) {
       setLoginNeedModalShow(true);
@@ -257,7 +262,7 @@ const MyPage = () => {
       </MobileView>
       <CheckModal
         show={loginNeedModalShow}
-        onHide={() => setLoginNeedModalShow(false)}
+        onHide={toHome}
         main="로그인이 필요한 기능입니다."
         sub="로그인 페이지로 이동하시겠습니까?"
         check="확인"

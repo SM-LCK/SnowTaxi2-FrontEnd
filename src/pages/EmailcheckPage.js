@@ -52,7 +52,7 @@ const EmailcheckPage = () => {
   };
 
   const handleCertificateNumber = () => {
-    if (certificateNumber == inputNumber) {
+    if (inputNumber && (certificateNumber == inputNumber)) {
       setIsNextBtn(true);
       setAlert("인증 성공");
       setAlreadyModalShow(true);
@@ -66,7 +66,7 @@ const EmailcheckPage = () => {
   return (
     <>
     <div className={style['login-wrap']}>
-    <div style={{width: "100%", marginBottom:wHeight/20, marginTop:wHeight/20}} align="center"><img src={loginLogo} alt="로고" className={style['img']}/></div>
+    <Link to="/"><div style={{width: "100%", marginBottom:wHeight/20, marginTop:wHeight/20}} align="center"><img src={loginLogo} alt="로고" className={style['img']}/></div></Link>
       <div className={style['login-html']}>
         <input id="tab-1"type="radio" name="tab" className={style['sign-in']}></input><Link to="/Login"><label for="tab-1" className={style['tab']}>로그인</label></Link>
         <input id="tab-2"type="radio" name="tab" className={style['sign-up']} checked></input><label for="tab-1" className={style['tab']}>회원가입</label>

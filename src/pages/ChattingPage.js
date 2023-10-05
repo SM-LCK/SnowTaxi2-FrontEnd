@@ -13,7 +13,7 @@ import AlertModal from "../components/AlertModal";
 const ChattingPage = () => {
   const navigate = useNavigate();
   var moment = require('moment');
-  let ridingTime = moment().format('yyyy-MM-DD') + " " + localStorage.getItem("@ridingTime") + ':00'
+  let now = moment().format('yyyy-MM-DD') + " ";
   let me = localStorage.getItem("@nickname")
   let wWidth = window.innerWidth;
   let wHeight = window.innerHeight;
@@ -21,22 +21,24 @@ const ChattingPage = () => {
   const [loginNeedModalShow, setLoginNeedModalShow] = useState(false);
   const [outModalShow, setOutModalShow] = useState(false);
   const [finishModalShow, setFinishModalShow] = useState(false);
-  
-  const makeTime = (ridingTime) => {
-    const timeArr = ridingTime.split(":");
-    var ampm = "오전";
-    var hour = timeArr[0];
-    var min = timeArr[1];
-    //console.log(hour, min);
+  const [ridingTime, setRidingTime] = useState("");
 
-    if (timeArr[0] >= 12) {
-      ampm = "오후";
-      if (timeArr[0] > 12) {
-        hour = timeArr[0] - 12;
-      }
+
+  const makeTime = (ridingTime) => {
+    var time2 = ridingTime
+    for (var i = 1; i < 10; i++) {
+      time2 = time2.replace(" ", "")
     }
-    const string = ampm + "   " + hour + ":" + min;
-    //console.log(string);
+    let time = time2.substr(0, 2);
+    var hour = time2.substr(2, 2);
+    if (time == '오전' || time == 'AM') {
+      if (hour == '12') {
+        hour = '00'
+      }
+    } else {
+      hour = (parseInt(hour) + 12).toString();
+    }
+    const string = hour + time2.substr(4, 3)
     return string;
   };
 
@@ -143,14 +145,19 @@ const ChattingPage = () => {
     setChat("");
   };
 
-  function isBefore(ridingTime) {
-    console.log(ridingTime)
-    let rt = new Date(ridingTime);
-    let now = Date.now();
-    console.log("타는 시간", rt);
-    console.log("오늘 시간", now)
+  function isBefore() {
+    console.log(now)
+    console.log(localStorage.getItem("@ridingTime"))
+    let str = now + makeTime(localStorage.getItem("@ridingTime")) + ":00";
+    console.log("이게 택시 타는 시간임")
+    console.log(str)
 
-    if (rt < now) {
+    let rt = new Date(str);
+    let nows = Date.now();
+    console.log("타는 시간", rt);
+    console.log("오늘 시간", nows)
+
+    if (rt < nows) {
       return false;
     } else {
       return true;
@@ -251,7 +258,7 @@ const ChattingPage = () => {
             <div className="chatTitle">  
               {/* <div></div>       */}
               <div className="pageTitle">
-                {makeTime(localStorage.getItem("@ridingTime")) + " 🚕 택시 팟"}
+                {localStorage.getItem("@ridingTime") + " 🚕 택시 팟"}
               </div>
 
               { isBefore(ridingTime) ? (

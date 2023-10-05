@@ -23,30 +23,12 @@ const PotItemButton = (data) => {
   const [alreadyModalShow, setAlreadyModalShow] = useState(false);
   const [loginNeedModalShow, setLoginNeedModalShow] = useState(false);
 
-  const makeTime = (ridingTime) => {
-    const timeArr = ridingTime.split(":");
-    var ampm = "오전";
-    var hour = timeArr[0];
-    var min = timeArr[1];
-    //console.log(hour, min);
-
-    if (timeArr[0] >= 12) {
-      ampm = "오후";
-      if (timeArr[0] > 12) {
-        hour = timeArr[0] - 12;
-      }
-    }
-    const string = ampm + "   " + hour + ":" + min;
-    //console.log(string);
-    return string;
-  };
-
   useEffect(() => {
     // if (localStorage.getItem("@potId") != undefined) {
     //   setStoragePotId(localStorage.getItem("@potId"));
     // }
     setPotId(gettedData.id);
-    setRidingTime(makeTime(gettedData.ridingTime));
+    setRidingTime(gettedData.ridingTime);
     setHeadCount(gettedData.headCount);
     setParticipating(gettedData.participating);
   }, []);

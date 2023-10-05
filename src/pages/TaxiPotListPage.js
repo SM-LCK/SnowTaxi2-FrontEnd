@@ -133,7 +133,7 @@ const TaxiPotListPage = () => {
 
   return (
     <>
-      {/* <BrowserView>
+      <BrowserView>
         <div
           className="page"
           style={{ padding: "0 400px", paddingBottom: "200px" }}
@@ -248,7 +248,7 @@ const TaxiPotListPage = () => {
             )}
           </div>
         </div>
-      </BrowserView> */}
+      </BrowserView>
         <MobileView>
             <div>
                 <div className="centerC" style={{height:wHeight*(0.09)}}>

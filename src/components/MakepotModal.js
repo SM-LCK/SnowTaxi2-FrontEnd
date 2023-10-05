@@ -23,6 +23,24 @@ const MakepotModal = (props) => {
     setTimeValue(newTimeValue);
   };
 
+  const makeTime = (ridingTime) => {
+    const timeArr = ridingTime.split(":");
+    var ampm = "오전";
+    var hour = timeArr[0];
+    var min = timeArr[1];
+    //console.log(hour, min);
+
+    if (timeArr[0] >= 12) {
+      ampm = "오후";
+      if (timeArr[0] > 12) {
+        hour = timeArr[0] - 12;
+      }
+    }
+    const string = ampm + "   " + hour + ":" + min;
+    //console.log(string);
+    return string;
+  };
+
   const handleParticipating = async () => {
     try {
       const time = timeValue.$d; // 데이터에서 시간 정보를 가져옵니다
@@ -47,7 +65,7 @@ const MakepotModal = (props) => {
         .then((response) => {
           if (response.data.data != 0) {
             localStorage.setItem("@potId", response.data.data);
-            localStorage.setItem("@ridingTime", formattedTime);
+            localStorage.setItem("@ridingTime", makeTime(formattedTime));
             navigate("/Home/Chatting");
           } else {
             {

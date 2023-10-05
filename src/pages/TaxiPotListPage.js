@@ -27,8 +27,9 @@ const TaxiPotListPage = () => {
   const id = state.id;
 
   const toHomePage = () => {
+    setLoginNeedModalShow(false);
     navigate("/");
-  };
+  }
 
   useEffect(() => {
     if (localStorage.getItem("@token") == undefined) {
@@ -345,7 +346,7 @@ const TaxiPotListPage = () => {
         </MobileView>
         <CheckModal
             show={loginNeedModalShow}
-            onHide={() => setLoginNeedModalShow(false)}
+            onHide={toHomePage}
             main="로그인이 필요한 기능입니다."
             sub="로그인 페이지로 이동하시겠습니까?"
             check="확인"

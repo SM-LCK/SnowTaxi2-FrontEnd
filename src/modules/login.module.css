@@ -118,6 +118,7 @@
   .login-form .group .input,
   .login-form .group .button{
     border:none;
+    margin-top: 4px;
     padding:15px 20px;
     border-radius:20px;
     outline: none;
@@ -130,7 +131,7 @@
   .login-form .group .label{
     color: #000000;
     font-size:13px;
-    padding: 0px 5px;
+    padding: 4px 5px;
     height: 23px;
   }
   .login-form .group .button{

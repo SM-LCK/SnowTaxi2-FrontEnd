@@ -107,7 +107,7 @@ const SignupPage = () => {
 
   return (
     <div className={style['login-wrap']}>
-      <div style={{width: "100%", marginBottom:wHeight/20, marginTop:wHeight/20}} align="center"><img src={loginLogo} alt="로고" className={style['img']}/></div>
+      <Link to="/"><div style={{width: "100%", marginBottom:wHeight/20, marginTop:wHeight/20}} align="center"><img src={loginLogo} alt="로고" className={style['img']}/></div></Link>
       <div className={style['login-html']}>
         <input id="tab-1"type="radio" name="tab" className={style['sign-in']}></input><Link to="/Login"><label for="tab-1" className={style['tab']}>로그인</label></Link>
         <input id="tab-2"type="radio" name="tab" className={style['sign-up']} checked></input><label for="tab-1" className={style['tab']}>회원가입</label>
@@ -127,7 +127,7 @@ const SignupPage = () => {
               <input id="pass" type="email" className={style['input']} value={nickname}
                   onChange={(e) => setNickname(e.target.value)}></input>
               {isNicknameCheck && (
-                <label align="right" for="pass" className={style['label']}>사용가능한 닉네임입니다.</label>
+                <label align="right" for="pass" style={{color:"#4274FF"}} className={style['label']}>사용가능한 닉네임입니다.</label>
               )}
               <div align="right" className={style['button3']}>
                 {!isNicknameCheck ? (
@@ -148,7 +148,7 @@ const SignupPage = () => {
                 placeholder="알파벳과 숫자를 포함한 8글자 이상"
                 onChange={handlePasswordChange}></input>
                 {!isPasswordValid && (
-                  <label align="right" for="pass" className={style['label']}>유효한 비밀번호를 입력하세요.</label>
+                  <label align="right" style={{color:"#ff8642"}}for="pass" className={style['label']}>유효한 비밀번호를 입력하세요.</label>
                 )}
             </div>
             <div className={style['group']}>
@@ -156,7 +156,7 @@ const SignupPage = () => {
               <input id="pass" type="password" className={style['input']} data-type="password" value={checkPassword}
                 onChange={handleCheckPasswordChange}></input>
               {!isPasswordMatch && (
-                <label align="right" for="pass" className={style['label']}>다시 확인해 주세요.</label>
+                <label align="right" for="pass" style={{color:"#FF8642"}} className={style['label']}>다시 확인해 주세요.</label>
               )}
             </div>
             

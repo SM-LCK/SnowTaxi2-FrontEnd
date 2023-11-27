@@ -48,6 +48,7 @@ const LoginPage = () => {
             localStorage.setItem("@potId", response.data.data.potInfo.potId);
             localStorage.setItem("@ridingTime", response.data.data.potInfo.ridingTime);
             localStorage.setItem("@nickname", response.data.data.nickname);
+            localStorage.setItem("@cash", '0');
             navigate("/");
           }
         })
@@ -97,6 +98,7 @@ const LoginPage = () => {
       <AlertModal
         show={alreadyModalShow}
         alertMessage={alert}
+        finish='false'
         onHide={() => setAlreadyModalShow(false)}
       />
     </>

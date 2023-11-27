@@ -69,6 +69,7 @@ const RePasswordPage = () => {
       <AlertModal
         show={alreadyModalShow}
         alertMessage={alert}
+        finish='false'
         onHide={() => setAlreadyModalShow(false)}
       />
     </>

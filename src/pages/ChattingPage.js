@@ -206,16 +206,19 @@ const ChattingPage = () => {
     });
   };
 
-  const outHandle = () => {
-
+  const finishPot = () => {
+    setFinishModalShow(false)
+    let cash = localStorage.getItem("@cash") - 1200
+    localStorage.setItem("@cash", cash)
   };
 
   return (
     <div>
       <AlertModal
         show={finishModalShow}
+        finish='true'
         alertMessage={"[" + localStorage.getItem("@ridingTime") + "]  택시 팟 탑승을 완료했습니다!"}
-        onHide={() => setFinishModalShow(false)}
+        onHide={finishPot}
       />
       <CheckModal
         show={outModalShow}

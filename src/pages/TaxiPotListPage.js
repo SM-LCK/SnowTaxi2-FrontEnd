@@ -251,7 +251,7 @@ const TaxiPotListPage = () => {
         </div>
       </BrowserView>
         <MobileView>
-            <div>
+            <div style={{paddingBottom:"70px"}}>
                 <div className="centerC" style={{height:wHeight*(0.09)}}>
                     <div className="pageTitle">
                         <BsChevronLeft className="backBtn" onClick={toHomePage}/>

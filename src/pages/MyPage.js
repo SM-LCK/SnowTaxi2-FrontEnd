@@ -10,15 +10,36 @@ import ReactRoundedImage from "react-rounded-image";
 import { useNavigate } from "react-router-dom";
 import CheckModal from "../components/CheckModal";
 import { BrowserView, MobileView } from "react-device-detect";
+import ChargeModal from "../components/ChargeModal";
 
 const MyPage = () => {
+  let wHeight = window.innerHeight;
+  let wWidth = window.innerWidth;
   const navigate = useNavigate();
   const [loginNeedModalShow, setLoginNeedModalShow] = useState(false);
   const [avatar, setAvatar] = useState("");
   const [nickname, setNickname] = useState("");
   const [modalShow, setModalShow] = useState(false);
+  const [chargeModalShow, setChargeModalShow] = useState(false);
+  const [price, setPrice] = useState("");
+  const [cash, setCash] = useState("0");
   const images = [profile1, profile2, profile3, profile4];
 
+  const onChangePrice = (e) => {
+    setPrice(e.target.value);
+  };
+
+  const chargeBtn = () => {
+    setPrice("")
+    localStorage.setItem("@cash", parseInt(cash) + parseInt(price))
+    setCash(parseInt(cash) + parseInt(price))
+    setChargeModalShow(false);
+  }
+
+  const hideCharge = () => {
+    setChargeModalShow(false);
+  }
+  
   const toLoginPage = () => {
     setLoginNeedModalShow(false);
     navigate("/Login");
@@ -36,6 +57,7 @@ const MyPage = () => {
       //navigate("/Login");
     } else {
       setNickname(localStorage.getItem("@nickname"));
+      setCash(localStorage.getItem("@cash"))
       console.log("nickname", nickname);
       const randomIndex = Math.floor(Math.random() * images.length);
       const selectedImage = images[randomIndex];
@@ -173,12 +195,12 @@ const MyPage = () => {
               >
                 마이페이지
               </div>
-              <div style={{ fontSize: "13px", fontWeight: "700" }}>
+              <div style={{ fontSize: "16px", fontWeight: "700" }}>
                 나의 정보
               </div>
               <div
                 style={{
-                  marginTop: "10px",
+                  marginTop: "15px",
                   marginBottom: "10px",
                   display: "flex",
                   alignItems: "center",
@@ -194,12 +216,26 @@ const MyPage = () => {
                 />
                 <div
                   style={{
-                    fontSize: "13px",
-                    marginLeft: "20px",
+                    fontSize: "15px",
+                    marginLeft: wWidth - 290,
                   }}
                 >
                   {nickname} 님, 안녕하세요! 🍀
                 </div>
+              </div>
+              <hr height="30px" />
+              
+              <div className="cashLine">
+
+                <div style={{ fontSize: "16px", fontWeight: "700", marginBottom: "10px" }}>
+                    스노우 캐시
+                </div>
+
+                <div className="cash" style={{height: wHeight / 12,}}>
+                  <div>{cash}원</div>
+                  <div className="chargeBtn" onClick={() => setChargeModalShow(true)}>충전하기</div>
+                </div>
+
               </div>
 
               <hr height="30px" />
@@ -213,7 +249,7 @@ const MyPage = () => {
                 }}
                 onClick={gotoHistory}
               >
-                <div style={{ fontSize: "13px", fontWeight: "700" }}>
+                <div style={{ fontSize: "16px", fontWeight: "700" }}>
                   참여 내역
                 </div>
                 <FiChevronRight size="20" color="black" />
@@ -228,7 +264,7 @@ const MyPage = () => {
                   marginBottom: "5px",
                 }}
               >
-                <div style={{ fontSize: "13px", fontWeight: "700" }}>
+                <div style={{ fontSize: "16px", fontWeight: "700" }}>
                   로그아웃
                 </div>
                 <FiChevronRight
@@ -251,7 +287,7 @@ const MyPage = () => {
                   marginBottom: "5px",
                 }}
               >
-                <div style={{ fontSize: "13px", fontWeight: "700" }}>
+                <div style={{ fontSize: "16px", fontWeight: "700" }}>
                   회원탈퇴
                 </div>
                 <FiChevronRight size="20" color="black" />
@@ -267,6 +303,13 @@ const MyPage = () => {
         sub="로그인 페이지로 이동하시겠습니까?"
         check="확인"
         okAction={toLoginPage}
+      />
+      <ChargeModal
+        show={chargeModalShow}
+        price={price}
+        onHide={hideCharge}
+        onChangePrice={onChangePrice}
+        okAction={chargeBtn}
       />
     </>
   );

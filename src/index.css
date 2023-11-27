@@ -86,7 +86,22 @@ code {
   color: #dadada;
 }
 
+.inputPrice {
+  display: flex;
+  flex-direction: "row";
+  background-color: #ebf1ff;
+  text-align: center;
+  border: none;
+  margin-right: 10px;
+  padding: 18px;
+  border-radius: 12px;
+  font-size: 20px;
+  font-weight: bolder;
+}
 
+.inputPrice::placeholder {
+  font-size: 17px;
+}
 
 .inputChat {
   display: flex;
@@ -126,6 +141,13 @@ code {
   flex-direction: row;
   padding: 10px;
   background-color: white;
+}
+
+.chargeModalBtn {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
 }
 
 .fixTop {
@@ -262,4 +284,38 @@ code {
   text-decoration: underline;
   text-decoration-color: #80A1FF;
   text-decoration-thickness: 5px;
+}
+
+.cashLine {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cash {
+  padding: 10px;
+  padding-left: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-style:solid;
+  border-width: 2.5px;
+  border-radius: 10px;
+  border-color: #d4d4e0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.chargeBtn {
+  font-size: 16px;
+  background-color: #5E79EB;
+  border-radius: 8px;
+  width: 90px;
+  height: 40px;
+  align-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  color: white;
 }

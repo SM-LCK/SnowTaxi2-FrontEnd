@@ -156,6 +156,7 @@ const PotItemButton = (data) => {
           />
           <AlertModal
             show={alreadyModalShow}
+            finish='false'
             alertMessage="이미 참여하고 있는 팟이 있습니다."
             onHide={() => setAlreadyModalShow(false)}
           />

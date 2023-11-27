@@ -1,70 +1,52 @@
-# Getting Started with Create React App
+# 🚗SnowTaxi2
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+숙명여대 학우들을 위한 택시 팟 모집 서비스  
+SnowTaxi에 가입해 함께 택시 탈 학우들을 모아보세요!  
 
-## Available Scripts
+<p align="center">
+  <img src="https://github.com/SM-LCK/SnowTaxi2-BackEnd/assets/62925109/435706ba-e846-4bb6-944f-9830f9c100d6" align="center" width="32%">
+  <img src="https://github.com/SM-LCK/SnowTaxi2-BackEnd/assets/62925109/549059cf-8915-4e72-a2ab-e0012fff3711" align="center" width="32%">
+  <img src="https://github.com/SM-LCK/SnowTaxi2-BackEnd/assets/62925109/14fd97fa-9a18-4adc-b158-ac4872f2e257" align="center" width="32%">
+</p>
 
-In the project directory, you can run:
+## 🤼‍♂️팀 LCK
+- 김영경
+- 이가은
+- 최수연
 
-### `npm start`
+## 👩‍💻사용 기술
+<p align="center">
+  <img src="https://github.com/SM-LCK/SnowTaxi2-BackEnd/assets/62925109/d237ca24-0da3-4065-a724-6db259e21d99" align="center" width="80%">
+</p>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🛠️주요 기능
+### 숙명메일로 로그인 / 회원가입
+- 회원가입 절차에서 학교 이메일(sookmyung.ac.kr)로 인증을 받아 같은 학교 학우간의 서비스임을 보장합니다.
+<p align="center">
+  <img src="https://github.com/SM-LCK/SnowTaxi2-BackEnd/assets/62925109/2f045e8c-07ab-4362-b19f-c61efe231f53" align="center" width="43%">
+  <img src="https://github.com/SM-LCK/SnowTaxi2-BackEnd/assets/62925109/be318c1d-782e-4421-aba8-3d2e74bdff70" align="center" width="34%">
+ 
+</p>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 택시 팟
+- 출발지를 선택해서 지정하고, 시간을 입력하면 현재 날짜의 팟이 생성됩니다.
+- 만들어진 택시 팟에 참가할 수 있으며, 팟에 참여할 수 없게 된다면 탑승 시간이 지나기 전에 한해서 팟을 나갈 수 있습니다.
+<p align="center">
+  <img src="https://github.com/SM-LCK/SnowTaxi2-BackEnd/assets/62925109/28a5f5a8-2b61-40cc-9c50-ea09a273c706" align="center" width="40%">
+  <img src="https://github.com/SM-LCK/SnowTaxi2-BackEnd/assets/62925109/17a68105-9868-40c2-aa4a-9b961814c1af" align="center" width="40%">
+  </figure>
+</p>
 
-### `npm test`
+  
+### 채팅 방
+- 채팅 기능으로 편리하게 위치와 결제 정보를 공유할 수 있습니다.
+<p align="center">
+  <img src="https://github.com/SM-LCK/SnowTaxi2-BackEnd/assets/62925109/92af5b0d-4f53-44e7-86de-fec38e4dab68" align="center" width="80%">
+</p>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 참여 내역
+- 참여 완료한 팟들의 채팅들을 참여 완료 후에도 참여 내역에서 확인할 수 있습니다.
+<p align="center">
+  <img src="https://github.com/SM-LCK/SnowTaxi2-BackEnd/assets/62925109/4f38fd25-3c50-49c7-ae9e-4dbc83a8d8e3" align="center" width="40%">
+</p>
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
